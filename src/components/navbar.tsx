@@ -92,14 +92,11 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <motion.div 
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className="h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center overflow-hidden bg-white shadow-md border border-slate-100"
+            whileHover={{ scale: 1.05 }}
+            className="h-10 w-32 md:h-12 md:w-40 rounded-xl flex items-center justify-center overflow-hidden bg-white shadow-sm border border-slate-100 p-1.5"
           >
-            <img src="/logo.png" alt="UGI Logo" className="h-full w-full object-contain p-1" />
+            <img src="/logo.png" alt="UGI Logo" className="h-full w-full object-contain" />
           </motion.div>
-          <span className="hidden sm:block text-xl md:text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-            UGI<span className="text-indigo-600">Notes</span>
-          </span>
         </Link>
 
         {/* Desktop Nav Links */}
