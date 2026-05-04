@@ -102,22 +102,35 @@ export function ResourceNavigator() {
           {step === 0 ? (
             <motion.div 
               key="step0"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98, y: -10 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
             >
               {INSTITUTES.map((inst) => (
                 <button
                   key={inst.id}
                   onClick={() => handleInstituteSelect(inst.id)}
-                  className="group relative p-12 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[3rem] border border-slate-200/50 dark:border-slate-800/50 hover:border-indigo-500 shadow-2xl transition-all duration-500 overflow-hidden flex flex-col items-center"
+                  className="group relative p-10 bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl rounded-[3.5rem] border border-white/20 dark:border-slate-800/20 hover:border-indigo-500/50 shadow-2xl transition-all duration-500 overflow-hidden flex flex-col items-center text-center"
                 >
-                  <div className="h-20 w-20 bg-indigo-600/10 dark:bg-indigo-400/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-indigo-600 transition-all duration-500">
-                    <inst.icon className="h-10 w-10 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors" />
+                  {/* Card Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  
+                  <div className="relative h-28 w-28 bg-white dark:bg-slate-800 rounded-[2.5rem] flex items-center justify-center mb-8 shadow-xl group-hover:scale-110 group-hover:rotate-3 group-hover:bg-indigo-600 transition-all duration-500 border border-slate-100 dark:border-slate-700 group-hover:border-indigo-400">
+                    <inst.icon className="h-12 w-12 text-indigo-600 dark:text-indigo-400 group-hover:text-white transition-colors duration-500" />
                   </div>
-                  <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tighter">{inst.short}</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 font-bold text-center opacity-70">{inst.label}</p>
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-3 tracking-tighter group-hover:text-indigo-600 transition-colors">
+                      {inst.short}
+                    </h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-bold leading-tight opacity-70 group-hover:opacity-100 transition-opacity">
+                      {inst.label}
+                    </p>
+                  </div>
+
+                  {/* Decorative element */}
+                  <div className="absolute -bottom-6 -right-6 h-24 w-24 bg-indigo-600/5 rounded-full blur-3xl group-hover:bg-indigo-600/20 transition-all duration-700" />
                 </button>
               ))}
             </motion.div>
@@ -166,25 +179,33 @@ export function ResourceNavigator() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="flex flex-col items-center w-full"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl">
                 {currentYearData?.semesters.map((sem) => (
                   <button
                     key={sem}
                     onClick={() => handleSemesterSelect(sem)}
-                    className="group relative p-12 bg-white/50 dark:bg-slate-900/50 backdrop-blur-2xl rounded-[4rem] border border-slate-200/50 dark:border-slate-800/50 hover:border-indigo-500/50 shadow-2xl transition-all duration-500 overflow-hidden flex flex-col items-center"
+                    className="group relative p-12 bg-white/40 dark:bg-slate-900/40 backdrop-blur-3xl rounded-[4rem] border border-white/20 dark:border-slate-800/20 hover:border-indigo-500/50 shadow-2xl transition-all duration-700 overflow-hidden flex flex-col items-center"
                   >
-                    <div className="h-24 w-24 bg-indigo-600 text-white rounded-[2rem] flex items-center justify-center mb-8 text-4xl font-black shadow-2xl shadow-indigo-500/30 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                    {/* Decorative background number */}
+                    <div className="absolute -top-10 -right-10 text-[12rem] font-black text-indigo-600/5 dark:text-indigo-400/5 select-none pointer-events-none group-hover:scale-110 transition-transform duration-700">
+                       {sem}
+                    </div>
+
+                    <div className="relative h-28 w-28 bg-gradient-to-br from-indigo-600 to-violet-700 text-white rounded-[2.5rem] flex items-center justify-center mb-8 text-5xl font-black shadow-2xl shadow-indigo-500/40 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 ring-8 ring-indigo-500/5">
                       {sem}
                     </div>
-                    <h3 className="text-3xl font-black text-slate-900 dark:text-white mb-3 text-center tracking-tighter">
-                      Semester {sem}
-                    </h3>
-                    <p className="text-slate-400 text-xs font-black uppercase tracking-[0.3em] text-center mb-10">
-                      {sem % 2 === 0 ? "Even" : "Odd"} Semester
-                    </p>
                     
-                    <div className="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-black text-sm shadow-lg shadow-indigo-500/20 group-hover:scale-105 active:scale-95 transition-all duration-300">
-                      Explore Resources
+                    <div className="relative z-10 text-center">
+                       <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2 tracking-tighter group-hover:text-indigo-600 transition-colors">
+                         Semester {sem}
+                       </h3>
+                       <p className="text-indigo-600 dark:text-indigo-400 text-[10px] font-black uppercase tracking-[0.4em] mb-10 opacity-70">
+                         {sem % 2 === 0 ? "Even" : "Odd"} • Academic Term
+                       </p>
+                       
+                       <div className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-sm group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-xl">
+                         Explore Resources <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                       </div>
                     </div>
                   </button>
                 ))}
