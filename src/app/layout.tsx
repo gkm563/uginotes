@@ -10,9 +10,42 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NotesBazi | United Institute of Technology, Prayagraj",
-  description: "Centralized notes sharing platform for students of UIT Prayagraj. Upload, browse, and download academic resources.",
-  keywords: ["Notes", "UIT Prayagraj", "Engineering Notes", "PYQ", "Assignments"],
+  title: {
+    default: "UgiNotes | Official Academic Resource Library & Notes Hub for UGI",
+    template: "%s | UgiNotes"
+  },
+  description: "UgiNotes (NotesBazi) is the central digital academic library for United Group of Institutions (UIT, UCER, UIP, UIM). Access and share lecture notes, previous year question papers (PYQs), study guides, and assignments.",
+  keywords: [
+    "UgiNotes", 
+    "NotesBazi", 
+    "UGI Notes", 
+    "United Group of Institutions", 
+    "UIT Prayagraj", 
+    "UCER Prayagraj", 
+    "UIP", 
+    "UIM", 
+    "Engineering Notes", 
+    "PYQ", 
+    "Assignments", 
+    "Study Material", 
+    "United College", 
+    "Computer Science Notes", 
+    "UGI Student Portal"
+  ],
+  authors: [{ name: "UgiNotes Community" }],
+  openGraph: {
+    title: "UgiNotes | Official Academic Resource Library & Notes Hub for UGI",
+    description: "The digital library for United Group of Institutions. Access verified notes, PYQs, and assignments shared by your peers.",
+    url: "https://uginotes.vercel.app",
+    siteName: "UgiNotes",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "UgiNotes | Official Academic Resource Library & Notes Hub for UGI",
+    description: "The digital library for United Group of Institutions. Access verified notes, PYQs, and assignments shared by your peers.",
+  }
 };
 
 import { UploadProvider } from "@/components/providers/upload-provider";
