@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UgiNotes - Official Academic Hub for UGI</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #7c3aed;
+            --accent: #f43f5e;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.5);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #818cf8, #ffffff, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge-hub {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+            display: flex;
+            flex-col: column;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 span {
+            background: linear-gradient(to right, #a78bfa, #f472b6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        /* CTA Buttons */
+        .cta-container {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 4rem;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-vercel {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        .btn-vercel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(255, 255, 255, 0.2);
+            background-color: #f1f5f9;
+        }
+
+        .btn-netlify {
+            background-color: var(--primary);
+            color: var(--text-main);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-netlify:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -20px rgba(79, 70, 229, 0.3);
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 5rem 0 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 6rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">NotesBazi / UgiNotes</div>
+            <div class="badge-hub">
+                <span class="badge-dot"></span>
+                Official Hub for UGI
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>Empowering the <br><span>UGI Community.</span></h1>
+            <p class="subtitle">
+                The official digital resource library for <strong>UIT, UCER, UIP, and UIM</strong>. 
+                Access verified notes, previous year question papers (PYQs), and assignments shared by your peers.
+            </p>
+
+            <div class="cta-container">
+                <a href="https://uginotes.vercel.app" class="btn btn-vercel" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 116 100" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M57.5 0L115 100H0L57.5 0Z"/></svg>
+                    Open App on Vercel
+                </a>
+                <a href="https://uginotes.netlify.app" class="btn btn-netlify" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 100 100" fill="currentColor"><path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm20.8 72.8c-2.3 2.3-5.3 3.5-8.5 3.5s-6.2-1.2-8.5-3.5L50 69l-3.8 3.8c-2.3 2.3-5.3 3.5-8.5 3.5s-6.2-1.2-8.5-3.5c-4.7-4.7-4.7-12.3 0-17l17-17c2.3-2.3 5.3-3.5 8.5-3.5s6.2 1.2 8.5 3.5l3.8 3.8 3.8-3.8c2.3-2.3 5.3-3.5 8.5-3.5s6.2 1.2 8.5 3.5c4.7 4.7 4.7 12.3 0 17l-17 17z"/></svg>
+                    Open App on Netlify
+                </a>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <div class="card-title">Resource Explorer</div>
+                <div class="card-desc">Quickly find notes, assignments, and PYQs organized cleanly by subject, semester, and academic year.</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">✨</div>
+                <div class="card-title">AI OCR & Summary</div>
+                <div class="card-desc">Automatically extract text, subjects, and topics from uploaded images using Google Gemini 1.5 Flash.</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏆</div>
+                <div class="card-title">Leaderboard</div>
+                <div class="card-desc">Recognize top contributors across UGI campuses based on views, downloads, and community ratings.</div>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <div class="card-title">Admin Dashboard</div>
+                <div class="card-desc">Interactive charts powered by Recharts for viewing upload statistics, user activity, and report resolving.</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 UgiNotes / NotesBazi. Powered by Next.js, Supabase, and Gemini AI.</p>
+        </footer>
+    </div>
+</body>
+</html>
