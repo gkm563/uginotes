@@ -1,5 +1,517 @@
-// Pre-loaded Local Academic Notes Data for Standalone & Vercel Deployment
 export const STATIC_NOTES = [
+  {
+    "id": "note-5th-1",
+    "title": "B.Tech. CSE (Data Science) Syllabus 3rd year",
+    "subject": "B.Tech CSE 5th Sem",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: B.Tech. CSE (Data Science) Syllabus 3rd year.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CB.Tech.%20CSE%20%28Data%20Science%29%20Syllabus%203rd%20year.pdf",
+    "downloads": 107,
+    "average_rating": "4.3",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-2",
+    "title": "CC  2025-26",
+    "subject": "Cloud Computing",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: CC  2025-26.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCC%5CCC%20%202025-26.pdf",
+    "downloads": 114,
+    "average_rating": "4.4",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-3",
+    "title": "CC 2024-25",
+    "subject": "Cloud Computing",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: CC 2024-25.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCC%5CCC%202024-25.pdf",
+    "downloads": 121,
+    "average_rating": "4.5",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-4",
+    "title": "CLOUD COMPUTING SYLLABUS",
+    "subject": "Cloud Computing",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: CLOUD COMPUTING SYLLABUS.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCC%5CCLOUD%20COMPUTING%20SYLLABUS.pdf",
+    "downloads": 128,
+    "average_rating": "4.6",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-5",
+    "title": "COI  2025-26",
+    "subject": "Constitution of India",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: COI  2025-26.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCOI%5CCOI%20%202025-26.pdf",
+    "downloads": 135,
+    "average_rating": "4.7",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-6",
+    "title": "COI 2024-25",
+    "subject": "Constitution of India",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: COI 2024-25.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCOI%5CCOI%202024-25.pdf",
+    "downloads": 142,
+    "average_rating": "4.8",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-7",
+    "title": "COI UNIT 1 NOTES updated",
+    "subject": "Constitution of India",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: COI UNIT 1 NOTES updated.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCOI%5CCOI%20UNIT%201%20NOTES%20updated.pdf",
+    "downloads": 149,
+    "average_rating": "4.9",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-8",
+    "title": "CONSTITUTION OF INDIA",
+    "subject": "Constitution of India",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: CONSTITUTION OF INDIA.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCOI%5CCONSTITUTION%20OF%20INDIA.pdf",
+    "downloads": 156,
+    "average_rating": "4.2",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-9",
+    "title": "desktop",
+    "subject": "Constitution of India",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: desktop.ini",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CCOI%5Cdesktop.ini",
+    "downloads": 163,
+    "average_rating": "4.3",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-10",
+    "title": "DA  2025-26",
+    "subject": "Data Analytics",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DA  2025-26.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDA%5CDA%20%202025-26.pdf",
+    "downloads": 170,
+    "average_rating": "4.4",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-11",
+    "title": "DA 2024-25",
+    "subject": "Data Analytics",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DA 2024-25.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDA%5CDA%202024-25.pdf",
+    "downloads": 177,
+    "average_rating": "4.5",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-12",
+    "title": "DA SYLLABUS",
+    "subject": "Data Analytics",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DA SYLLABUS.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDA%5CDA%20SYLLABUS.pdf",
+    "downloads": 184,
+    "average_rating": "4.6",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-13",
+    "title": "DAA Unit 1 Notes",
+    "subject": "Data Analytics",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DAA Unit 1 Notes.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDA%5CDAA%20Unit%201%20Notes.pdf",
+    "downloads": 191,
+    "average_rating": "4.7",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-14",
+    "title": "desktop",
+    "subject": "Data Analytics",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: desktop.ini",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDA%5Cdesktop.ini",
+    "downloads": 198,
+    "average_rating": "4.8",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-15",
+    "title": "DAA  2025-26",
+    "subject": "Design & Analysis of Algorithms",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DAA  2025-26.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDAA%5CDAA%20%202025-26.pdf",
+    "downloads": 205,
+    "average_rating": "4.9",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-16",
+    "title": "DAA 2024-25",
+    "subject": "Design & Analysis of Algorithms",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DAA 2024-25.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDAA%5CDAA%202024-25.pdf",
+    "downloads": 212,
+    "average_rating": "4.2",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-17",
+    "title": "DAA SYLLABUS",
+    "subject": "Design & Analysis of Algorithms",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DAA SYLLABUS.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDAA%5CDAA%20SYLLABUS.pdf",
+    "downloads": 219,
+    "average_rating": "4.3",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-18",
+    "title": "DBMS 2024-25",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DBMS 2024-25.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5CDBMS%202024-25.pdf",
+    "downloads": 226,
+    "average_rating": "4.4",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-19",
+    "title": "DBMS 2025-26",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DBMS 2025-26.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "PYQ",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5CDBMS%202025-26.pdf",
+    "downloads": 233,
+    "average_rating": "4.5",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-20",
+    "title": "DBMS PRACTICE PROBLEM",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DBMS PRACTICE PROBLEM.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5CDBMS%20PRACTICE%20PROBLEM.pdf",
+    "downloads": 240,
+    "average_rating": "4.6",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-21",
+    "title": "DBMS SYLLABUS",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DBMS SYLLABUS.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5CDBMS%20SYLLABUS.pdf",
+    "downloads": 247,
+    "average_rating": "4.7",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-22",
+    "title": "DBMS_UNIT_1",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DBMS_UNIT_1.pptx",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5CDBMS_UNIT_1.pptx",
+    "downloads": 104,
+    "average_rating": "4.8",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-23",
+    "title": "desktop",
+    "subject": "Database Management System",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: desktop.ini",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDBMS%5Cdesktop.ini",
+    "downloads": 111,
+    "average_rating": "4.9",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-24",
+    "title": "DATA WAREHOUSE SYLLABUS",
+    "subject": "Data Warehousing & Data Mining",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DATA WAREHOUSE SYLLABUS.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Syllabus",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDW%5CDATA%20WAREHOUSE%20SYLLABUS.pdf",
+    "downloads": 118,
+    "average_rating": "4.2",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-25",
+    "title": "DWDM_Unit_Wise_Notes (1)",
+    "subject": "Data Warehousing & Data Mining",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DWDM_Unit_Wise_Notes (1).pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDW%5CDWDM_Unit_Wise_Notes%20%281%29.pdf",
+    "downloads": 125,
+    "average_rating": "4.3",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-26",
+    "title": "DWDM_Unit_Wise_Notes",
+    "subject": "Data Warehousing & Data Mining",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: DWDM_Unit_Wise_Notes.pdf",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDW%5CDWDM_Unit_Wise_Notes.pdf",
+    "downloads": 132,
+    "average_rating": "4.4",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
+  {
+    "id": "note-5th-27",
+    "title": "desktop",
+    "subject": "Data Warehousing & Data Mining",
+    "description": "AKTU B.Tech 3rd Year (5th Sem) CSE Resource: desktop.ini",
+    "year": "3rd",
+    "semester": 5,
+    "type": "Notes",
+    "file_url": "/notes/notes%5C5th%20Semester%5CDW%5Cdesktop.ini",
+    "downloads": 139,
+    "average_rating": "4.5",
+    "uploaded_by": "system",
+    "created_at": "2026-09-12T06:00:00.000Z",
+    "profiles": {
+      "name": "UGI Notes Bazi Admin",
+      "role": "admin",
+      "avatar_url": "/logo.png"
+    }
+  },
   {
     "id": "note-1",
     "title": "2023 24(2)",
