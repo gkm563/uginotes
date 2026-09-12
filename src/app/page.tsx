@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { ResourceNavigator } from "@/components/home/resource-navigator";
 import { LogoAnimation } from "@/components/logo-animation";
+import { STATIC_NOTES } from "@/data/static-notes";
 
 export default async function Home() {
   let trendingNotes: any[] = [];
@@ -58,6 +59,13 @@ export default async function Home() {
 
   } catch (error) {
     console.error("Database fetch failed:", error);
+  }
+
+  if (!trendingNotes || trendingNotes.length === 0) {
+    trendingNotes = STATIC_NOTES.slice(0, 4);
+  }
+  if (!recentNotes || recentNotes.length === 0) {
+    recentNotes = STATIC_NOTES.slice(4, 8);
   }
 
   return (

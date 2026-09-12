@@ -39,6 +39,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useDebounce } from "@/lib/hooks/use-debounce";
 import { NotePreviewModal } from "@/components/note-preview-modal";
 import { useRouter } from "next/navigation";
+import { STATIC_NOTES } from "@/data/static-notes";
 
 export function NotesListing({ 
   initialSearch = "", 
@@ -183,6 +184,20 @@ export function NotesListing({
       if (error) throw error;
       
       let fetchedNotes = data || [];
+
+      if (fetchedNotes.length === 0) {
+        fetchedNotes = STATIC_NOTES.filter(n => {
+          let matches = true;
+          if (search) {
+            const sLower = search.toLowerCase();
+            matches = matches && (n.title.toLowerCase().includes(sLower) || n.subject.toLowerCase().includes(sLower) || n.description.toLowerCase().includes(sLower));
+          }
+          if (year !== "All") matches = matches && n.year === year;
+          if (sem !== "All") matches = matches && n.semester === parseInt(sem);
+          if (type !== "All") matches = matches && n.type === type;
+          return matches;
+        });
+      }
       
       const uploaderIds = Array.from(new Set(fetchedNotes.map((n: any) => n.uploaded_by).filter(Boolean)));
       if (uploaderIds.length > 0) {
