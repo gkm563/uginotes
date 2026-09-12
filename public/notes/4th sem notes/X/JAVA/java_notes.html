@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS403 – Object Oriented Programming with Java | Complete Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d14;
+  --surface: #111520;
+  --surface2: #181e2e;
+  --border: #232b40;
+  --u1: #4f8ef7;
+  --u2: #38d9a9;
+  --u3: #f7a84f;
+  --u4: #e06bde;
+  --u5: #f76e6e;
+  --text: #e2e8f4;
+  --muted: #8899bb;
+  --code-bg: #0d1117;
+  --accent: #4f8ef7;
+  --highlight: #ffe066;
+  --radius: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0 0 40px 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+#sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 10;
+}
+
+#sidebar-header .logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  color: var(--u1);
+  letter-spacing: -0.5px;
+}
+
+#sidebar-header .sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.sidebar-unit-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 16px 20px 6px;
+  color: var(--muted);
+}
+
+.sidebar-link {
+  display: block;
+  padding: 7px 20px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-link:hover, .sidebar-link.active {
+  color: var(--text);
+  background: rgba(79,142,247,0.08);
+  border-left-color: var(--u1);
+}
+.sidebar-link.u1 { border-left-color: transparent; }
+.sidebar-link.u1:hover, .sidebar-link.u1.active { border-left-color: var(--u1); background: rgba(79,142,247,0.08); color: var(--u1); }
+.sidebar-link.u2:hover, .sidebar-link.u2.active { border-left-color: var(--u2); background: rgba(56,217,169,0.08); color: var(--u2); }
+.sidebar-link.u3:hover, .sidebar-link.u3.active { border-left-color: var(--u3); background: rgba(247,168,79,0.08); color: var(--u3); }
+.sidebar-link.u4:hover, .sidebar-link.u4.active { border-left-color: var(--u4); background: rgba(224,107,222,0.08); color: var(--u4); }
+.sidebar-link.u5:hover, .sidebar-link.u5.active { border-left-color: var(--u5); background: rgba(247,110,110,0.08); color: var(--u5); }
+
+/* ── MAIN ── */
+#main {
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #0a0d14 0%, #0f1629 40%, #0a1228 100%);
+  padding: 72px 60px 60px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%);
+}
+.hero::after {
+  content: 'JAVA';
+  position: absolute;
+  right: 40px; bottom: -20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 140px;
+  font-weight: 800;
+  color: rgba(79,142,247,0.04);
+  letter-spacing: -5px;
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(79,142,247,0.12);
+  border: 1px solid rgba(79,142,247,0.3);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--u1);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.hero h1 span { color: var(--u1); }
+.hero p {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+.unit-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.unit-pill {
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.5px;
+}
+.pill-1 { background: rgba(79,142,247,0.15); color: var(--u1); border: 1px solid rgba(79,142,247,0.3); }
+.pill-2 { background: rgba(56,217,169,0.15); color: var(--u2); border: 1px solid rgba(56,217,169,0.3); }
+.pill-3 { background: rgba(247,168,79,0.15); color: var(--u3); border: 1px solid rgba(247,168,79,0.3); }
+.pill-4 { background: rgba(224,107,222,0.15); color: var(--u4); border: 1px solid rgba(224,107,222,0.3); }
+.pill-5 { background: rgba(247,110,110,0.15); color: var(--u5); border: 1px solid rgba(247,110,110,0.3); }
+
+/* ── CONTENT ── */
+.content {
+  padding: 48px 60px;
+  max-width: 960px;
+}
+
+/* ── UNIT HEADER ── */
+.unit-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.unit-num {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.un1 { background: rgba(79,142,247,0.15); color: var(--u1); border: 1px solid rgba(79,142,247,0.25); }
+.un2 { background: rgba(56,217,169,0.15); color: var(--u2); border: 1px solid rgba(56,217,169,0.25); }
+.un3 { background: rgba(247,168,79,0.15); color: var(--u3); border: 1px solid rgba(247,168,79,0.25); }
+.un4 { background: rgba(224,107,222,0.15); color: var(--u4); border: 1px solid rgba(224,107,222,0.25); }
+.un5 { background: rgba(247,110,110,0.15); color: var(--u5); border: 1px solid rgba(247,110,110,0.25); }
+
+.unit-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; }
+.unit-subtitle { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+/* ── SECTION BLOCK ── */
+.section { margin-bottom: 52px; }
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--accent);
+  color: #fff;
+}
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: var(--text);
+}
+p { margin-bottom: 12px; color: #c8d4e8; }
+ul, ol { padding-left: 22px; margin-bottom: 12px; }
+li { margin-bottom: 6px; color: #c8d4e8; }
+strong { color: var(--text); font-weight: 600; }
+
+/* ── CODE ── */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 16px 0 24px;
+  overflow: hidden;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+.code-lang {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.code-dots { display: flex; gap: 6px; }
+.code-dot { width: 10px; height: 10px; border-radius: 50%; }
+.cd1 { background: #f76e6e; } .cd2 { background: var(--u3); } .cd3 { background: var(--u2); }
+pre {
+  padding: 20px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #cdd6f4;
+}
+.kw { color: #89b4fa; } /* keywords */
+.cm { color: #6c7086; font-style: italic; } /* comments */
+.str { color: #a6e3a1; } /* strings */
+.num { color: #fab387; } /* numbers */
+.cls { color: #f9e2af; } /* class names */
+.fn { color: #89dceb; } /* function names */
+.ann { color: #cba6f7; } /* annotations */
+.out { color: #a6e3a1; } /* output */
+
+/* ── OUTPUT BOX ── */
+.output-box {
+  background: #050809;
+  border: 1px solid #1a2a1a;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #a6e3a1;
+  margin-top: -12px;
+  margin-bottom: 24px;
+}
+.output-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #3a5a3a;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ── INFO CARDS ── */
+.info-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 16px 0;
+}
+.info-card.tip { border-left: 4px solid var(--u2); }
+.info-card.warn { border-left: 4px solid var(--u3); }
+.info-card.note { border-left: 4px solid var(--u1); }
+.info-card.exam { border-left: 4px solid var(--highlight); background: rgba(255,224,102,0.04); }
+.card-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  margin-bottom: 8px;
+}
+.tip .card-label { color: var(--u2); }
+.warn .card-label { color: var(--u3); }
+.note .card-label { color: var(--u1); }
+.exam .card-label { color: var(--highlight); }
+
+/* ── TABLE ── */
+.table-wrap { overflow-x: auto; margin: 16px 0 24px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+th {
+  background: var(--surface2);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(35,43,64,0.6);
+  color: #c8d4e8;
+  vertical-align: top;
+}
+tr:hover td { background: rgba(79,142,247,0.03); }
+
+/* ── DIAGRAM ── */
+.diagram {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin: 16px 0 24px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 2;
+}
+
+/* ── PYQ SECTION ── */
+.pyq-section {
+  background: rgba(255,224,102,0.04);
+  border: 1px solid rgba(255,224,102,0.2);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 40px 0 20px;
+}
+.pyq-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.pyq-icon {
+  font-size: 20px;
+}
+.pyq-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--highlight);
+}
+.pyq-subtitle { font-size: 12px; color: var(--muted); }
+.pyq-q {
+  background: var(--surface2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+  border-left: 3px solid var(--highlight);
+  color: #dde5f5;
+}
+.pyq-meta {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 4px;
+}
+.freq-badge {
+  display: inline-flex;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(247,110,110,0.15);
+  color: var(--u5);
+  border: 1px solid rgba(247,110,110,0.3);
+  margin-left: 8px;
+}
+
+/* ── DIVIDER ── */
+.unit-divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+  margin: 60px 0;
+}
+
+/* ── SVG DIAGRAMS ── */
+.svg-wrap {
+  text-align: center;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+svg text { font-family: 'JetBrains Mono', monospace; }
+
+/* ── SEARCH BAR ── */
+#search-bar {
+  margin: 0 16px 12px;
+  position: relative;
+}
+#search-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px 8px 32px;
+  color: var(--text);
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+}
+#search-input:focus { border-color: var(--u1); }
+#search-input::placeholder { color: var(--muted); }
+.search-icon {
+  position: absolute;
+  left: 10px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2e3a55; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section { animation: fadeUp 0.5s ease both; }
+.section:nth-child(2) { animation-delay: 0.05s; }
+.section:nth-child(3) { animation-delay: 0.1s; }
+.section:nth-child(4) { animation-delay: 0.15s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #sidebar { width: 100%; height: auto; position: relative; }
+  #main { margin-left: 0; }
+  .hero { padding: 40px 24px; }
+  .content { padding: 28px 20px; }
+  .hero h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo">☕ Java Notes</div>
+    <div class="sub">BCS403 · SEM IV</div>
+  </div>
+  <div id="search-bar">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search topics..." oninput="filterNav(this.value)">
+  </div>
+
+  <div class="sidebar-unit-label">Unit I – Foundations</div>
+  <a href="#u1-intro" class="sidebar-link u1">Introduction to Java</a>
+  <a href="#u1-prog" class="sidebar-link u1">Programming Structures</a>
+  <a href="#u1-oop" class="sidebar-link u1">OOP Concepts</a>
+  <a href="#u1-packages" class="sidebar-link u1">Packages</a>
+  <a href="#u1-pyq" class="sidebar-link u1">📋 PYQs – Unit I</a>
+
+  <div class="sidebar-unit-label">Unit II – Exceptions & Threads</div>
+  <a href="#u2-exceptions" class="sidebar-link u2">Exception Handling</a>
+  <a href="#u2-io" class="sidebar-link u2">Input / Output</a>
+  <a href="#u2-threads" class="sidebar-link u2">Multithreading</a>
+  <a href="#u2-pyq" class="sidebar-link u2">📋 PYQs – Unit II</a>
+
+  <div class="sidebar-unit-label">Unit III – Java New Features</div>
+  <a href="#u3-lambda" class="sidebar-link u3">Lambda & Functional</a>
+  <a href="#u3-stream" class="sidebar-link u3">Stream API</a>
+  <a href="#u3-modern" class="sidebar-link u3">Modern Java Features</a>
+  <a href="#u3-pyq" class="sidebar-link u3">📋 PYQs – Unit III</a>
+
+  <div class="sidebar-unit-label">Unit IV – Collections</div>
+  <a href="#u4-collections" class="sidebar-link u4">Collections Framework</a>
+  <a href="#u4-list" class="sidebar-link u4">List & Queue</a>
+  <a href="#u4-map" class="sidebar-link u4">Map & Set</a>
+  <a href="#u4-pyq" class="sidebar-link u4">📋 PYQs – Unit IV</a>
+
+  <div class="sidebar-unit-label">Unit V – Spring</div>
+  <a href="#u5-spring" class="sidebar-link u5">Spring Framework</a>
+  <a href="#u5-boot" class="sidebar-link u5">Spring Boot</a>
+  <a href="#u5-rest" class="sidebar-link u5">RESTful APIs</a>
+  <a href="#u5-pyq" class="sidebar-link u5">📋 PYQs – Unit V</a>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">📚 B.Tech SEM IV &nbsp;·&nbsp; BCS403 &nbsp;·&nbsp; 5 Units</div>
+    <h1>Object Oriented<br><span>Programming with Java</span></h1>
+    <p>Complete study notes with PYQ analysis, code examples, diagrams, and exam tips — built from syllabus + 2023-24 & 2024-25 question papers.</p>
+    <div class="unit-pills">
+      <span class="unit-pill pill-1">I · Java Foundations</span>
+      <span class="unit-pill pill-2">II · Exceptions & Threads</span>
+      <span class="unit-pill pill-3">III · New Features</span>
+      <span class="unit-pill pill-4">IV · Collections</span>
+      <span class="unit-pill pill-5">V · Spring Boot</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ════════════════════════════════════════════
+       UNIT I
+  ════════════════════════════════════════════ -->
+  <div class="unit-header" id="unit1">
+    <div class="unit-num un1">I</div>
+    <div>
+      <div class="unit-title">Java Foundations & OOP</div>
+      <div class="unit-subtitle">Introduction · Classes · Inheritance · Polymorphism · Packages</div>
+    </div>
+  </div>
+
+  <!-- 1.1 Intro -->
+  <div class="section" id="u1-intro">
+    <h2>1.1 Introduction to Java</h2>
+
+    <h3>Why Java?</h3>
+    <p>Java is one of the most popular programming languages because it is <strong>platform-independent</strong> (Write Once, Run Anywhere), object-oriented, secure, robust, and has a huge ecosystem of libraries.</p>
+
+    <div class="info-card note">
+      <div class="card-label">📌 Key Concept</div>
+      Java source code (<code>.java</code>) is compiled by the <strong>Java Compiler (javac)</strong> into <strong>Bytecode</strong> (<code>.class</code> file). This bytecode is then interpreted/executed by the <strong>Java Virtual Machine (JVM)</strong> — which exists for every platform. That's why Java is platform-independent.
+    </div>
+
+    <h3>JVM vs JRE vs JDK</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Term</th><th>Full Form</th><th>What it contains</th><th>Used by</th></tr>
+      <tr><td><strong>JVM</strong></td><td>Java Virtual Machine</td><td>Executes bytecode; provides memory management, garbage collection</td><td>Runtime execution</td></tr>
+      <tr><td><strong>JRE</strong></td><td>Java Runtime Environment</td><td>JVM + standard class libraries</td><td>Running Java apps (no compilation)</td></tr>
+      <tr><td><strong>JDK</strong></td><td>Java Development Kit</td><td>JRE + compiler (javac) + debugger + tools</td><td>Developing Java apps</td></tr>
+    </table>
+    </div>
+
+    <div class="svg-wrap">
+      <svg width="500" height="120" viewBox="0 0 500 120" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="480" height="100" rx="10" fill="#1a2040" stroke="#4f8ef7" stroke-width="1.5"/>
+        <text x="30" y="30" font-size="11" fill="#4f8ef7" font-weight="bold">JDK</text>
+        <rect x="30" y="38" width="440" height="62" rx="8" fill="#111827" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="50" y="57" font-size="11" fill="#38d9a9" font-weight="bold">JRE</text>
+        <rect x="50" y="64" width="400" height="28" rx="6" fill="#0d1117" stroke="#f7a84f" stroke-width="1.5"/>
+        <text x="230" y="83" font-size="11" fill="#f7a84f" font-weight="bold" text-anchor="middle">JVM (executes bytecode)</text>
+      </svg>
+    </div>
+
+    <h3>Java Source File Structure</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// 1. Package declaration (optional, must be first)</span>
+<span class="kw">package</span> com.example;
+
+<span class="cm">// 2. Import statements</span>
+<span class="kw">import</span> java.util.Scanner;
+
+<span class="cm">// 3. Class declaration (filename must match public class name)</span>
+<span class="kw">public class</span> <span class="cls">HelloWorld</span> {
+    <span class="cm">// 4. main() - entry point of every Java program</span>
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.<span class="fn">println</span>(<span class="str">"Hello, World!"</span>);
+    }
+}</pre>
+    </div>
+
+    <h3>Compilation & Execution</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">TERMINAL</div></div>
+      <pre><span class="cm"># Compile: creates HelloWorld.class (bytecode)</span>
+javac HelloWorld.java
+
+<span class="cm"># Run: JVM executes the bytecode</span>
+java HelloWorld</pre>
+    </div>
+  </div>
+
+  <!-- 1.2 Programming Structures -->
+  <div class="section" id="u1-prog">
+    <h2>1.2 Programming Structures in Java</h2>
+
+    <h3>Data Types</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Size</th><th>Range / Notes</th><th>Default</th></tr>
+      <tr><td><code>byte</code></td><td>1 byte</td><td>-128 to 127</td><td>0</td></tr>
+      <tr><td><code>short</code></td><td>2 bytes</td><td>-32768 to 32767</td><td>0</td></tr>
+      <tr><td><code>int</code></td><td>4 bytes</td><td>~±2 billion</td><td>0</td></tr>
+      <tr><td><code>long</code></td><td>8 bytes</td><td>very large integers</td><td>0L</td></tr>
+      <tr><td><code>float</code></td><td>4 bytes</td><td>decimal (7 digits precision)</td><td>0.0f</td></tr>
+      <tr><td><code>double</code></td><td>8 bytes</td><td>decimal (15 digits precision)</td><td>0.0d</td></tr>
+      <tr><td><code>char</code></td><td>2 bytes</td><td>Unicode character</td><td>'\u0000'</td></tr>
+      <tr><td><code>boolean</code></td><td>1 bit</td><td>true / false</td><td>false</td></tr>
+      <tr><td><code>String</code></td><td>varies</td><td>Reference type (Object)</td><td>null</td></tr>
+    </table>
+    </div>
+
+    <h3>Control Flow</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// if-else</span>
+<span class="kw">int</span> x = <span class="num">10</span>;
+<span class="kw">if</span> (x > <span class="num">5</span>) {
+    System.out.<span class="fn">println</span>(<span class="str">"Greater"</span>);
+} <span class="kw">else</span> {
+    System.out.<span class="fn">println</span>(<span class="str">"Smaller"</span>);
+}
+
+<span class="cm">// for loop</span>
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+    System.out.<span class="fn">print</span>(i + <span class="str">" "</span>);
+}
+<span class="cm">// Output: 0 1 2 3 4</span>
+
+<span class="cm">// Enhanced for loop (for-each)</span>
+<span class="kw">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>};
+<span class="kw">for</span> (<span class="kw">int</span> num : arr) {
+    System.out.<span class="fn">print</span>(num + <span class="str">" "</span>);
+}
+
+<span class="cm">// switch statement</span>
+<span class="kw">int</span> day = <span class="num">2</span>;
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.<span class="fn">println</span>(<span class="str">"Monday"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.<span class="fn">println</span>(<span class="str">"Tuesday"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.<span class="fn">println</span>(<span class="str">"Other"</span>);
+}</pre>
+    </div>
+
+    <h3>Arrays & Strings</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// Array declaration and initialization</span>
+<span class="kw">int</span>[] marks = <span class="kw">new</span> <span class="kw">int</span>[<span class="num">5</span>];          <span class="cm">// empty array of size 5</span>
+<span class="kw">int</span>[] scores = {<span class="num">90</span>, <span class="num">85</span>, <span class="num">78</span>, <span class="num">92</span>, <span class="num">88</span>}; <span class="cm">// inline initialization</span>
+
+<span class="cm">// String operations</span>
+<span class="cls">String</span> s = <span class="str">"Hello Java"</span>;
+System.out.<span class="fn">println</span>(s.<span class="fn">length</span>());       <span class="cm">// 10</span>
+System.out.<span class="fn">println</span>(s.<span class="fn">toUpperCase</span>()); <span class="cm">// HELLO JAVA</span>
+System.out.<span class="fn">println</span>(s.<span class="fn">substring</span>(<span class="num">6</span>)); <span class="cm">// Java</span>
+System.out.<span class="fn">println</span>(s.<span class="fn">contains</span>(<span class="str">"Java"</span>)); <span class="cm">// true</span>
+System.out.<span class="fn">println</span>(s.<span class="fn">replace</span>(<span class="str">"Java"</span>, <span class="str">"World"</span>)); <span class="cm">// Hello World</span>
+
+<span class="cm">// String reverse (PYQ 2024-25!)</span>
+<span class="cls">String</span> str = <span class="str">"Hello"</span>;
+<span class="cls">StringBuilder</span> sb = <span class="kw">new</span> <span class="cls">StringBuilder</span>(str);
+System.out.<span class="fn">println</span>(sb.<span class="fn">reverse</span>());   <span class="cm">// olleH</span></pre>
+    </div>
+  </div>
+
+  <!-- 1.3 OOP -->
+  <div class="section" id="u1-oop">
+    <h2>1.3 Object Oriented Programming Concepts</h2>
+
+    <h3>Class & Object</h3>
+    <p>A <strong>class</strong> is a blueprint/template. An <strong>object</strong> is a real-world instance of a class.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">public class</span> <span class="cls">Student</span> {
+    <span class="cm">// Attributes (instance variables)</span>
+    <span class="kw">int</span> rollNumber;
+    <span class="cls">String</span> name;
+    <span class="cls">String</span> branch;
+    <span class="cls">String</span> email;
+
+    <span class="cm">// Constructor (PYQ 2023-24!)</span>
+    <span class="kw">public</span> <span class="fn">Student</span>(<span class="kw">int</span> rollNumber, <span class="cls">String</span> name, <span class="cls">String</span> branch, <span class="cls">String</span> email) {
+        <span class="kw">this</span>.rollNumber = rollNumber;
+        <span class="kw">this</span>.name = name;
+        <span class="kw">this</span>.branch = branch;
+        <span class="kw">this</span>.email = email;
+    }
+
+    <span class="cm">// Method</span>
+    <span class="kw">public void</span> <span class="fn">display</span>() {
+        System.out.<span class="fn">println</span>(<span class="str">"Roll: "</span> + rollNumber + <span class="str">" Name: "</span> + name);
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cm">// Creating objects</span>
+        <span class="cls">Student</span> s1 = <span class="kw">new</span> <span class="cls">Student</span>(<span class="num">101</span>, <span class="str">"Rahul"</span>, <span class="str">"CSE"</span>, <span class="str">"r@mail.com"</span>);
+        <span class="cls">Student</span> s2 = <span class="kw">new</span> <span class="cls">Student</span>(<span class="num">102</span>, <span class="str">"Priya"</span>, <span class="str">"IT"</span>, <span class="str">"p@mail.com"</span>);
+        s1.<span class="fn">display</span>();
+        s2.<span class="fn">display</span>();
+    }
+}</pre>
+    </div>
+    <div class="output-box"><div class="output-label">Output</div>Roll: 101 Name: Rahul<br>Roll: 102 Name: Priya</div>
+
+    <h3>Types of Constructors</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Description</th><th>Example</th></tr>
+      <tr><td>Default Constructor</td><td>No parameters; Java provides it automatically if none defined</td><td><code>Student() {}</code></td></tr>
+      <tr><td>Parameterized Constructor</td><td>Takes arguments to initialize object</td><td><code>Student(int r, String n)</code></td></tr>
+      <tr><td>Copy Constructor</td><td>Takes same class object as parameter</td><td><code>Student(Student s)</code></td></tr>
+    </table>
+    </div>
+
+    <h3>The Four Pillars of OOP</h3>
+    <div class="svg-wrap">
+      <svg width="560" height="130" viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg">
+        <!-- Box 1: Encapsulation -->
+        <rect x="10" y="30" width="120" height="80" rx="10" fill="#111827" stroke="#4f8ef7" stroke-width="1.5"/>
+        <text x="70" y="58" font-size="20" text-anchor="middle">🔒</text>
+        <text x="70" y="80" font-size="11" fill="#4f8ef7" text-anchor="middle" font-weight="bold">Encapsulation</text>
+        <text x="70" y="97" font-size="9.5" fill="#8899bb" text-anchor="middle">Hide data</text>
+        <!-- Box 2: Inheritance -->
+        <rect x="150" y="30" width="120" height="80" rx="10" fill="#111827" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="210" y="58" font-size="20" text-anchor="middle">🧬</text>
+        <text x="210" y="80" font-size="11" fill="#38d9a9" text-anchor="middle" font-weight="bold">Inheritance</text>
+        <text x="210" y="97" font-size="9.5" fill="#8899bb" text-anchor="middle">Reuse code</text>
+        <!-- Box 3: Polymorphism -->
+        <rect x="290" y="30" width="120" height="80" rx="10" fill="#111827" stroke="#f7a84f" stroke-width="1.5"/>
+        <text x="350" y="58" font-size="20" text-anchor="middle">🔄</text>
+        <text x="350" y="80" font-size="11" fill="#f7a84f" text-anchor="middle" font-weight="bold">Polymorphism</text>
+        <text x="350" y="97" font-size="9.5" fill="#8899bb" text-anchor="middle">Many forms</text>
+        <!-- Box 4: Abstraction -->
+        <rect x="430" y="30" width="120" height="80" rx="10" fill="#111827" stroke="#e06bde" stroke-width="1.5"/>
+        <text x="490" y="58" font-size="20" text-anchor="middle">🎭</text>
+        <text x="490" y="80" font-size="11" fill="#e06bde" text-anchor="middle" font-weight="bold">Abstraction</text>
+        <text x="490" y="97" font-size="9.5" fill="#8899bb" text-anchor="middle">Hide complexity</text>
+        <!-- Connecting line -->
+        <text x="280" y="20" font-size="10" fill="#4f8ef7" text-anchor="middle" font-weight="bold">4 PILLARS OF OOP</text>
+      </svg>
+    </div>
+
+    <h3>Encapsulation</h3>
+    <p>Wrapping data (variables) and methods into a single unit (class), and restricting direct access using access modifiers.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">public class</span> <span class="cls">BankAccount</span> {
+    <span class="kw">private double</span> balance; <span class="cm">// hidden from outside</span>
+
+    <span class="kw">public double</span> <span class="fn">getBalance</span>() { <span class="kw">return</span> balance; } <span class="cm">// getter</span>
+
+    <span class="kw">public void</span> <span class="fn">deposit</span>(<span class="kw">double</span> amount) { <span class="cm">// setter with validation</span>
+        <span class="kw">if</span> (amount > <span class="num">0</span>) balance += amount;
+    }
+}</pre>
+    </div>
+
+    <h3>Inheritance</h3>
+    <p>One class (subclass/child) inherits properties and methods of another class (superclass/parent) using the <code>extends</code> keyword.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">class</span> <span class="cls">Animal</span> {           <span class="cm">// Superclass</span>
+    <span class="cls">String</span> name;
+    <span class="kw">void</span> <span class="fn">eat</span>() { System.out.<span class="fn">println</span>(name + <span class="str">" is eating"</span>); }
+}
+
+<span class="kw">class</span> <span class="cls">Dog</span> <span class="kw">extends</span> <span class="cls">Animal</span> {  <span class="cm">// Subclass</span>
+    <span class="kw">void</span> <span class="fn">bark</span>() { System.out.<span class="fn">println</span>(name + <span class="str">" says Woof!"</span>); }
+}
+
+<span class="kw">public class</span> <span class="cls">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">Dog</span> d = <span class="kw">new</span> <span class="cls">Dog</span>();
+        d.name = <span class="str">"Tommy"</span>;
+        d.<span class="fn">eat</span>();  <span class="cm">// inherited from Animal</span>
+        d.<span class="fn">bark</span>(); <span class="cm">// Dog's own method</span>
+    }
+}</pre>
+    </div>
+    <div class="output-box"><div class="output-label">Output</div>Tommy is eating<br>Tommy says Woof!</div>
+
+    <h3>Polymorphism (PYQ – Very Important!)</h3>
+    <p>The ability of a single method/reference to behave differently based on context. Two types:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Also called</th><th>Resolved at</th><th>Mechanism</th></tr>
+      <tr><td><strong>Compile-time</strong></td><td>Static polymorphism</td><td>Compile time</td><td>Method Overloading</td></tr>
+      <tr><td><strong>Run-time</strong></td><td>Dynamic polymorphism</td><td>Runtime</td><td>Method Overriding</td></tr>
+    </table>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – METHOD OVERLOADING (Compile-time)</div></div>
+      <pre><span class="kw">class</span> <span class="cls">Calculator</span> {
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)          { <span class="kw">return</span> a + b; }
+    <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b)  { <span class="kw">return</span> a + b; }
+    <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c)   { <span class="kw">return</span> a + b + c; }
+    <span class="cm">// Same name, different parameters = Overloading</span>
+}</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – METHOD OVERRIDING (Runtime) [PYQ 2023-24]</div></div>
+      <pre><span class="kw">class</span> <span class="cls">Shape</span> {
+    <span class="kw">void</span> <span class="fn">displayArea</span>() {
+        System.out.<span class="fn">println</span>(<span class="str">"Area of generic shape"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cls">Rectangle</span> <span class="kw">extends</span> <span class="cls">Shape</span> {
+    <span class="kw">double</span> length, width;
+    <span class="ann">@Override</span>
+    <span class="kw">void</span> <span class="fn">displayArea</span>() {  <span class="cm">// overrides parent method</span>
+        System.out.<span class="fn">println</span>(<span class="str">"Area = "</span> + (length * width));
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">Test</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">Shape</span> s = <span class="kw">new</span> <span class="cls">Rectangle</span>(); <span class="cm">// upcasting</span>
+        ((<span class="cls">Rectangle</span>)s).length = <span class="num">5</span>;
+        ((<span class="cls">Rectangle</span>)s).width = <span class="num">3</span>;
+        s.<span class="fn">displayArea</span>(); <span class="cm">// calls Rectangle's version at runtime!</span>
+    }
+}</pre>
+    </div>
+    <div class="output-box"><div class="output-label">Output</div>Area = 15.0</div>
+
+    <h3>Abstraction</h3>
+    <p>Hiding implementation details and showing only essential features. Achieved via <strong>Abstract Classes</strong> and <strong>Interfaces</strong>.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – ABSTRACT CLASS [PYQ 2023-24]</div></div>
+      <pre><span class="kw">abstract class</span> <span class="cls">Vehicle</span> {
+    <span class="cls">String</span> brand;
+    <span class="kw">abstract void</span> <span class="fn">start</span>();   <span class="cm">// abstract method – no body</span>
+
+    <span class="kw">void</span> <span class="fn">fuel</span>() {             <span class="cm">// concrete method – has body</span>
+        System.out.<span class="fn">println</span>(<span class="str">"Filling fuel"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cls">Car</span> <span class="kw">extends</span> <span class="cls">Vehicle</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">void</span> <span class="fn">start</span>() {
+        System.out.<span class="fn">println</span>(brand + <span class="str">" car engine starts with key"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cls">Motorcycle</span> <span class="kw">extends</span> <span class="cls">Vehicle</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">void</span> <span class="fn">start</span>() {
+        System.out.<span class="fn">println</span>(brand + <span class="str">" bike starts with kick"</span>);
+    }
+}</pre>
+    </div>
+
+    <h3>Interfaces [PYQ Both Years!]</h3>
+    <p>An interface defines a <strong>contract</strong> — a set of methods that implementing classes MUST provide. Interfaces support multiple inheritance in Java.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">interface</span> <span class="cls">Drawable</span> {
+    <span class="kw">void</span> <span class="fn">draw</span>();            <span class="cm">// implicitly public abstract</span>
+    <span class="kw">default void</span> <span class="fn">show</span>() { System.out.<span class="fn">println</span>(<span class="str">"Showing shape"</span>); }
+}
+
+<span class="kw">interface</span> <span class="cls">Resizable</span> {
+    <span class="kw">void</span> <span class="fn">resize</span>(<span class="kw">double</span> factor);
+}
+
+<span class="cm">// A class can implement multiple interfaces (unlike extends)</span>
+<span class="kw">class</span> <span class="cls">Circle</span> <span class="kw">implements</span> <span class="cls">Drawable</span>, <span class="cls">Resizable</span> {
+    <span class="kw">double</span> radius;
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">draw</span>() { System.out.<span class="fn">println</span>(<span class="str">"Drawing circle r="</span> + radius); }
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">resize</span>(<span class="kw">double</span> factor) { radius *= factor; }
+}</pre>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr>
+      <tr><td>Keyword</td><td><code>abstract class</code></td><td><code>interface</code></td></tr>
+      <tr><td>Methods</td><td>Abstract + concrete</td><td>Abstract + default + static</td></tr>
+      <tr><td>Variables</td><td>Any type</td><td>Only <code>public static final</code></td></tr>
+      <tr><td>Multiple inheritance</td><td>❌ Not possible</td><td>✅ A class can implement many</td></tr>
+      <tr><td>Constructor</td><td>✅ Has constructor</td><td>❌ No constructor</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <!-- 1.4 Packages -->
+  <div class="section" id="u1-packages">
+    <h2>1.4 Packages</h2>
+    <p>A package is a namespace that organizes related classes and interfaces, preventing naming conflicts.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// File: com/myapp/MathUtils.java</span>
+<span class="kw">package</span> com.myapp;
+
+<span class="kw">public class</span> <span class="cls">MathUtils</span> {
+    <span class="kw">public static int</span> <span class="fn">square</span>(<span class="kw">int</span> n) { <span class="kw">return</span> n * n; }
+}
+
+<span class="cm">// File: Main.java – using the package</span>
+<span class="kw">import</span> com.myapp.MathUtils;
+<span class="kw">import static</span> com.myapp.MathUtils.square; <span class="cm">// static import</span>
+
+<span class="kw">public class</span> <span class="cls">Main</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.<span class="fn">println</span>(<span class="fn">square</span>(<span class="num">5</span>)); <span class="cm">// no class name needed!</span>
+    }
+}</pre>
+    </div>
+    <div class="info-card tip">
+      <div class="card-label">💡 Naming Convention</div>
+      Packages use reverse domain name: <code>com.companyname.projectname</code>. Class names are PascalCase. Method names are camelCase.
+    </div>
+  </div>
+
+  <!-- PYQ Unit 1 -->
+  <div class="pyq-section" id="u1-pyq">
+    <div class="pyq-header">
+      <span class="pyq-icon">📋</span>
+      <div>
+        <div class="pyq-title">Previous Year Questions – Unit I</div>
+        <div class="pyq-subtitle">BCS403 · 2023-24 & 2024-25</div>
+      </div>
+    </div>
+    <div class="pyq-q">
+      Define the concept of classes and objects in Java with a suitable example.
+      <div class="pyq-meta">2023-24 · Section A · 2 marks</div>
+    </div>
+    <div class="pyq-q">
+      Illustrate Constructors and their applications in Java. Write a class Student with attributes roll_number, name, branch and email. Write all-argument constructor for class Student and create two objects. <span class="freq-badge">★ HOT</span>
+      <div class="pyq-meta">2023-24 · Section C · 7 marks</div>
+    </div>
+    <div class="pyq-q">
+      Illustrate polymorphism and its types. Differentiate between run-time and compile-time polymorphism. Write super class Shape with displayArea() and sub class Rectangle. <span class="freq-badge">★ HOT</span>
+      <div class="pyq-meta">2023-24 · Section C · 7 marks</div>
+    </div>
+    <div class="pyq-q">
+      Explain abstraction and abstract classes in Java. Describe abstract method with a suitable example.
+      <div class="pyq-meta">2023-24 · Section B · 7 marks</div>
+    </div>
+    <div class="pyq-q">
+      Why is Java platform-independent?
+      <div class="pyq-meta">2024-25 · Section A · 2 marks</div>
+    </div>
+    <div class="pyq-q">
+      Explain the concept of JVM and Java Runtime Environment.
+      <div class="pyq-meta">2024-25 · Section C · 7 marks</div>
+    </div>
+    <div class="pyq-q">
+      Discuss the different data types and control structures in Java with examples.
+      <div class="pyq-meta">2024-25 · Section B · 7 marks</div>
+    </div>
+    <div class="pyq-q">
+      Write a Java program to take user input and display the reverse of a string. <span class="freq-badge">NEW 2025</span>
+      <div class="pyq-meta">2024-25 · Section C · 7 marks</div>
+    </div>
+  </div>
+
+  <div class="unit-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       UNIT II
+  ════════════════════════════════════════════ -->
+  <div class="unit-header" id="unit2" style="--accent: var(--u2)">
+    <div class="unit-num un2">II</div>
+    <div>
+      <div class="unit-title" style="color: var(--u2)">Exception Handling, I/O & Multithreading</div>
+      <div class="unit-subtitle">try·catch·finally · File I/O · Threads</div>
+    </div>
+  </div>
+
+  <!-- 2.1 Exceptions -->
+  <div class="section" id="u2-exceptions">
+    <h2 style="border-left-color: var(--u2)">2.1 Exception Handling</h2>
+
+    <p>An <strong>exception</strong> is an unexpected event that disrupts normal program flow at runtime. Java's exception handling lets you respond to errors gracefully instead of crashing.</p>
+
+    <h3>Exception Hierarchy</h3>
+    <div class="svg-wrap">
+      <svg width="560" height="200" viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Throwable -->
+        <rect x="190" y="5" width="180" height="34" rx="7" fill="#1a2040" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="280" y="27" font-size="12" fill="#38d9a9" text-anchor="middle" font-weight="bold">Throwable</text>
+        <!-- Error -->
+        <rect x="40" y="70" width="160" height="34" rx="7" fill="#1a2040" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="120" y="92" font-size="12" fill="#f76e6e" text-anchor="middle" font-weight="bold">Error (JVM errors)</text>
+        <!-- Exception -->
+        <rect x="250" y="70" width="160" height="34" rx="7" fill="#1a2040" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="330" y="92" font-size="12" fill="#38d9a9" text-anchor="middle" font-weight="bold">Exception</text>
+        <!-- Lines from Throwable -->
+        <line x1="280" y1="39" x2="120" y2="70" stroke="#444" stroke-width="1.5"/>
+        <line x1="280" y1="39" x2="330" y2="70" stroke="#444" stroke-width="1.5"/>
+        <!-- Checked -->
+        <rect x="200" y="138" width="140" height="30" rx="6" fill="#131a2e" stroke="#f7a84f" stroke-width="1.5"/>
+        <text x="270" y="158" font-size="11" fill="#f7a84f" text-anchor="middle">Checked Exception</text>
+        <!-- Unchecked/RuntimeException -->
+        <rect x="360" y="138" width="175" height="30" rx="6" fill="#131a2e" stroke="#e06bde" stroke-width="1.5"/>
+        <text x="447" y="158" font-size="11" fill="#e06bde" text-anchor="middle">RuntimeException</text>
+        <!-- Lines from Exception -->
+        <line x1="330" y1="104" x2="270" y2="138" stroke="#444" stroke-width="1.5"/>
+        <line x1="330" y1="104" x2="447" y2="138" stroke="#444" stroke-width="1.5"/>
+        <!-- Labels -->
+        <text x="120" y="118" font-size="9" fill="#8899bb" text-anchor="middle">OutOfMemoryError, StackOverflowError</text>
+        <text x="270" y="182" font-size="9" fill="#8899bb" text-anchor="middle">IOException, SQLException</text>
+        <text x="447" y="182" font-size="9" fill="#8899bb" text-anchor="middle">NullPointerException, ArithmeticException</text>
+      </svg>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>Checked Exception</th><th>Unchecked Exception</th></tr>
+      <tr><td>Detected at</td><td>Compile time</td><td>Runtime</td></tr>
+      <tr><td>Must handle?</td><td>Yes (try-catch or throws)</td><td>No (optional)</td></tr>
+      <tr><td>Examples</td><td>IOException, SQLException</td><td>NullPointerException, ArithmeticException, ArrayIndexOutOfBoundsException</td></tr>
+    </table>
+    </div>
+
+    <h3>Keywords: try, catch, finally, throw, throws</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Complete Exception Demo [PYQ 2023-24 & 2024-25]</div></div>
+      <pre><span class="kw">public class</span> <span class="cls">ExceptionDemo</span> {
+
+    <span class="cm">// throws declares that method might throw this exception</span>
+    <span class="kw">static void</span> <span class="fn">checkAge</span>(<span class="kw">int</span> age) <span class="kw">throws</span> <span class="cls">IllegalArgumentException</span> {
+        <span class="kw">if</span> (age &lt; <span class="num">0</span>) {
+            <span class="kw">throw new</span> <span class="cls">IllegalArgumentException</span>(<span class="str">"Age cannot be negative!"</span>);
+        }
+        System.out.<span class="fn">println</span>(<span class="str">"Valid age: "</span> + age);
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="kw">try</span> {
+            <span class="kw">int</span> result = <span class="num">10</span> / <span class="num">0</span>;          <span class="cm">// ArithmeticException</span>
+        } <span class="kw">catch</span> (<span class="cls">ArithmeticException</span> e) {
+            System.out.<span class="fn">println</span>(<span class="str">"Caught: "</span> + e.<span class="fn">getMessage</span>()); <span class="cm">// / by zero</span>
+        } <span class="kw">finally</span> {
+            System.out.<span class="fn">println</span>(<span class="str">"Finally always runs!"</span>); <span class="cm">// always executes</span>
+        }
+
+        <span class="cm">// Multiple exceptions (PYQ 2024-25)</span>
+        <span class="kw">try</span> {
+            String s = <span class="kw">null</span>;
+            s.<span class="fn">length</span>();                       <span class="cm">// NullPointerException</span>
+        } <span class="kw">catch</span> (<span class="cls">NullPointerException</span> | <span class="cls">ArrayIndexOutOfBoundsException</span> e) {
+            System.out.<span class="fn">println</span>(<span class="str">"Null or array error: "</span> + e);
+        }
+    }
+}</pre>
+    </div>
+    <div class="output-box"><div class="output-label">Output</div>Caught: / by zero<br>Finally always runs!<br>Null or array error: java.lang.NullPointerException</div>
+
+    <div class="info-card tip">
+      <div class="card-label">💡 finally block</div>
+      The <strong>finally</strong> block always executes — whether or not an exception occurs. It's used to release resources like closing files or DB connections. The only case it doesn't run: if <code>System.exit()</code> is called.
+    </div>
+
+    <h3>User-Defined Exception</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">class</span> <span class="cls">InsufficientFundsException</span> <span class="kw">extends</span> <span class="cls">Exception</span> {
+    <span class="kw">public</span> <span class="fn">InsufficientFundsException</span>(<span class="cls">String</span> msg) {
+        <span class="kw">super</span>(msg); <span class="cm">// passes message to Exception</span>
+    }
+}
+
+<span class="kw">class</span> <span class="cls">Account</span> {
+    <span class="kw">double</span> balance = <span class="num">500</span>;
+    <span class="kw">void</span> <span class="fn">withdraw</span>(<span class="kw">double</span> amt) <span class="kw">throws</span> <span class="cls">InsufficientFundsException</span> {
+        <span class="kw">if</span> (amt > balance) <span class="kw">throw new</span> <span class="cls">InsufficientFundsException</span>(<span class="str">"Not enough balance!"</span>);
+        balance -= amt;
+    }
+}</pre>
+    </div>
+  </div>
+
+  <!-- 2.2 I/O -->
+  <div class="section" id="u2-io">
+    <h2 style="border-left-color: var(--u2)">2.2 Input / Output (File Handling)</h2>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Stream Type</th><th>Works with</th><th>Classes</th></tr>
+      <tr><td><strong>Byte Stream</strong></td><td>Raw bytes (images, audio, binary)</td><td>FileInputStream, FileOutputStream</td></tr>
+      <tr><td><strong>Character Stream</strong></td><td>Text/Unicode characters</td><td>FileReader, FileWriter, BufferedReader, BufferedWriter</td></tr>
+    </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Writing & Reading a File</div></div>
+      <pre><span class="kw">import</span> java.io.*;
+
+<span class="kw">public class</span> <span class="cls">FileDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cm">// Writing to file</span>
+        <span class="kw">try</span> (<span class="cls">FileWriter</span> fw = <span class="kw">new</span> <span class="cls">FileWriter</span>(<span class="str">"data.txt"</span>)) {
+            fw.<span class="fn">write</span>(<span class="str">"Hello, File Handling in Java!\n"</span>);
+            fw.<span class="fn">write</span>(<span class="str">"Second line here."</span>);
+        } <span class="kw">catch</span> (<span class="cls">IOException</span> e) {
+            System.out.<span class="fn">println</span>(<span class="str">"Error writing: "</span> + e);
+        }
+
+        <span class="cm">// Reading from file</span>
+        <span class="kw">try</span> (<span class="cls">BufferedReader</span> br = <span class="kw">new</span> <span class="cls">BufferedReader</span>(<span class="kw">new</span> <span class="cls">FileReader</span>(<span class="str">"data.txt"</span>))) {
+            <span class="cls">String</span> line;
+            <span class="kw">while</span> ((line = br.<span class="fn">readLine</span>()) != <span class="kw">null</span>) {
+                System.out.<span class="fn">println</span>(line);
+            }
+        } <span class="kw">catch</span> (<span class="cls">IOException</span> e) {
+            System.out.<span class="fn">println</span>(<span class="str">"Error reading: "</span> + e);
+        }
+    }
+}</pre>
+    </div>
+    <div class="info-card note">
+      <div class="card-label">📌 Try-with-resources</div>
+      The <code>try (Resource r = ...)</code> syntax (Java 7+) automatically closes the resource, eliminating the need for a finally block to close streams. This is a Unit III topic too!
+    </div>
+  </div>
+
+  <!-- 2.3 Threads -->
+  <div class="section" id="u2-threads">
+    <h2 style="border-left-color: var(--u2)">2.3 Multithreading</h2>
+
+    <p>A <strong>thread</strong> is the smallest unit of execution. Java supports running multiple threads simultaneously (multithreading), allowing parallel tasks.</p>
+
+    <h3>Thread Life Cycle [PYQ 2023-24]</h3>
+    <div class="svg-wrap">
+      <svg width="620" height="100" viewBox="0 0 620 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#38d9a9"/>
+          </marker>
+        </defs>
+        <!-- States -->
+        <rect x="5" y="30" width="90" height="32" rx="6" fill="#1a2040" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="50" y="51" font-size="11" fill="#38d9a9" text-anchor="middle" font-weight="bold">NEW</text>
+        <rect x="120" y="30" width="90" height="32" rx="6" fill="#1a2040" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="165" y="51" font-size="11" fill="#38d9a9" text-anchor="middle" font-weight="bold">RUNNABLE</text>
+        <rect x="235" y="30" width="90" height="32" rx="6" fill="#1a2040" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="280" y="51" font-size="11" fill="#38d9a9" text-anchor="middle" font-weight="bold">RUNNING</text>
+        <rect x="350" y="30" width="90" height="32" rx="6" fill="#1a2040" stroke="#f7a84f" stroke-width="1.5"/>
+        <text x="395" y="51" font-size="11" fill="#f7a84f" text-anchor="middle" font-weight="bold">WAITING</text>
+        <rect x="465" y="30" width="105" height="32" rx="6" fill="#1a2040" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="517" y="51" font-size="11" fill="#f76e6e" text-anchor="middle" font-weight="bold">TERMINATED</text>
+        <!-- Arrows -->
+        <line x1="95" y1="46" x2="120" y2="46" stroke="#38d9a9" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="210" y1="46" x2="235" y2="46" stroke="#38d9a9" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="325" y1="46" x2="350" y2="46" stroke="#38d9a9" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="440" y1="46" x2="465" y2="46" stroke="#38d9a9" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- also from WAITING back to RUNNING -->
+        <path d="M395,62 Q395,85 280,85 Q230,85 280,62" stroke="#f7a84f" stroke-width="1" fill="none" stroke-dasharray="4"/>
+        <text x="337" y="95" font-size="9" fill="#f7a84f" text-anchor="middle">notify()</text>
+        <!-- Labels -->
+        <text x="50" y="20" font-size="9" fill="#8899bb" text-anchor="middle">new Thread()</text>
+        <text x="165" y="20" font-size="9" fill="#8899bb" text-anchor="middle">start()</text>
+        <text x="280" y="20" font-size="9" fill="#8899bb" text-anchor="middle">scheduler picks</text>
+        <text x="395" y="20" font-size="9" fill="#8899bb" text-anchor="middle">wait()/sleep()</text>
+        <text x="517" y="20" font-size="9" fill="#8899bb" text-anchor="middle">run() completes</text>
+      </svg>
+    </div>
+
+    <h3>Creating Threads – Two Ways</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Method 1: Extending Thread class</div></div>
+      <pre><span class="kw">class</span> <span class="cls">MyThread</span> <span class="kw">extends</span> <span class="cls">Thread</span> {
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">run</span>() {
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+            System.out.<span class="fn">println</span>(<span class="cls">Thread</span>.<span class="fn">currentThread</span>().<span class="fn">getName</span>() + <span class="str">": "</span> + i);
+        }
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">ThreadDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">MyThread</span> t1 = <span class="kw">new</span> <span class="cls">MyThread</span>();
+        t1.<span class="fn">setName</span>(<span class="str">"Thread-A"</span>);
+        t1.<span class="fn">start</span>(); <span class="cm">// calls run() internally</span>
+    }
+}</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Method 2: Implementing Runnable (Preferred!) [PYQ 2023-24]</div></div>
+      <pre><span class="kw">class</span> <span class="cls">PrintNumbers</span> <span class="kw">implements</span> <span class="cls">Runnable</span> {
+    <span class="kw">private</span> <span class="cls">String</span> name;
+    <span class="cls">PrintNumbers</span>(<span class="cls">String</span> name) { <span class="kw">this</span>.name = name; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public void</span> <span class="fn">run</span>() {
+        <span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+            System.out.<span class="fn">println</span>(name + <span class="str">": "</span> + i);
+            <span class="kw">try</span> { <span class="cls">Thread</span>.<span class="fn">sleep</span>(<span class="num">100</span>); } <span class="kw">catch</span> (<span class="cls">InterruptedException</span> e) {}
+        }
+    }
+}
+
+<span class="kw">public class</span> <span class="cls">ThreadDemo2</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">Thread</span> t1 = <span class="kw">new</span> <span class="cls">Thread</span>(<span class="kw">new</span> <span class="cls">PrintNumbers</span>(<span class="str">"Thread-1"</span>));
+        <span class="cls">Thread</span> t2 = <span class="kw">new</span> <span class="cls">Thread</span>(<span class="kw">new</span> <span class="cls">PrintNumbers</span>(<span class="str">"Thread-2"</span>));
+        t1.<span class="fn">start</span>();
+        t2.<span class="fn">start</span>();
+    }
+}</pre>
+    </div>
+
+    <div class="info-card tip">
+      <div class="card-label">💡 Why Runnable is Preferred</div>
+      Since Java does not allow multiple inheritance, extending <code>Thread</code> prevents your class from extending any other class. Using <code>Runnable</code> is preferred because the class is free to extend another class.
+    </div>
+
+    <h3>Synchronization & Inter-thread Communication</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Even & Odd threads [PYQ 2024-25]</div></div>
+      <pre><span class="kw">class</span> <span class="cls">Printer</span> {
+    <span class="kw">private boolean</span> printEven = <span class="kw">false</span>;
+
+    <span class="kw">synchronized void</span> <span class="fn">printOdd</span>(<span class="kw">int</span> n) <span class="kw">throws</span> <span class="cls">InterruptedException</span> {
+        <span class="kw">while</span> (printEven) <span class="fn">wait</span>();
+        System.out.<span class="fn">print</span>(n + <span class="str">" "</span>);
+        printEven = <span class="kw">true</span>;
+        <span class="fn">notifyAll</span>();
+    }
+
+    <span class="kw">synchronized void</span> <span class="fn">printEven</span>(<span class="kw">int</span> n) <span class="kw">throws</span> <span class="cls">InterruptedException</span> {
+        <span class="kw">while</span> (!printEven) <span class="fn">wait</span>();
+        System.out.<span class="fn">print</span>(n + <span class="str">" "</span>);
+        printEven = <span class="kw">false</span>;
+        <span class="fn">notifyAll</span>();
+    }
+}
+
+<span class="cm">// Thread 1 prints odd: 1, Thread 2 prints even: 2, etc.</span></pre>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Purpose</th></tr>
+      <tr><td><code>wait()</code></td><td>Releases lock, thread enters WAITING state</td></tr>
+      <tr><td><code>notify()</code></td><td>Wakes up one waiting thread</td></tr>
+      <tr><td><code>notifyAll()</code></td><td>Wakes up all waiting threads</td></tr>
+      <tr><td><code>sleep(ms)</code></td><td>Pauses thread for ms milliseconds (doesn't release lock)</td></tr>
+      <tr><td><code>join()</code></td><td>Waits for another thread to complete</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <!-- PYQ Unit 2 -->
+  <div class="pyq-section" id="u2-pyq">
+    <div class="pyq-header">
+      <span class="pyq-icon">📋</span>
+      <div>
+        <div class="pyq-title">Previous Year Questions – Unit II</div>
+        <div class="pyq-subtitle">BCS403 · 2023-24 & 2024-25</div>
+      </div>
+    </div>
+    <div class="pyq-q">Describe all keywords used for exception handling in Java. <div class="pyq-meta">2023-24 · Section A · 2 marks</div></div>
+    <div class="pyq-q">Differentiate between checked and unchecked exceptions in Java. Write a Java program to demonstrate Arithmetic Exception handling. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Differentiate with suitable examples: 1. Character streams and Byte Streams  2. wait() and notify()<div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Describe the ways to create threads in Java with code. Also explain which method is more suitable.<div class="pyq-meta">2023-24 · Section B · 7 marks</div></div>
+    <div class="pyq-q">What is the purpose of the finally block in Java exception handling?<div class="pyq-meta">2024-25 · Section A · 2 marks</div></div>
+    <div class="pyq-q">How is throw different from throws?<div class="pyq-meta">2024-25 · Section A · 2 marks</div></div>
+    <div class="pyq-q">Write a Java program to handle multiple exceptions using try-catch-finally. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Write a Java program that creates two threads – one to print even numbers and other for odd numbers. <span class="freq-badge">NEW 2025</span><div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Explain concept of multithreading. Write a program to implement two threads printing numbers alternatively.<div class="pyq-meta">2024-25 · Section B · 7 marks</div></div>
+  </div>
+
+  <div class="unit-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       UNIT III
+  ════════════════════════════════════════════ -->
+  <div class="unit-header" id="unit3">
+    <div class="unit-num un3">III</div>
+    <div>
+      <div class="unit-title" style="color: var(--u3)">Java New Features</div>
+      <div class="unit-subtitle">Lambda · Functional Interfaces · Stream API · Records · Sealed Classes</div>
+    </div>
+  </div>
+
+  <div class="section" id="u3-lambda">
+    <h2 style="border-left-color: var(--u3)">3.1 Functional Interfaces & Lambda Expressions [PYQ Both Years!]</h2>
+
+    <p>A <strong>Functional Interface</strong> is an interface with <em>exactly one</em> abstract method. It can have multiple default or static methods. The <code>@FunctionalInterface</code> annotation enforces this.</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Functional Interface & Lambda</div></div>
+      <pre><span class="ann">@FunctionalInterface</span>
+<span class="kw">interface</span> <span class="cls">Greet</span> {
+    <span class="kw">void</span> <span class="fn">sayHello</span>(<span class="cls">String</span> name); <span class="cm">// one abstract method</span>
+}
+
+<span class="kw">public class</span> <span class="cls">LambdaDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+
+        <span class="cm">// Before Java 8 – Anonymous class</span>
+        <span class="cls">Greet</span> g1 = <span class="kw">new</span> <span class="cls">Greet</span>() {
+            <span class="kw">public void</span> <span class="fn">sayHello</span>(<span class="cls">String</span> name) {
+                System.out.<span class="fn">println</span>(<span class="str">"Hello, "</span> + name);
+            }
+        };
+
+        <span class="cm">// Java 8+ – Lambda Expression (much cleaner!)</span>
+        <span class="cls">Greet</span> g2 = name -> System.out.<span class="fn">println</span>(<span class="str">"Hello, "</span> + name);
+
+        g2.<span class="fn">sayHello</span>(<span class="str">"Rahul"</span>);  <span class="cm">// Hello, Rahul</span>
+
+        <span class="cm">// Built-in Functional Interfaces</span>
+        java.util.function.<span class="cls">Predicate</span>&lt;<span class="cls">Integer</span>&gt; isEven = n -> n % <span class="num">2</span> == <span class="num">0</span>;
+        System.out.<span class="fn">println</span>(isEven.<span class="fn">test</span>(<span class="num">4</span>));  <span class="cm">// true</span>
+
+        java.util.function.<span class="cls">Function</span>&lt;<span class="cls">String</span>, <span class="cls">Integer</span>&gt; len = s -> s.<span class="fn">length</span>();
+        System.out.<span class="fn">println</span>(len.<span class="fn">apply</span>(<span class="str">"Java"</span>));  <span class="cm">// 4</span>
+
+        java.util.function.<span class="cls">Consumer</span>&lt;<span class="cls">String</span>&gt; print = s -> System.out.<span class="fn">println</span>(s);
+        print.<span class="fn">accept</span>(<span class="str">"Lambda is awesome!"</span>);
+    }
+}</pre>
+    </div>
+
+    <h3>Method References</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">import</span> java.util.*;
+<span class="kw">import</span> java.util.function.*;
+
+<span class="cls">List</span>&lt;<span class="cls">String</span>&gt; names = <span class="cls">Arrays</span>.<span class="fn">asList</span>(<span class="str">"Alice"</span>, <span class="str">"Bob"</span>, <span class="str">"Charlie"</span>);
+
+<span class="cm">// Lambda</span>
+names.<span class="fn">forEach</span>(name -> System.out.<span class="fn">println</span>(name));
+
+<span class="cm">// Method Reference (equivalent, cleaner)</span>
+names.<span class="fn">forEach</span>(System.out::<span class="fn">println</span>);
+
+<span class="cm">// Static method reference</span>
+<span class="cls">Function</span>&lt;<span class="cls">String</span>, <span class="cls">Integer</span>&gt; toInt = <span class="cls">Integer</span>::<span class="fn">parseInt</span>;</pre>
+    </div>
+  </div>
+
+  <div class="section" id="u3-stream">
+    <h2 style="border-left-color: var(--u3)">3.2 Stream API [PYQ 2023-24]</h2>
+
+    <p>Stream API (Java 8+) enables functional-style operations on collections — filtering, mapping, reducing — in a clean, readable way. Streams don't store data; they process it.</p>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Operations</th><th>Returns</th></tr>
+      <tr><td><strong>Intermediate</strong></td><td>filter(), map(), sorted(), distinct(), limit(), skip()</td><td>Another Stream (lazy)</td></tr>
+      <tr><td><strong>Terminal</strong></td><td>collect(), forEach(), count(), sum(), reduce(), findFirst()</td><td>Result / void</td></tr>
+    </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Stream API Demo [PYQ: sum of even numbers 1-10]</div></div>
+      <pre><span class="kw">import</span> java.util.*;
+<span class="kw">import</span> java.util.stream.*;
+
+<span class="kw">public class</span> <span class="cls">StreamDemo</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">List</span>&lt;<span class="cls">Integer</span>&gt; nums = new <span class="cls">ArrayList</span>&lt;&gt;();
+        <span class="kw">for</span> (<span class="kw">int</span> i=<span class="num">1</span>; i&lt;=<span class="num">10</span>; i++) nums.<span class="fn">add</span>(i);
+
+        <span class="cm">// Sum of even numbers from 1 to 10 (PYQ!)</span>
+        <span class="kw">int</span> sum = nums.<span class="fn">stream</span>()
+                      .<span class="fn">filter</span>(n -> n % <span class="num">2</span> == <span class="num">0</span>)   <span class="cm">// intermediate: keep evens</span>
+                      .<span class="fn">mapToInt</span>(<span class="cls">Integer</span>::intValue) <span class="cm">// intermediate: convert</span>
+                      .<span class="fn">sum</span>();                        <span class="cm">// terminal: sum</span>
+        System.out.<span class="fn">println</span>(<span class="str">"Sum of evens: "</span> + sum);   <span class="cm">// 30</span>
+
+        <span class="cm">// More operations</span>
+        nums.<span class="fn">stream</span>()
+            .<span class="fn">filter</span>(n -> n > <span class="num">5</span>)
+            .<span class="fn">map</span>(n -> n * n)
+            .<span class="fn">sorted</span>()
+            .<span class="fn">forEach</span>(System.out::<span class="fn">println</span>); <span class="cm">// 36, 49, 64, 81, 100</span>
+
+        <span class="cm">// Collect to list</span>
+        <span class="cls">List</span>&lt;<span class="cls">String</span>&gt; names = <span class="cls">Arrays</span>.<span class="fn">asList</span>(<span class="str">"anna"</span>, <span class="str">"bob"</span>, <span class="str">"charlie"</span>);
+        <span class="cls">List</span>&lt;<span class="cls">String</span>&gt; upper = names.<span class="fn">stream</span>()
+                                    .<span class="fn">map</span>(<span class="cls">String</span>::toUpperCase)
+                                    .<span class="fn">collect</span>(<span class="cls">Collectors</span>.<span class="fn">toList</span>());
+    }
+}</pre>
+    </div>
+    <div class="output-box"><div class="output-label">Output</div>Sum of evens: 30</div>
+  </div>
+
+  <div class="section" id="u3-modern">
+    <h2 style="border-left-color: var(--u3)">3.3 Modern Java Features</h2>
+
+    <h3>Switch Expression (Java 14+) [PYQ 2023-24]</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">int</span> day = <span class="num">3</span>;
+
+<span class="cm">// Old switch-case statement</span>
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.<span class="fn">println</span>(<span class="str">"Mon"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.<span class="fn">println</span>(<span class="str">"Tue"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.<span class="fn">println</span>(<span class="str">"Other"</span>);
+}
+
+<span class="cm">// New switch expression (no break needed, returns value)</span>
+<span class="cls">String</span> dayName = <span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span> -> <span class="str">"Monday"</span>;
+    <span class="kw">case</span> <span class="num">2</span> -> <span class="str">"Tuesday"</span>;
+    <span class="kw">case</span> <span class="num">3</span> -> <span class="str">"Wednesday"</span>;
+    <span class="kw">default</span> -> <span class="str">"Other"</span>;
+};
+System.out.<span class="fn">println</span>(dayName); <span class="cm">// Wednesday</span>
+
+<span class="cm">// yield keyword (for multiline cases)</span>
+<span class="kw">int</span> score = <span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>, <span class="num">2</span> -> <span class="num">10</span>;
+    <span class="kw">case</span> <span class="num">3</span> -> {
+        System.out.<span class="fn">println</span>(<span class="str">"Midweek"</span>);
+        <span class="kw">yield</span> <span class="num">20</span>;   <span class="cm">// yield returns value from block</span>
+    }
+    <span class="kw">default</span> -> <span class="num">0</span>;
+};</pre>
+    </div>
+
+    <h3>Records (Java 16+)</h3>
+    <p>Records are immutable data carrier classes that auto-generate constructor, getters, equals, hashCode, and toString.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// Instead of a verbose POJO class:</span>
+<span class="kw">record</span> <span class="cls">Point</span>(<span class="kw">int</span> x, <span class="kw">int</span> y) {}
+
+<span class="cls">Point</span> p = <span class="kw">new</span> <span class="cls">Point</span>(<span class="num">3</span>, <span class="num">4</span>);
+System.out.<span class="fn">println</span>(p.x());     <span class="cm">// 3  (auto-generated getter)</span>
+System.out.<span class="fn">println</span>(p);          <span class="cm">// Point[x=3, y=4]</span></pre>
+    </div>
+
+    <h3>Sealed Classes (Java 17+) [PYQ 2023-24]</h3>
+    <p>Sealed classes restrict which other classes can extend/implement them, giving more control over class hierarchies.</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">sealed class</span> <span class="cls">Shape</span> <span class="kw">permits</span> <span class="cls">Circle</span>, <span class="cls">Rectangle</span>, <span class="cls">Triangle</span> {}
+
+<span class="kw">final class</span> <span class="cls">Circle</span> <span class="kw">extends</span> <span class="cls">Shape</span> { <span class="kw">double</span> radius; }
+<span class="kw">final class</span> <span class="cls">Rectangle</span> <span class="kw">extends</span> <span class="cls">Shape</span> { <span class="kw">double</span> w, h; }
+<span class="kw">non-sealed class</span> <span class="cls">Triangle</span> <span class="kw">extends</span> <span class="cls">Shape</span> {}
+
+<span class="cm">// SquarePatch cannot extend Shape — compiler error!</span></pre>
+    </div>
+
+    <h3>Text Blocks (Java 15+)</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cm">// Old way (messy)</span>
+<span class="cls">String</span> json = <span class="str">"{\n  \"name\": \"Java\",\n  \"version\": 17\n}"</span>;
+
+<span class="cm">// Text block (clean!)</span>
+<span class="cls">String</span> json = <span class="str">"""
+        {
+          "name": "Java",
+          "version": 17
+        }
+        """</span>;</pre>
+    </div>
+  </div>
+
+  <!-- PYQ Unit 3 -->
+  <div class="pyq-section" id="u3-pyq">
+    <div class="pyq-header">
+      <span class="pyq-icon">📋</span>
+      <div>
+        <div class="pyq-title">Previous Year Questions – Unit III</div>
+        <div class="pyq-subtitle">BCS403 · 2023-24 & 2024-25</div>
+      </div>
+    </div>
+    <div class="pyq-q">Explain the functional interfaces in Java. Describe lambda expressions with the help of functional interfaces. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Explain Java stream API and its applications. Describe Intermediate and terminal operations. Write a program to print sum of all even numbers from ArrayList&lt;Integer&gt; containing 1 to 10. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Compare and contrast switch-case statement with switch-expression in Java.<div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Explain the concept of Sealed classes in Java with suitable example.<div class="pyq-meta">2023-24 · Section A · 2 marks</div></div>
+    <div class="pyq-q">What is a functional interface? Give an example.<div class="pyq-meta">2024-25 · Section A · 2 marks</div></div>
+    <div class="pyq-q">What are functional interfaces and how are they implemented using lambda expressions?<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+    <div class="pyq-q">What is the Stream API in Java? How does it help in functional-style operations?<div class="pyq-meta">2024-25 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Describe the role of annotations in Java and how type annotations are used.<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+  </div>
+
+  <div class="unit-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       UNIT IV
+  ════════════════════════════════════════════ -->
+  <div class="unit-header" id="unit4">
+    <div class="unit-num un4">IV</div>
+    <div>
+      <div class="unit-title" style="color: var(--u4)">Java Collections Framework</div>
+      <div class="unit-subtitle">List · Set · Queue · Map · Sorting · Comparable · Comparator</div>
+    </div>
+  </div>
+
+  <div class="section" id="u4-collections">
+    <h2 style="border-left-color: var(--u4)">4.1 Collections Framework Overview [PYQ Both Years!]</h2>
+
+    <p>The Collections Framework provides a unified architecture for storing and manipulating groups of objects. It includes interfaces, implementations, and algorithms.</p>
+
+    <div class="svg-wrap">
+      <svg width="640" height="320" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- Iterable -->
+        <rect x="245" y="5" width="150" height="30" rx="6" fill="#1a1440" stroke="#e06bde" stroke-width="1.5"/>
+        <text x="320" y="25" font-size="11" fill="#e06bde" text-anchor="middle" font-weight="bold">«interface» Iterable</text>
+        <!-- Collection -->
+        <rect x="245" y="60" width="150" height="30" rx="6" fill="#1a1440" stroke="#e06bde" stroke-width="1.5"/>
+        <text x="320" y="80" font-size="11" fill="#e06bde" text-anchor="middle" font-weight="bold">«interface» Collection</text>
+        <line x1="320" y1="35" x2="320" y2="60" stroke="#666" stroke-width="1.5"/>
+        <!-- List -->
+        <rect x="50" y="130" width="120" height="28" rx="6" fill="#111830" stroke="#4f8ef7" stroke-width="1.5"/>
+        <text x="110" y="149" font-size="11" fill="#4f8ef7" text-anchor="middle">«i» List</text>
+        <!-- Set -->
+        <rect x="258" y="130" width="120" height="28" rx="6" fill="#111830" stroke="#38d9a9" stroke-width="1.5"/>
+        <text x="318" y="149" font-size="11" fill="#38d9a9" text-anchor="middle">«i» Set</text>
+        <!-- Queue -->
+        <rect x="466" y="130" width="120" height="28" rx="6" fill="#111830" stroke="#f7a84f" stroke-width="1.5"/>
+        <text x="526" y="149" font-size="11" fill="#f7a84f" text-anchor="middle">«i» Queue</text>
+        <!-- Lines from Collection -->
+        <line x1="280" y1="90" x2="110" y2="130" stroke="#555" stroke-width="1.5"/>
+        <line x1="320" y1="90" x2="318" y2="130" stroke="#555" stroke-width="1.5"/>
+        <line x1="360" y1="90" x2="526" y2="130" stroke="#555" stroke-width="1.5"/>
+        <!-- List implementations -->
+        <rect x="5" y="200" width="95" height="26" rx="5" fill="#0d1117" stroke="#4f8ef7" stroke-width="1"/>
+        <text x="52" y="217" font-size="10" fill="#88aaee" text-anchor="middle">ArrayList</text>
+        <rect x="110" y="200" width="95" height="26" rx="5" fill="#0d1117" stroke="#4f8ef7" stroke-width="1"/>
+        <text x="157" y="217" font-size="10" fill="#88aaee" text-anchor="middle">LinkedList</text>
+        <line x1="52" y1="158" x2="52" y2="200" stroke="#334" stroke-width="1"/>
+        <line x1="157" y1="158" x2="157" y2="200" stroke="#334" stroke-width="1"/>
+        <!-- Set implementations -->
+        <rect x="220" y="200" width="90" height="26" rx="5" fill="#0d1117" stroke="#38d9a9" stroke-width="1"/>
+        <text x="265" y="217" font-size="10" fill="#4fc49e" text-anchor="middle">HashSet</text>
+        <rect x="320" y="200" width="90" height="26" rx="5" fill="#0d1117" stroke="#38d9a9" stroke-width="1"/>
+        <text x="365" y="217" font-size="10" fill="#4fc49e" text-anchor="middle">TreeSet</text>
+        <line x1="265" y1="158" x2="265" y2="200" stroke="#334" stroke-width="1"/>
+        <line x1="365" y1="158" x2="365" y2="200" stroke="#334" stroke-width="1"/>
+        <!-- Queue implementations -->
+        <rect x="435" y="200" width="95" height="26" rx="5" fill="#0d1117" stroke="#f7a84f" stroke-width="1"/>
+        <text x="482" y="217" font-size="10" fill="#c4924f" text-anchor="middle">LinkedList</text>
+        <rect x="540" y="200" width="95" height="26" rx="5" fill="#0d1117" stroke="#f7a84f" stroke-width="1"/>
+        <text x="587" y="217" font-size="10" fill="#c4924f" text-anchor="middle">PriorityQueue</text>
+        <line x1="482" y1="158" x2="482" y2="200" stroke="#334" stroke-width="1"/>
+        <line x1="587" y1="158" x2="587" y2="200" stroke="#334" stroke-width="1"/>
+        <!-- Map (separate) -->
+        <rect x="245" y="265" width="150" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="320" y="284" font-size="11" fill="#f76e6e" text-anchor="middle">«interface» Map</text>
+        <text x="320" y="255" font-size="9.5" fill="#666" text-anchor="middle">— separate hierarchy —</text>
+        <text x="20" y="305" font-size="9.5" fill="#8899bb">HashMap · LinkedHashMap · TreeMap · Hashtable</text>
+      </svg>
+    </div>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Interface</th><th>Ordered?</th><th>Duplicates?</th><th>Key implementations</th></tr>
+      <tr><td><strong>List</strong></td><td>✅ Index-based</td><td>✅ Allowed</td><td>ArrayList, LinkedList, Vector, Stack</td></tr>
+      <tr><td><strong>Set</strong></td><td>❌ (TreeSet sorts)</td><td>❌ No duplicates</td><td>HashSet, LinkedHashSet, TreeSet</td></tr>
+      <tr><td><strong>Queue</strong></td><td>✅ FIFO order</td><td>✅ Allowed</td><td>LinkedList, PriorityQueue, ArrayDeque</td></tr>
+      <tr><td><strong>Map</strong></td><td>❌ (LinkedHashMap keeps order)</td><td>❌ No dup keys</td><td>HashMap, TreeMap, LinkedHashMap, Hashtable</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="section" id="u4-list">
+    <h2 style="border-left-color: var(--u4)">4.2 List & Queue</h2>
+
+    <h3>ArrayList vs LinkedList [PYQ 2024-25]</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>ArrayList</th><th>LinkedList</th></tr>
+      <tr><td>Internal storage</td><td>Dynamic array</td><td>Doubly linked nodes</td></tr>
+      <tr><td>Random access</td><td>O(1) – fast</td><td>O(n) – slow</td></tr>
+      <tr><td>Insert/Delete (middle)</td><td>O(n) – slow</td><td>O(1) – fast</td></tr>
+      <tr><td>Memory</td><td>Less (just data)</td><td>More (data + two pointers)</td></tr>
+      <tr><td>Use when</td><td>Frequent reads/iteration</td><td>Frequent insert/delete</td></tr>
+    </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – ArrayList & forEach [PYQ 2023-24]</div></div>
+      <pre><span class="kw">import</span> java.util.*;
+
+<span class="cls">ArrayList</span>&lt;<span class="cls">String</span>&gt; list = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;();
+list.<span class="fn">add</span>(<span class="str">"Apple"</span>);
+list.<span class="fn">add</span>(<span class="str">"Banana"</span>);
+list.<span class="fn">add</span>(<span class="str">"Cherry"</span>);
+list.<span class="fn">add</span>(<span class="str">"Dates"</span>);
+list.<span class="fn">add</span>(<span class="str">"Elderberry"</span>);
+
+<span class="cm">// Display using forEach (lambda) [PYQ exactly!]</span>
+list.<span class="fn">forEach</span>(item -> System.out.<span class="fn">println</span>(item));
+
+<span class="cm">// Common methods</span>
+System.out.<span class="fn">println</span>(list.<span class="fn">size</span>());        <span class="cm">// 5</span>
+System.out.<span class="fn">println</span>(list.<span class="fn">get</span>(<span class="num">0</span>));        <span class="cm">// Apple</span>
+list.<span class="fn">remove</span>(<span class="str">"Banana"</span>);                  <span class="cm">// remove by value</span>
+list.<span class="fn">set</span>(<span class="num">1</span>, <span class="str">"Blueberry"</span>);               <span class="cm">// update index 1</span>
+System.out.<span class="fn">println</span>(list.<span class="fn">contains</span>(<span class="str">"Apple"</span>)); <span class="cm">// true</span>
+<span class="cls">Collections</span>.<span class="fn">sort</span>(list);                  <span class="cm">// sort alphabetically</span></pre>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – LinkedList [PYQ 2023-24]</div></div>
+      <pre><span class="cls">LinkedList</span>&lt;<span class="cls">Integer</span>&gt; ll = <span class="kw">new</span> <span class="cls">LinkedList</span>&lt;&gt;();
+ll.<span class="fn">add</span>(<span class="num">10</span>);       <span class="cm">// adds to end</span>
+ll.<span class="fn">addFirst</span>(<span class="num">5</span>);   <span class="cm">// adds to beginning</span>
+ll.<span class="fn">addLast</span>(<span class="num">20</span>);   <span class="cm">// adds to end</span>
+ll.<span class="fn">removeFirst</span>(); <span class="cm">// removes first element</span>
+ll.<span class="fn">removeLast</span>();  <span class="cm">// removes last element</span>
+System.out.<span class="fn">println</span>(ll.<span class="fn">peek</span>()); <span class="cm">// looks at first without removing</span>
+System.out.<span class="fn">println</span>(ll.<span class="fn">size</span>()); <span class="cm">// size</span></pre>
+    </div>
+  </div>
+
+  <div class="section" id="u4-map">
+    <h2 style="border-left-color: var(--u4)">4.3 Map & Set</h2>
+
+    <h3>HashMap [PYQ Both Years!]</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – HashMap Demo</div></div>
+      <pre><span class="kw">import</span> java.util.*;
+
+<span class="cls">HashMap</span>&lt;<span class="cls">String</span>, <span class="cls">Integer</span>&gt; scores = <span class="kw">new</span> <span class="cls">HashMap</span>&lt;&gt;();
+scores.<span class="fn">put</span>(<span class="str">"Rahul"</span>, <span class="num">90</span>);
+scores.<span class="fn">put</span>(<span class="str">"Priya"</span>, <span class="num">85</span>);
+scores.<span class="fn">put</span>(<span class="str">"Amit"</span>, <span class="num">92</span>);
+
+System.out.<span class="fn">println</span>(scores.<span class="fn">get</span>(<span class="str">"Rahul"</span>));    <span class="cm">// 90</span>
+System.out.<span class="fn">println</span>(scores.<span class="fn">containsKey</span>(<span class="str">"Priya"</span>)); <span class="cm">// true</span>
+scores.<span class="fn">remove</span>(<span class="str">"Amit"</span>);
+System.out.<span class="fn">println</span>(scores.<span class="fn">size</span>());           <span class="cm">// 2</span>
+
+<span class="cm">// Iterate through keys and values (PYQ 2024-25!)</span>
+<span class="kw">for</span> (<span class="cls">Map</span>.<span class="cls">Entry</span>&lt;<span class="cls">String</span>, <span class="cls">Integer</span>&gt; entry : scores.<span class="fn">entrySet</span>()) {
+    System.out.<span class="fn">println</span>(entry.<span class="fn">getKey</span>() + <span class="str">" → "</span> + entry.<span class="fn">getValue</span>());
+}
+
+<span class="cm">// Using forEach (Java 8)</span>
+scores.<span class="fn">forEach</span>((k, v) -> System.out.<span class="fn">println</span>(k + <span class="str">": "</span> + v));</pre>
+    </div>
+
+    <h3>HashSet</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="cls">HashSet</span>&lt;<span class="cls">String</span>&gt; set = <span class="kw">new</span> <span class="cls">HashSet</span>&lt;&gt;();
+set.<span class="fn">add</span>(<span class="str">"Apple"</span>);
+set.<span class="fn">add</span>(<span class="str">"Banana"</span>);
+set.<span class="fn">add</span>(<span class="str">"Apple"</span>);  <span class="cm">// duplicate – ignored!</span>
+System.out.<span class="fn">println</span>(set.<span class="fn">size</span>()); <span class="cm">// 2</span>
+System.out.<span class="fn">println</span>(set);         <span class="cm">// [Banana, Apple] (no order guarantee)</span></pre>
+    </div>
+
+    <h3>Sorting with Comparable & Comparator</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA</div></div>
+      <pre><span class="kw">class</span> <span class="cls">Student</span> <span class="kw">implements</span> <span class="cls">Comparable</span>&lt;<span class="cls">Student</span>&gt; {
+    <span class="cls">String</span> name; <span class="kw">int</span> marks;
+    <span class="cls">Student</span>(<span class="cls">String</span> n, <span class="kw">int</span> m) { name=n; marks=m; }
+
+    <span class="ann">@Override</span>
+    <span class="kw">public int</span> <span class="fn">compareTo</span>(<span class="cls">Student</span> other) {
+        <span class="kw">return</span> <span class="kw">this</span>.marks - other.marks; <span class="cm">// ascending by marks</span>
+    }
+}
+
+<span class="cls">List</span>&lt;<span class="cls">Student</span>&gt; students = <span class="cls">Arrays</span>.<span class="fn">asList</span>(
+    <span class="kw">new</span> <span class="cls">Student</span>(<span class="str">"Alice"</span>, <span class="num">85</span>),
+    <span class="kw">new</span> <span class="cls">Student</span>(<span class="str">"Bob"</span>, <span class="num">70</span>),
+    <span class="kw">new</span> <span class="cls">Student</span>(<span class="str">"Carol"</span>, <span class="num">92</span>)
+);
+<span class="cls">Collections</span>.<span class="fn">sort</span>(students);
+
+<span class="cm">// Using Comparator (for external, flexible sorting)</span>
+students.<span class="fn">sort</span>(<span class="cls">Comparator</span>.<span class="fn">comparing</span>(s -> s.name)); <span class="cm">// by name</span></pre>
+    </div>
+  </div>
+
+  <!-- PYQ Unit 4 -->
+  <div class="pyq-section" id="u4-pyq">
+    <div class="pyq-header">
+      <span class="pyq-icon">📋</span>
+      <div>
+        <div class="pyq-title">Previous Year Questions – Unit IV</div>
+        <div class="pyq-subtitle">BCS403 · 2023-24 & 2024-25</div>
+      </div>
+    </div>
+    <div class="pyq-q">Write a Java program to create an ArrayList&lt;String&gt; with five items and display all elements using forEach method. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section A · 2 marks</div></div>
+    <div class="pyq-q">Describe Collections framework in Java with a suitable diagram displaying interfaces and classes and their hierarchy. Also explain List, Set, Queue interfaces.<div class="pyq-meta">2023-24 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Describe LinkedList in Java. With suitable example describe any five methods available in LinkedLists. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Describe HashMap in Java. With suitable example describe any five methods available in HashMaps.<div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">How does Stack differ from Queue?<div class="pyq-meta">2024-25 · Section A · 2 marks</div></div>
+    <div class="pyq-q">Compare and contrast ArrayList and LinkedList in terms of performance and usage. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2024-25 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Write a program to demonstrate the use of HashMap and iterate through keys and values.<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Discuss the hierarchy of the Collection framework. Differentiate between List, Set, and Map.<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+  </div>
+
+  <div class="unit-divider"></div>
+
+  <!-- ════════════════════════════════════════════
+       UNIT V
+  ════════════════════════════════════════════ -->
+  <div class="unit-header" id="unit5">
+    <div class="unit-num un5">V</div>
+    <div>
+      <div class="unit-title" style="color: var(--u5)">Spring Framework & Spring Boot</div>
+      <div class="unit-subtitle">IoC · DI · AOP · Spring Boot · RESTful APIs</div>
+    </div>
+  </div>
+
+  <div class="section" id="u5-spring">
+    <h2 style="border-left-color: var(--u5)">5.1 Spring Framework Core [PYQ Both Years!]</h2>
+
+    <h3>What is Spring?</h3>
+    <p>Spring is a comprehensive Java framework that simplifies enterprise application development. Its core features are <strong>Inversion of Control (IoC)</strong> and <strong>Dependency Injection (DI)</strong>.</p>
+
+    <h3>IoC vs DI [PYQ 2023-24 & 2024-25!]</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Concept</th><th>Inversion of Control (IoC)</th><th>Dependency Injection (DI)</th></tr>
+      <tr><td>Definition</td><td>Design principle — control of object creation is given to the framework, not the programmer</td><td>Implementation technique for IoC — framework injects required objects (dependencies)</td></tr>
+      <tr><td>Who creates objects?</td><td>Spring Container (IoC container)</td><td>Spring injects them automatically</td></tr>
+      <tr><td>Relationship</td><td>Broad concept</td><td>How IoC is implemented</td></tr>
+    </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Dependency Injection with Annotations</div></div>
+      <pre><span class="kw">import</span> org.springframework.stereotype.*;
+<span class="kw">import</span> org.springframework.beans.factory.annotation.*;
+
+<span class="ann">@Service</span>               <span class="cm">// marks as a Spring-managed service bean</span>
+<span class="kw">public class</span> <span class="cls">EmailService</span> {
+    <span class="kw">public void</span> <span class="fn">sendEmail</span>(<span class="cls">String</span> msg) {
+        System.out.<span class="fn">println</span>(<span class="str">"Email sent: "</span> + msg);
+    }
+}
+
+<span class="ann">@Component</span>             <span class="cm">// marks as Spring bean (auto-detected)</span>
+<span class="kw">public class</span> <span class="cls">NotificationService</span> {
+
+    <span class="ann">@Autowired</span>          <span class="cm">// Spring automatically injects EmailService!</span>
+    <span class="kw">private</span> <span class="cls">EmailService</span> emailService;
+
+    <span class="kw">public void</span> <span class="fn">notify</span>(<span class="cls">String</span> message) {
+        emailService.<span class="fn">sendEmail</span>(message);
+    }
+}
+<span class="cm">// Without Spring, you'd write: emailService = new EmailService();</span>
+<span class="cm">// With Spring, the framework handles object creation and injection!</span></pre>
+    </div>
+
+    <h3>Spring Bean Scopes</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Scope</th><th>Description</th></tr>
+      <tr><td><strong>Singleton</strong></td><td>One instance per Spring container (default)</td></tr>
+      <tr><td><strong>Prototype</strong></td><td>New instance every time it's requested</td></tr>
+      <tr><td><strong>Request</strong></td><td>One instance per HTTP request (web apps)</td></tr>
+      <tr><td><strong>Session</strong></td><td>One instance per HTTP session</td></tr>
+    </table>
+    </div>
+
+    <h3>Spring Container & Bean Life Cycle [PYQ 2023-24]</h3>
+    <div class="svg-wrap">
+      <svg width="580" height="60" viewBox="0 0 580 60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#f76e6e"/>
+          </marker>
+        </defs>
+        <rect x="5" y="15" width="90" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="50" y="33" font-size="10" fill="#f76e6e" text-anchor="middle">Instantiate</text>
+        <rect x="115" y="15" width="90" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="160" y="33" font-size="10" fill="#f76e6e" text-anchor="middle">Inject Deps</text>
+        <rect x="225" y="15" width="90" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="270" y="33" font-size="10" fill="#f76e6e" text-anchor="middle">Init (@PostConstruct)</text>
+        <rect x="335" y="15" width="90" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="380" y="33" font-size="10" fill="#f76e6e" text-anchor="middle">Ready/Use</text>
+        <rect x="445" y="15" width="115" height="28" rx="6" fill="#1a1028" stroke="#f76e6e" stroke-width="1.5"/>
+        <text x="502" y="33" font-size="10" fill="#f76e6e" text-anchor="middle">Destroy (@PreDestroy)</text>
+        <line x1="95" y1="29" x2="115" y2="29" stroke="#f76e6e" stroke-width="1.5" marker-end="url(#a2)"/>
+        <line x1="205" y1="29" x2="225" y2="29" stroke="#f76e6e" stroke-width="1.5" marker-end="url(#a2)"/>
+        <line x1="315" y1="29" x2="335" y2="29" stroke="#f76e6e" stroke-width="1.5" marker-end="url(#a2)"/>
+        <line x1="425" y1="29" x2="445" y2="29" stroke="#f76e6e" stroke-width="1.5" marker-end="url(#a2)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="section" id="u5-boot">
+    <h2 style="border-left-color: var(--u5)">5.2 Spring Boot [PYQ Both Years!]</h2>
+
+    <h3>What is Spring Boot?</h3>
+    <p>Spring Boot is an opinionated extension of Spring that eliminates boilerplate configuration. It provides embedded servers, auto-configuration, and starter dependencies.</p>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Feature</th><th>Traditional Spring</th><th>Spring Boot</th></tr>
+      <tr><td>Configuration</td><td>XML files, lots of manual setup</td><td>Auto-configuration, minimal setup</td></tr>
+      <tr><td>Server</td><td>Deploy WAR to external server</td><td>Embedded Tomcat (run as JAR)</td></tr>
+      <tr><td>Starter</td><td>Manual dependency management</td><td>spring-boot-starter-* handles it</td></tr>
+      <tr><td>Setup time</td><td>Hours</td><td>Minutes (Spring Initializr)</td></tr>
+    </table>
+    </div>
+
+    <h3>Basic Spring Boot Application Structure</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – Main Application Class</div></div>
+      <pre><span class="kw">package</span> com.example.demo;
+<span class="kw">import</span> org.springframework.boot.*;
+<span class="kw">import</span> org.springframework.boot.autoconfigure.*;
+
+<span class="ann">@SpringBootApplication</span>  <span class="cm">// = @Configuration + @EnableAutoConfiguration + @ComponentScan</span>
+<span class="kw">public class</span> <span class="cls">DemoApplication</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cls">SpringApplication</span>.<span class="fn">run</span>(<span class="cls">DemoApplication</span>.<span class="kw">class</span>, args);
+    }
+}</pre>
+    </div>
+  </div>
+
+  <div class="section" id="u5-rest">
+    <h2 style="border-left-color: var(--u5)">5.3 RESTful Web Services with Spring Boot [PYQ Both Years!]</h2>
+
+    <h3>HTTP Methods (GET vs POST)</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Method</th><th>Purpose</th><th>Body?</th><th>Idempotent?</th></tr>
+      <tr><td><strong>GET</strong></td><td>Read/Retrieve data</td><td>No</td><td>Yes</td></tr>
+      <tr><td><strong>POST</strong></td><td>Create new resource</td><td>Yes</td><td>No</td></tr>
+      <tr><td><strong>PUT</strong></td><td>Update entire resource</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td><strong>DELETE</strong></td><td>Remove resource</td><td>No</td><td>Yes</td></tr>
+    </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span class="code-dot cd1"></span><span class="code-dot cd2"></span><span class="code-dot cd3"></span></div><div class="code-lang">JAVA – REST Controller with CRUD [PYQ 2024-25]</div></div>
+      <pre><span class="kw">import</span> org.springframework.web.bind.annotation.*;
+<span class="kw">import</span> java.util.*;
+
+<span class="ann">@RestController</span>
+<span class="ann">@RequestMapping</span>(<span class="str">"/api/students"</span>)
+<span class="kw">public class</span> <span class="cls">StudentController</span> {
+
+    <span class="kw">private</span> <span class="cls">List</span>&lt;<span class="cls">String</span>&gt; students = <span class="kw">new</span> <span class="cls">ArrayList</span>&lt;&gt;(
+        <span class="cls">Arrays</span>.<span class="fn">asList</span>(<span class="str">"Rahul"</span>, <span class="str">"Priya"</span>, <span class="str">"Amit"</span>)
+    );
+
+    <span class="cm">// GET all students</span>
+    <span class="ann">@GetMapping</span>
+    <span class="kw">public</span> <span class="cls">List</span>&lt;<span class="cls">String</span>&gt; <span class="fn">getAll</span>() {
+        <span class="kw">return</span> students;
+    }
+
+    <span class="cm">// GET by index</span>
+    <span class="ann">@GetMapping</span>(<span class="str">"/{id}"</span>)
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">getById</span>(<span class="ann">@PathVariable</span> <span class="kw">int</span> id) {
+        <span class="kw">return</span> students.<span class="fn">get</span>(id);
+    }
+
+    <span class="cm">// POST – add student</span>
+    <span class="ann">@PostMapping</span>
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">add</span>(<span class="ann">@RequestBody</span> <span class="cls">String</span> name) {
+        students.<span class="fn">add</span>(name);
+        <span class="kw">return</span> <span class="str">"Added: "</span> + name;
+    }
+
+    <span class="cm">// PUT – update student</span>
+    <span class="ann">@PutMapping</span>(<span class="str">"/{id}"</span>)
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">update</span>(<span class="ann">@PathVariable</span> <span class="kw">int</span> id, <span class="ann">@RequestBody</span> <span class="cls">String</span> name) {
+        students.<span class="fn">set</span>(id, name);
+        <span class="kw">return</span> <span class="str">"Updated index "</span> + id + <span class="str">" to "</span> + name;
+    }
+
+    <span class="cm">// DELETE</span>
+    <span class="ann">@DeleteMapping</span>(<span class="str">"/{id}"</span>)
+    <span class="kw">public</span> <span class="cls">String</span> <span class="fn">delete</span>(<span class="ann">@PathVariable</span> <span class="kw">int</span> id) {
+        <span class="cls">String</span> removed = students.<span class="fn">remove</span>(id);
+        <span class="kw">return</span> <span class="str">"Deleted: "</span> + removed;
+    }
+}</pre>
+    </div>
+  </div>
+
+  <!-- PYQ Unit 5 -->
+  <div class="pyq-section" id="u5-pyq">
+    <div class="pyq-header">
+      <span class="pyq-icon">📋</span>
+      <div>
+        <div class="pyq-title">Previous Year Questions – Unit V</div>
+        <div class="pyq-subtitle">BCS403 · 2023-24 & 2024-25</div>
+      </div>
+    </div>
+    <div class="pyq-q">Explain the difference between Dependency Injection (DI) and Inversion of Control (IoC) in Spring. <span class="freq-badge">★ HOT</span><div class="pyq-meta">2023-24 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Describe Spring container and Spring bean life cycle.<div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Describe Spring Boot framework and its benefits. Describe RESTful API with Spring Boot.<div class="pyq-meta">2023-24 · Section C · 7 marks</div></div>
+    <div class="pyq-q">What is a GET vs POST request?<div class="pyq-meta">2024-25 · Section A · 2 marks</div></div>
+    <div class="pyq-q">What is Spring Boot? How is it different from the traditional Spring framework? <span class="freq-badge">★ HOT</span><div class="pyq-meta">2024-25 · Section B · 7 marks</div></div>
+    <div class="pyq-q">Explain the concept of Dependency Injection and its types in Spring. Develop a simple API in Spring Boot to perform CRUD operations using a list as storage.<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+    <div class="pyq-q">Describe the structure of a basic Spring Boot application. What are the advantages of using Spring Boot over traditional web frameworks?<div class="pyq-meta">2024-25 · Section C · 7 marks</div></div>
+  </div>
+
+  <!-- FINAL TIPS -->
+  <div class="unit-divider"></div>
+  <div class="section">
+    <h2 style="border-left-color: var(--highlight); color: var(--highlight)">⭐ Exam Strategy & Quick Revision</h2>
+    <div class="info-card exam">
+      <div class="card-label">🎯 Most Repeated Topics (both years)</div>
+      <ul>
+        <li><strong>Unit I:</strong> Polymorphism (overloading vs overriding), Constructors, Abstract class vs Interface</li>
+        <li><strong>Unit II:</strong> Exception handling (try/catch/finally/throw/throws), Thread creation ways, wait() vs notify()</li>
+        <li><strong>Unit III:</strong> Lambda expressions, Functional interfaces, Stream API sum of evens, Switch expression</li>
+        <li><strong>Unit IV:</strong> Collections hierarchy diagram, ArrayList vs LinkedList, HashMap methods, forEach</li>
+        <li><strong>Unit V:</strong> IoC vs DI, Spring Boot vs Spring, REST CRUD controller</li>
+      </ul>
+    </div>
+    <div class="info-card tip">
+      <div class="card-label">💡 Exam Tips</div>
+      <ul>
+        <li>Always draw <strong>diagrams</strong> for OOP pillars, thread lifecycle, collection hierarchy — examiners love visuals</li>
+        <li>For 7-mark questions: Definition → Explanation → Code → Output = full marks</li>
+        <li>Section A (2 marks): Be concise. 2-3 lines definition + 1 example</li>
+        <li>Section B (7 marks): Pick topics you know well — it's "any three"</li>
+        <li>Section C (7 marks): Always attempt; even partial code with comments earns marks</li>
+      </ul>
+    </div>
+  </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// Sidebar active link on scroll
+const sections = document.querySelectorAll('[id]');
+const links = document.querySelectorAll('.sidebar-link');
+function onScroll() {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < 120) current = sec.id;
+  });
+  links.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// Search filter
+function filterNav(q) {
+  q = q.toLowerCase();
+  links.forEach(l => {
+    const match = l.textContent.toLowerCase().includes(q);
+    l.style.display = match ? 'block' : 'none';
+  });
+  document.querySelectorAll('.sidebar-unit-label').forEach(label => {
+    label.style.display = q ? 'none' : '';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UHV Notes — Universal Human Values & Professional Ethics</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --u1: #e84855; --u1-light: #fde8ea; --u1-dark: #9e1d27;
+  --u2: #f4831f; --u2-light: #fef0e4; --u2-dark: #9e5200;
+  --u3: #2ecc71; --u3-light: #e4f9ed; --u3-dark: #1a7a44;
+  --u4: #3498db; --u4-light: #e4f2fc; --u4-dark: #1a5e8f;
+  --u5: #9b59b6; --u5-light: #f2e9f9; --u5-dark: #5c2d7a;
+  --bg: #0d0f14;
+  --surface: #161a23;
+  --surface2: #1e2435;
+  --text: #e8eaf0;
+  --muted: #7c8299;
+  --border: #2a3045;
+  --gold: #f0c040;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, #1a2040 0%, #0d0f14 70%);
+}
+
+.hero-orbs {
+  position: absolute; inset: 0; z-index: 1;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  animation: drift 12s ease-in-out infinite;
+}
+.orb:nth-child(1) { width:400px;height:400px;background:var(--u1);top:-10%;left:-5%; animation-delay:0s; }
+.orb:nth-child(2) { width:300px;height:300px;background:var(--u3);top:20%;right:0%; animation-delay:-4s; }
+.orb:nth-child(3) { width:350px;height:350px;background:var(--u4);bottom:-10%;left:30%; animation-delay:-8s; }
+.orb:nth-child(4) { width:250px;height:250px;background:var(--u5);top:50%;right:20%; animation-delay:-2s; }
+
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(30px,-20px) scale(1.05); }
+  66% { transform: translate(-20px,30px) scale(0.95); }
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: .4rem 1.2rem;
+  font-size: .78rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  animation: fadeUp .8s ease both;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  animation: fadeUp .8s .2s ease both;
+}
+
+.hero h1 .accent { 
+  font-style: italic;
+  background: linear-gradient(135deg, var(--gold), #ff9a3c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  margin-top: 1.2rem;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin-left: auto; margin-right: auto;
+  animation: fadeUp .8s .4s ease both;
+}
+
+.hero-units {
+  display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center;
+  margin-top: 2rem;
+  animation: fadeUp .8s .6s ease both;
+}
+
+.unit-pill {
+  padding: .45rem 1.1rem;
+  border-radius: 100px;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.unit-pill:hover { transform: translateY(-2px); }
+.unit-pill:nth-child(1) { background: var(--u1); color:#fff; box-shadow: 0 4px 20px rgba(232,72,85,.35); }
+.unit-pill:nth-child(2) { background: var(--u2); color:#fff; box-shadow: 0 4px 20px rgba(244,131,31,.35); }
+.unit-pill:nth-child(3) { background: var(--u3); color:#fff; box-shadow: 0 4px 20px rgba(46,204,113,.35); }
+.unit-pill:nth-child(4) { background: var(--u4); color:#fff; box-shadow: 0 4px 20px rgba(52,152,219,.35); }
+.unit-pill:nth-child(5) { background: var(--u5); color:#fff; box-shadow: 0 4px 20px rgba(155,89,182,.35); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── NAVIGATION ── */
+.sticky-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(13,15,20,.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: .7rem 2rem;
+  display: flex; gap: .5rem; flex-wrap: wrap; justify-content: center;
+}
+
+.nav-btn {
+  padding: .35rem .9rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+}
+.nav-btn:hover { color: var(--text); border-color: var(--border); }
+.nav-btn.u1:hover { color: var(--u1); border-color: var(--u1); background: var(--u1-light); background: rgba(232,72,85,.1); }
+.nav-btn.u2:hover { color: var(--u2); border-color: var(--u2); background: rgba(244,131,31,.1); }
+.nav-btn.u3:hover { color: var(--u3); border-color: var(--u3); background: rgba(46,204,113,.1); }
+.nav-btn.u4:hover { color: var(--u4); border-color: var(--u4); background: rgba(52,152,219,.1); }
+.nav-btn.u5:hover { color: var(--u5); border-color: var(--u5); background: rgba(155,89,182,.1); }
+
+/* ── MAIN LAYOUT ── */
+main { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 6rem; position: relative; z-index: 1; }
+
+/* ── UNIT SECTIONS ── */
+.unit-section {
+  margin-top: 5rem;
+  animation: sectionReveal .6s ease both;
+}
+
+@keyframes sectionReveal {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.unit-header {
+  position: relative;
+  padding: 2.5rem 2.5rem 2rem;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.unit-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  opacity: .08;
+  background-image: radial-gradient(circle at 70% 50%, currentColor 0%, transparent 60%);
+}
+
+.unit-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .7;
+  margin-bottom: .5rem;
+}
+
+.unit-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.unit-num-bg {
+  position: absolute;
+  right: 2rem; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 9rem;
+  font-weight: 900;
+  opacity: .06;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.unit-body {
+  background: var(--surface);
+  border-radius: 0 0 20px 20px;
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 2.5rem;
+}
+
+/* Color themes per unit */
+.u1-header { background: linear-gradient(135deg, #2a0d10 0%, #3d1418 100%); color: #f5b8bc; }
+.u1-header .unit-label, .u1-header .unit-num-bg { color: var(--u1); }
+.u2-header { background: linear-gradient(135deg, #2a1500 0%, #3d2200 100%); color: #f9c98f; }
+.u2-header .unit-label, .u2-header .unit-num-bg { color: var(--u2); }
+.u3-header { background: linear-gradient(135deg, #042010 0%, #063018 100%); color: #a8f0c8; }
+.u3-header .unit-label, .u3-header .unit-num-bg { color: var(--u3); }
+.u4-header { background: linear-gradient(135deg, #041828 0%, #062540 100%); color: #90caf9; }
+.u4-header .unit-label, .u4-header .unit-num-bg { color: var(--u4); }
+.u5-header { background: linear-gradient(135deg, #160a24 0%, #22103a 100%); color: #d1a8f0; }
+.u5-header .unit-label, .u5-header .unit-num-bg { color: var(--u5); }
+
+/* ── CARDS ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.8rem 0; }
+
+.card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s, box-shadow .25s;
+}
+.card:hover { transform: translateY(-3px); }
+
+.card-icon { font-size: 1.8rem; margin-bottom: .7rem; }
+.card h4 { font-size: .95rem; font-weight: 600; margin-bottom: .4rem; }
+.card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+.card.accent-u1 { border-left: 3px solid var(--u1); box-shadow: inset 0 0 40px rgba(232,72,85,.05); }
+.card.accent-u1:hover { box-shadow: 0 8px 30px rgba(232,72,85,.2); }
+.card.accent-u2 { border-left: 3px solid var(--u2); }
+.card.accent-u2:hover { box-shadow: 0 8px 30px rgba(244,131,31,.2); }
+.card.accent-u3 { border-left: 3px solid var(--u3); }
+.card.accent-u3:hover { box-shadow: 0 8px 30px rgba(46,204,113,.2); }
+.card.accent-u4 { border-left: 3px solid var(--u4); }
+.card.accent-u4:hover { box-shadow: 0 8px 30px rgba(52,152,219,.2); }
+.card.accent-u5 { border-left: 3px solid var(--u5); }
+.card.accent-u5:hover { box-shadow: 0 8px 30px rgba(155,89,182,.2); }
+
+/* ── SECTION TITLES ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  display: flex; align-items: center; gap: .7rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── FLOWCHART ── */
+.flowchart {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 1.8rem 0;
+  overflow-x: auto;
+}
+
+.flow-row { display: flex; align-items: center; justify-content: center; gap: .5rem; flex-wrap: wrap; margin: .5rem 0; }
+
+.flow-node {
+  padding: .7rem 1.3rem;
+  border-radius: 10px;
+  font-size: .84rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 120px;
+  max-width: 180px;
+  line-height: 1.4;
+  position: relative;
+  transition: transform .2s;
+}
+.flow-node:hover { transform: scale(1.04); }
+
+.flow-node.diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  border-radius: 0;
+  width: 140px; height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  padding: .5rem;
+  font-size: .78rem;
+}
+
+.flow-arrow {
+  font-size: 1.3rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.flow-arrow.down { width: 100%; text-align: center; font-size: 1.5rem; margin: .2rem 0; }
+
+.fn-u1 { background: rgba(232,72,85,.15); border: 1.5px solid var(--u1); color: #f5b8bc; }
+.fn-u2 { background: rgba(244,131,31,.15); border: 1.5px solid var(--u2); color: #f9c98f; }
+.fn-u3 { background: rgba(46,204,113,.15); border: 1.5px solid var(--u3); color: #a8f0c8; }
+.fn-u4 { background: rgba(52,152,219,.15); border: 1.5px solid var(--u4); color: #90caf9; }
+.fn-u5 { background: rgba(155,89,182,.15); border: 1.5px solid var(--u5); color: #d1a8f0; }
+.fn-gold { background: rgba(240,192,64,.15); border: 1.5px solid var(--gold); color: var(--gold); }
+.fn-white { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.2); color: var(--text); }
+
+/* ── PYRAMID ── */
+.pyramid { margin: 1.8rem 0; }
+.pyr-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: .3rem;
+}
+.pyr-block {
+  display: flex; align-items: center; justify-content: center; 
+  text-align: center;
+  padding: .8rem 1.2rem;
+  font-size: .84rem; font-weight: 600;
+  border-radius: 8px;
+  min-height: 52px;
+  transition: transform .2s;
+}
+.pyr-block:hover { transform: scaleX(1.02); }
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box {
+  border-radius: 14px;
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+  position: relative;
+}
+.highlight-box.u1 { background: rgba(232,72,85,.08); border-color: var(--u1); }
+.highlight-box.u2 { background: rgba(244,131,31,.08); border-color: var(--u2); }
+.highlight-box.u3 { background: rgba(46,204,113,.08); border-color: var(--u3); }
+.highlight-box.u4 { background: rgba(52,152,219,.08); border-color: var(--u4); }
+.highlight-box.u5 { background: rgba(155,89,182,.08); border-color: var(--u5); }
+.highlight-box.gold { background: rgba(240,192,64,.08); border-color: var(--gold); }
+
+.highlight-box .hb-title {
+  font-weight: 700; font-size: .88rem; text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: .5rem;
+}
+.highlight-box.u1 .hb-title { color: var(--u1); }
+.highlight-box.u2 .hb-title { color: var(--u2); }
+.highlight-box.u3 .hb-title { color: var(--u3); }
+.highlight-box.u4 .hb-title { color: var(--u4); }
+.highlight-box.u5 .hb-title { color: var(--u5); }
+.highlight-box.gold .hb-title { color: var(--gold); }
+
+/* ── LISTS ── */
+.fancy-list { list-style: none; padding: 0; margin: 1rem 0; }
+.fancy-list li {
+  padding: .6rem .8rem;
+  display: flex; align-items: flex-start; gap: .8rem;
+  border-radius: 8px;
+  margin-bottom: .4rem;
+  font-size: .9rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  transition: background .2s;
+}
+.fancy-list li:hover { background: rgba(255,255,255,.03); }
+.fancy-list .bullet { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
+
+/* ── COMPARISON TABLE ── */
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  font-size: .87rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.compare-table th {
+  padding: .9rem 1.1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.compare-table td { padding: .8rem 1.1rem; border-bottom: 1px solid var(--border); }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tbody tr:hover { background: rgba(255,255,255,.03); }
+
+/* ── CONCENTRIC CIRCLES ── */
+.concentric-wrap {
+  display: flex; justify-content: center; align-items: center;
+  padding: 2rem;
+  margin: 1.8rem 0;
+}
+.concentric-svg { max-width: 420px; width: 100%; }
+
+/* ── CYCLE DIAGRAM ── */
+.cycle-wrap { display: flex; justify-content: center; padding: 1rem; margin: 1.5rem 0; }
+
+/* ── QUOTE ── */
+.quote-block {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  margin: 1.5rem 0;
+  position: relative;
+  background: var(--surface2);
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+.quote-block::before {
+  content: '"';
+  position: absolute; top: -.3rem; left: 1rem;
+  font-size: 4rem; color: var(--gold); opacity: .4;
+  font-family: Georgia, serif; line-height: 1;
+}
+
+/* ── BADGE ROW ── */
+.badge-row { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+.badge {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .3rem .9rem;
+  border-radius: 100px;
+  font-size: .8rem;
+  font-weight: 600;
+  border: 1px solid;
+}
+.badge-u1 { color: var(--u1); border-color: rgba(232,72,85,.3); background: rgba(232,72,85,.1); }
+.badge-u2 { color: var(--u2); border-color: rgba(244,131,31,.3); background: rgba(244,131,31,.1); }
+.badge-u3 { color: var(--u3); border-color: rgba(46,204,113,.3); background: rgba(46,204,113,.1); }
+.badge-u4 { color: var(--u4); border-color: rgba(52,152,219,.3); background: rgba(52,152,219,.1); }
+.badge-u5 { color: var(--u5); border-color: rgba(155,89,182,.3); background: rgba(155,89,182,.1); }
+.badge-gold { color: var(--gold); border-color: rgba(240,192,64,.3); background: rgba(240,192,64,.1); }
+
+/* ── DIVIDER ── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* ── ANIMATED PROGRESS ── */
+.levels-chart { margin: 1.5rem 0; }
+.level-row { margin-bottom: .8rem; }
+.level-label { font-size: .82rem; font-weight: 500; margin-bottom: .25rem; display: flex; justify-content: space-between; }
+.level-bar-bg { background: var(--surface2); border-radius: 100px; height: 10px; overflow: hidden; border: 1px solid var(--border); }
+.level-bar { height: 100%; border-radius: 100px; animation: growBar 1.2s ease both; }
+@keyframes growBar { from { width: 0; } }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--muted);
+  font-size: .82rem;
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+footer strong { color: var(--gold); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .unit-body { padding: 1.4rem; }
+  .unit-header { padding: 1.8rem 1.4rem 1.5rem; }
+  .flowchart { padding: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orbs">
+    <div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">B.Tech 2nd Year · Foundation Course</div>
+    <h1>Universal Human <span class="accent">Values</span><br>&amp; Professional Ethics</h1>
+    <p class="hero-sub">Complete Study Notes · All 5 Units · Color-Coded · Visual Learning</p>
+    <div class="hero-units">
+      <a href="#unit1" class="unit-pill">Unit 1 — Introduction</a>
+      <a href="#unit2" class="unit-pill">Unit 2 — Self Harmony</a>
+      <a href="#unit3" class="unit-pill">Unit 3 — Family &amp; Society</a>
+      <a href="#unit4" class="unit-pill">Unit 4 — Nature &amp; Existence</a>
+      <a href="#unit5" class="unit-pill">Unit 5 — Ethics &amp; Profession</a>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <a href="#unit1" class="nav-btn u1">🔴 Unit 1</a>
+  <a href="#unit2" class="nav-btn u2">🟠 Unit 2</a>
+  <a href="#unit3" class="nav-btn u3">🟢 Unit 3</a>
+  <a href="#unit4" class="nav-btn u4">🔵 Unit 4</a>
+  <a href="#unit5" class="nav-btn u5">🟣 Unit 5</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     UNIT 1
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit1">
+  <div class="unit-header u1-header">
+    <div class="unit-label">Unit 1 · Foundation</div>
+    <h2>Course Introduction — Need, Guidelines,<br>Content &amp; Process for Value Education</h2>
+    <div class="unit-num-bg">1</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="highlight-box gold">
+      <div class="hb-title">🎯 Core Question</div>
+      Why do we need Value Education alongside Technical Skills?
+    </div>
+
+    <h3 class="section-title">What is Value Education?</h3>
+    <p style="color:var(--muted);font-size:.93rem;margin-bottom:1rem;">Value education is not about preaching morals or imposing dogmas. It is a <strong>systematic, rational self-exploration</strong> process that helps us verify what is truly right for us — using our own Natural Acceptance.</p>
+
+    <div class="card-grid">
+      <div class="card accent-u1">
+        <div class="card-icon">🧭</div>
+        <h4>Not Dogmatic</h4>
+        <p>No prescriptions. No rules forced upon you. You explore and verify yourself.</p>
+      </div>
+      <div class="card accent-u1">
+        <div class="card-icon">🔬</div>
+        <h4>Explorational</h4>
+        <p>Like science — systematic study of the human being and existence.</p>
+      </div>
+      <div class="card accent-u1">
+        <div class="card-icon">💬</div>
+        <h4>Dialogic</h4>
+        <p>Teacher–student dialogue evolves into continuous internal self-dialogue.</p>
+      </div>
+      <div class="card accent-u1">
+        <div class="card-icon">✅</div>
+        <h4>Self-Verifiable</h4>
+        <p>Truth is proposed, not imposed. You validate it through Natural Acceptance.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">The Two Core Human Aspirations</h3>
+
+    <!-- Happiness + Prosperity Flowchart -->
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:700;font-size:1rem;margin-bottom:1.2rem;color:var(--gold)">Every Human Being Wants...</div>
+      <div class="flow-row">
+        <div class="flow-node fn-u1" style="min-width:160px">😊 <strong>Happiness</strong><br><small>Sukh — psychological well-being, fulfillment in relationships</small></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node fn-u2" style="min-width:160px">🌿 <strong>Prosperity</strong><br><small>Samridhi — availability of physical facilities</small></div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row">
+        <div class="flow-node fn-gold" style="min-width:300px">These require → <strong>Right Understanding + Relationships + Physical Facilities</strong></div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row">
+        <div class="flow-node fn-white">Priority: Right Understanding &gt; Relationship &gt; Physical Facilities</div>
+      </div>
+    </div>
+
+    <div class="highlight-box u1">
+      <div class="hb-title">⚠️ Current Scenario Problem</div>
+      We give <strong>highest priority to physical facilities</strong> (money, gadgets, status), ignoring relationships and right understanding — which are far more important for lasting happiness!
+    </div>
+
+    <h3 class="section-title">The Two Mechanisms of Self-Exploration</h3>
+    <div class="card-grid">
+      <div class="card accent-u1" style="border-left-width:0;border-top:3px solid var(--u1)">
+        <div class="card-icon">💡</div>
+        <h4>Natural Acceptance (Sahaj Sweekriti)</h4>
+        <p>That which we inherently accept as right, without any conditioning or external influence. It is the same in all human beings regardless of culture, religion, or time.</p>
+        <br>
+        <p style="color:var(--u1);font-size:.82rem;font-weight:600">Example: Everyone naturally accepts being respected, not disrespected.</p>
+      </div>
+      <div class="card accent-u1" style="border-left-width:0;border-top:3px solid var(--u2)">
+        <div class="card-icon">🧪</div>
+        <h4>Experiential Validation</h4>
+        <p>After identifying what is naturally acceptable, we <em>live by it</em> and observe whether it consistently produces happiness and harmony.</p>
+        <br>
+        <p style="color:var(--u2);font-size:.82rem;font-weight:600">If it produces harmony continuously → it is the right understanding.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">Harmony at All Levels — Overview</h3>
+    <!-- Concentric Circles SVG -->
+    <div class="concentric-wrap">
+      <svg class="concentric-svg" viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="420" height="380" fill="transparent"/>
+        <!-- Circles -->
+        <circle cx="210" cy="190" r="175" fill="rgba(155,89,182,0.08)" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <circle cx="210" cy="190" r="135" fill="rgba(52,152,219,0.1)" stroke="#3498db" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <circle cx="210" cy="190" r="95" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <circle cx="210" cy="190" r="55" fill="rgba(244,131,31,0.12)" stroke="#f4831f" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <circle cx="210" cy="190" r="28" fill="rgba(232,72,85,0.2)" stroke="#e84855" stroke-width="2"/>
+        <!-- Labels -->
+        <text x="210" y="186" text-anchor="middle" fill="#f5b8bc" font-family="DM Sans,sans-serif" font-size="11" font-weight="700">SELF</text>
+        <text x="210" y="198" text-anchor="middle" fill="#f5b8bc" font-family="DM Sans,sans-serif" font-size="9">(I &amp; Body)</text>
+        <!-- Family -->
+        <text x="210" y="140" text-anchor="middle" fill="#f9c98f" font-family="DM Sans,sans-serif" font-size="11" font-weight="600">FAMILY</text>
+        <!-- Society -->
+        <text x="210" y="93" text-anchor="middle" fill="#a8f0c8" font-family="DM Sans,sans-serif" font-size="11" font-weight="600">SOCIETY</text>
+        <!-- Nature -->
+        <text x="210" y="65" text-anchor="middle" fill="#90caf9" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">NATURE</text>
+        <!-- Existence -->
+        <text x="210" y="24" text-anchor="middle" fill="#d1a8f0" font-family="DM Sans,sans-serif" font-size="10" font-weight="600">EXISTENCE</text>
+        <!-- Arrows inward -->
+        <path d="M210 32 L210 50" stroke="#9b59b6" stroke-width="1.5" marker-end="url(#arr)"/>
+        <path d="M210 70 L210 82" stroke="#3498db" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#9b59b6"/>
+          </marker>
+          <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#3498db"/>
+          </marker>
+        </defs>
+        <!-- Harmony labels on right -->
+        <text x="360" y="120" text-anchor="end" fill="#9b59b6" font-family="DM Sans,sans-serif" font-size="9.5">Unit 5 →</text>
+        <text x="360" y="155" text-anchor="end" fill="#3498db" font-family="DM Sans,sans-serif" font-size="9.5">Unit 4 →</text>
+        <text x="360" y="185" text-anchor="end" fill="#2ecc71" font-family="DM Sans,sans-serif" font-size="9.5">Unit 3 →</text>
+        <text x="360" y="210" text-anchor="end" fill="#f4831f" font-family="DM Sans,sans-serif" font-size="9.5">Unit 2 →</text>
+        <text x="360" y="240" text-anchor="end" fill="#e84855" font-family="DM Sans,sans-serif" font-size="9.5">Unit 1 →</text>
+      </svg>
+    </div>
+
+    <h3 class="section-title">Why Skills Without Values Fail</h3>
+    <div class="card-grid">
+      <div class="card accent-u1">
+        <div class="card-icon">⚡</div>
+        <h4>Techno-genic Maladies</h4>
+        <p>Energy depletion, pollution, global warming, deforestation — all man-made, caused by technology without ethical guidance.</p>
+      </div>
+      <div class="card accent-u1">
+        <div class="card-icon">💔</div>
+        <h4>Human Relationship Crisis</h4>
+        <p>Terrorism, corruption, generation gap, depression, breakdown of families — all stem from lack of right understanding.</p>
+      </div>
+      <div class="card accent-u1">
+        <div class="card-icon">🔑</div>
+        <h4>The Root Cause</h4>
+        <p>Lack of <strong>Human Values</strong> in education. Technical skills amplify both good and bad — values determine which direction they go.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box u1">
+      <div class="hb-title">📌 Key Insight to Remember</div>
+      Any solution driven by <strong>fear, temptation or dogma</strong> is <em>not sustainable</em>. Only value-based living grounded in right understanding produces lasting harmony.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 2
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit2">
+  <div class="unit-header u2-header">
+    <div class="unit-label">Unit 2 · Harmony Within</div>
+    <h2>Understanding Harmony in the Human Being<br>— Harmony in Myself!</h2>
+    <div class="unit-num-bg">2</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="highlight-box u2">
+      <div class="hb-title">🌟 Central Concept</div>
+      A human being is not just a body — we are a <strong>co-existence of 'I' (consciousness/Self) and the Body (material)</strong>. Understanding this is the key to self-harmony.
+    </div>
+
+    <h3 class="section-title">The Human Being: Dual Reality</h3>
+
+    <!-- Flowchart: I vs Body -->
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:700;font-size:1rem;margin-bottom:1.4rem;color:var(--u2)">Human Being = 'I' + Body</div>
+      <div class="flow-row" style="align-items:stretch;gap:2rem">
+        <div style="flex:1;min-width:200px">
+          <div class="flow-node fn-u1" style="width:100%;max-width:100%;margin-bottom:.8rem;padding:1rem">
+            <strong>🧠 'I' (Self / Jeevan)</strong>
+          </div>
+          <ul class="fancy-list" style="font-size:.82rem">
+            <li><span class="bullet">•</span> Sentient (Chetan) — conscious</li>
+            <li><span class="bullet">•</span> The DOER, SEER, and ENJOYER</li>
+            <li><span class="bullet">•</span> Has desires (Iccha), thoughts (Vichar), expectations</li>
+            <li><span class="bullet">•</span> Needs: Sukh (happiness) — feeling-based</li>
+            <li><span class="bullet">•</span> Activities: Understanding, desiring, selecting</li>
+          </ul>
+        </div>
+        <div style="display:flex;align-items:center;font-size:1.5rem;color:var(--u2)">⇄</div>
+        <div style="flex:1;min-width:200px">
+          <div class="flow-node fn-u3" style="width:100%;max-width:100%;margin-bottom:.8rem;padding:1rem">
+            <strong>🫀 Body (Shareer)</strong>
+          </div>
+          <ul class="fancy-list" style="font-size:.82rem">
+            <li><span class="bullet">•</span> Material (Jar) — physical instrument</li>
+            <li><span class="bullet">•</span> Instrument/tool of 'I'</li>
+            <li><span class="bullet">•</span> Has physical needs (Suvidha)</li>
+            <li><span class="bullet">•</span> Needs: Suvidha (facility) — need-based</li>
+            <li><span class="bullet">•</span> Activities: Breathing, sensing, physical work</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Sukh vs Suvidha — A Critical Distinction</h3>
+    <table class="compare-table">
+      <thead>
+        <tr style="background:rgba(244,131,31,.15)">
+          <th style="color:var(--u2)">Aspect</th>
+          <th style="color:var(--u1)">Sukh (Happiness)</th>
+          <th style="color:var(--u3)">Suvidha (Physical Facility)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Belongs to</td><td>'I' (Self)</td><td>Body</td></tr>
+        <tr><td>Nature</td><td>Feeling-based, continuous</td><td>Physical, limited</td></tr>
+        <tr><td>Saturation</td><td>Never saturates (if naturally right)</td><td>Saturates over time</td></tr>
+        <tr><td>Pattern</td><td>Naturally acceptable → want always</td><td>Tasty → untasty → intolerable (with time)</td></tr>
+        <tr><td>Source</td><td>Right understanding &amp; relationships</td><td>Money, objects, facilities</td></tr>
+        <tr><td>Error we make</td><td>Think Suvidha will give Sukh</td><td>Prioritize it over Sukh</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-title">Activities of 'I'</h3>
+
+    <!-- Cycle diagram for I activities -->
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:600;font-size:.9rem;color:var(--muted);margin-bottom:1.2rem">The Four Activities of 'I' — in a continuous cycle</div>
+      <div class="flow-row" style="justify-content:space-around;flex-wrap:nowrap">
+        <div class="flow-node fn-u2" style="min-width:100px;text-align:center">
+          📥<br><strong>Desire</strong><br><small>(Iccha)</small>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u1" style="min-width:100px;text-align:center">
+          💭<br><strong>Thought</strong><br><small>(Vichar)</small>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u3" style="min-width:100px;text-align:center">
+          🎯<br><strong>Expectation</strong><br><small>(Asha)</small>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u4" style="min-width:100px;text-align:center">
+          ✅<br><strong>Selection</strong><br><small>(Chunav)</small>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:.8rem;font-size:.8rem;color:var(--muted)">All activities of 'I' happen with <strong>Awareness (Chintan)</strong> and <strong>Realization (Anubhav)</strong></div>
+    </div>
+
+    <h3 class="section-title">Sanyam &amp; Swasthya — Harmony of I with Body</h3>
+    <div class="card-grid">
+      <div class="card accent-u2">
+        <div class="card-icon">⚖️</div>
+        <h4>Sanyam (Self-Regulation)</h4>
+        <p>When 'I' correctly understands the body's needs and regulates them appropriately — not suppression, but conscious right-use.</p>
+        <p style="margin-top:.6rem;font-size:.8rem;color:var(--u2)">I is responsible for the <em>nurturing, protection, and right utilization</em> of the body.</p>
+      </div>
+      <div class="card accent-u3">
+        <div class="card-icon">💪</div>
+        <h4>Swasthya (Health)</h4>
+        <p>Physical well-being that comes naturally when 'I' maintains proper sanyam — correct food, rest, exercise, and mental peace.</p>
+        <p style="margin-top:.6rem;font-size:.8rem;color:var(--u3)">Swasthya is a result of Sanyam, not the other way around.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">The Preconditioning Problem</h3>
+    <div class="flowchart">
+      <div style="text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:1rem">Where do most of our desires actually come from?</div>
+      <div class="flow-row">
+        <div class="flow-node fn-u1" style="min-width:130px;text-align:center">Preconditioning<br><small>(Society, Family,<br>Media, Education)</small></div>
+        <div class="flow-arrow">+</div>
+        <div class="flow-node fn-u2" style="min-width:130px;text-align:center">Sensation<br><small>(5 sense organs:<br>sight, sound, etc.)</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u1" style="min-width:130px;text-align:center">Most Desires<br><small>(not based on<br>Natural Acceptance)</small></div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row">
+        <div class="flow-node fn-gold" style="min-width:300px">✅ Solution: Refer to Natural Acceptance to filter what is truly right for you</div>
+      </div>
+    </div>
+
+    <div class="highlight-box u2">
+      <div class="hb-title">💡 Correct Understanding of Prosperity</div>
+      Prosperity is NOT how much you <em>earn</em> — it is having <strong>more physical facilities than you need</strong>, while feeling fulfilled. A person with less but who is content is more prosperous than a wealthy person who craves more.
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 3
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit3">
+  <div class="unit-header u3-header">
+    <div class="unit-label">Unit 3 · Human Relationships</div>
+    <h2>Understanding Harmony in Family &amp; Society<br>— Harmony in Human–Human Relationship</h2>
+    <div class="unit-num-bg">3</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="highlight-box u3">
+      <div class="hb-title">🏠 Key Principle</div>
+      The family is the basic unit of human interaction. Society is just an extension of family. Harmony in society starts from harmony in the family.
+    </div>
+
+    <h3 class="section-title">The 9 Values in Human Relationships</h3>
+    <div class="card-grid">
+      <div class="card accent-u3"><div class="card-icon">🤝</div><h4>Trust (Vishwas)</h4><p>Foundation of all relationships. Based on understanding intention vs competence.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🙏</div><h4>Respect (Samman)</h4><p>Right evaluation of the other — recognizing their potential, not judging by appearance or wealth.</p></div>
+      <div class="card accent-u3"><div class="card-icon">❤️</div><h4>Affection (Sneh)</h4><p>Feeling of belongingness — seeing the other as a relative, part of your larger family.</p></div>
+      <div class="card accent-u3"><div class="card-icon">⚖️</div><h4>Care (Mamata)</h4><p>Taking responsibility for ensuring the other's physical needs are met.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🌱</div><h4>Guidance (Vatsalya)</h4><p>Natural feeling to ensure well-being of those younger/dependent on us.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🛡️</div><h4>Reverence (Shraddha)</h4><p>Feeling for someone whose values and behavior we want to imbibe.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🫶</div><h4>Glory (Gaurav)</h4><p>Feeling of pride and joy in acknowledging someone's virtues and achievements.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🧡</div><h4>Gratitude (Kritagyata)</h4><p>Acknowledging someone who has contributed positively to your growth.</p></div>
+      <div class="card accent-u3"><div class="card-icon">🌟</div><h4>Love (Prem)</h4><p>Feeling of relatedness to all — the highest value, encompassing all the rest.</p></div>
+    </div>
+
+    <h3 class="section-title">Trust (Vishwas) — The Foundational Value</h3>
+
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:700;font-size:1rem;color:var(--u3);margin-bottom:1.2rem">The 8 Questions of Trust</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div>
+          <div style="text-align:center;color:var(--u3);font-weight:600;font-size:.85rem;margin-bottom:.6rem">INTENTION (Natural Acceptance)</div>
+          <ul class="fancy-list" style="font-size:.82rem">
+            <li><span class="bullet" style="color:var(--u3)">1a</span>Do I want to make myself happy? ✓</li>
+            <li><span class="bullet" style="color:var(--u3)">2a</span>Do I want to make the other happy? ✓</li>
+            <li><span class="bullet" style="color:var(--u3)">3a</span>Does the other want to make themselves happy? ✓</li>
+            <li><span class="bullet" style="color:var(--u3)">4a</span>Does the other want to make me happy? ✓</li>
+          </ul>
+          <div style="font-size:.8rem;color:var(--u3);margin-top:.5rem;padding:.5rem;background:rgba(46,204,113,.08);border-radius:8px">Answer: YES for all — Intention is always correct!</div>
+        </div>
+        <div>
+          <div style="text-align:center;color:var(--u1);font-weight:600;font-size:.85rem;margin-bottom:.6rem">COMPETENCE (Ability)</div>
+          <ul class="fancy-list" style="font-size:.82rem">
+            <li><span class="bullet" style="color:var(--u1)">1b</span>Am I able to always make myself happy? ✗</li>
+            <li><span class="bullet" style="color:var(--u1)">2b</span>Am I able to always make the other happy? ✗</li>
+            <li><span class="bullet" style="color:var(--u1)">3b</span>Is the other able to always make themselves happy? ✗</li>
+            <li><span class="bullet" style="color:var(--u1)">4b</span>Is the other able to always make me happy? ✗</li>
+          </ul>
+          <div style="font-size:.8rem;color:var(--u1);margin-top:.5rem;padding:.5rem;background:rgba(232,72,85,.08);border-radius:8px">Answer: NO for most — Competence is lacking!</div>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem;padding:1rem;background:rgba(240,192,64,.08);border-radius:10px;border:1px solid rgba(240,192,64,.2);font-size:.88rem">
+        <strong style="color:var(--gold)">Key Insight:</strong> We evaluate <em>ourselves</em> by our <strong>intention</strong> (I meant well) but evaluate <em>others</em> by their <strong>competence</strong> (they failed). This leads to constant conflict! The solution is to recognize: <strong>Everyone's intention is correct — only competence needs development.</strong>
+      </div>
+    </div>
+
+    <h3 class="section-title">Respect (Samman) — Right Evaluation</h3>
+    <div class="flowchart">
+      <div style="text-align:center;margin-bottom:1rem;font-size:.9rem;color:var(--muted)">What we confuse with Respect vs What Respect really is</div>
+      <div class="flow-row" style="align-items:stretch;gap:1.5rem">
+        <div style="flex:1;min-width:150px">
+          <div class="flow-node fn-u1" style="width:100%;max-width:100%;margin-bottom:.5rem">❌ Differentiation<br><small>(based on body, wealth,<br>belief, status)</small></div>
+          <div style="font-size:.78rem;text-align:center;color:var(--u1);padding:.4rem">Leads to gender bias, casteism, class struggle, communal violence</div>
+        </div>
+        <div style="display:flex;align-items:center;font-size:1.5rem;color:var(--u3)">≠</div>
+        <div style="flex:1;min-width:150px">
+          <div class="flow-node fn-u3" style="width:100%;max-width:100%;margin-bottom:.5rem">✅ Right Evaluation<br><small>(recognizing their Natural<br>Acceptance &amp; potential)</small></div>
+          <div style="font-size:.78rem;text-align:center;color:var(--u3);padding:.4rem">The other is like me — same potential, same natural acceptance</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Justice (Nyaya) &amp; Mutual Fulfillment (Ubhay-tripti)</h3>
+    <div class="card-grid">
+      <div class="card accent-u3">
+        <div class="card-icon">⚖️</div>
+        <h4>Nyaya (Justice)</h4>
+        <p>When there is right understanding + right feelings + right behavior in a relationship, both parties feel fulfilled. This natural state is Justice.</p>
+      </div>
+      <div class="card accent-u3">
+        <div class="card-icon">🔄</div>
+        <h4>Ubhay-tripti</h4>
+        <p>Mutual fulfillment — both members feel satisfied and nurtured in the relationship. This is the goal of all human interaction.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">Four Goals for a Harmonious Society</h3>
+    <!-- Pyramid for Society Goals -->
+    <div class="pyramid">
+      <div class="pyr-row"><div class="pyr-block fn-u5" style="width:80%">🌏 <strong>Sah-astitva</strong> — Co-existence · Living in harmony with all</div></div>
+      <div class="pyr-row"><div class="pyr-block fn-u4" style="width:68%">🛡️ <strong>Abhay</strong> — Fearlessness · Freedom from exploitation, conflict, fear</div></div>
+      <div class="pyr-row"><div class="pyr-block fn-u3" style="width:56%">🌱 <strong>Samridhi</strong> — Prosperity · Every family's needs are met</div></div>
+      <div class="pyr-row"><div class="pyr-block fn-u2" style="width:44%">⚖️ <strong>Samadhan</strong> — Resolution · Inner resolution, no conflicts</div></div>
+    </div>
+
+    <h3 class="section-title">Universal Human Order — From Family to World Family</h3>
+    <div class="flowchart">
+      <div class="flow-row" style="flex-wrap:wrap;gap:.5rem;justify-content:center">
+        <div class="flow-node fn-u1" style="min-width:80px;font-size:.8rem">Individual</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u2" style="min-width:80px;font-size:.8rem">Family</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u3" style="min-width:80px;font-size:.8rem">Society</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u4" style="min-width:80px;font-size:.8rem">Nation</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u5" style="min-width:100px;font-size:.8rem">World Family<br>(Vasudhaiva Kutumbakam)</div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row"><div class="flow-node fn-gold" style="min-width:280px">Akhand Samaj · Sarvabhaum Vyawastha<br><small>Undivided Society · Universal Order</small></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 4
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit4">
+  <div class="unit-header u4-header">
+    <div class="unit-label">Unit 4 · Nature &amp; Existence</div>
+    <h2>Understanding Harmony in Nature &amp; Existence<br>— Whole Existence as Co-existence</h2>
+    <div class="unit-num-bg">4</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="highlight-box u4">
+      <div class="hb-title">🌍 Central Concept</div>
+      The entire existence is a <strong>co-existence of mutually interacting units in all-pervasive space</strong>. Nature is self-regulated, interconnected, and inherently harmonious — until humans disturb it.
+    </div>
+
+    <h3 class="section-title">The Four Orders of Nature</h3>
+    <div class="card-grid">
+      <div class="card accent-u4" style="border-top:3px solid #4CAF50;border-left:none">
+        <div class="card-icon">🪨</div>
+        <h4>Physical Order (Padarth)</h4>
+        <p>Soil, water, metals, stones, air. Exists and physical activity. No life but provides the foundation for all other orders.</p>
+        <div class="badge-row"><span class="badge badge-u4">Exists</span><span class="badge badge-u4">Physical activity</span></div>
+      </div>
+      <div class="card accent-u4" style="border-top:3px solid #8BC34A;border-left:none">
+        <div class="card-icon">🌿</div>
+        <h4>Plant/Bio Order (Pranitva)</h4>
+        <p>Trees, plants, microbes. Breathes, grows, reproduces. Fulfills physical order and provides for animal order.</p>
+        <div class="badge-row"><span class="badge badge-u4">Exists</span><span class="badge badge-u4">Physical + Life activity</span></div>
+      </div>
+      <div class="card accent-u4" style="border-top:3px solid #FF9800;border-left:none">
+        <div class="card-icon">🦁</div>
+        <h4>Animal Order (Pranitva)</h4>
+        <p>All animals. Has knowledge, will, sensation. Guided by instinct, dependent on the plant order for survival.</p>
+        <div class="badge-row"><span class="badge badge-u4">Exists</span><span class="badge badge-u4">Knowledge+Will</span></div>
+      </div>
+      <div class="card accent-u4" style="border-top:3px solid var(--u4);border-left:none">
+        <div class="card-icon">🧑</div>
+        <h4>Human Order (Manav)</h4>
+        <p>Only humans have <strong>knowledge, will AND wisdom (Vivek)</strong>. We can understand, evaluate, and choose — this makes us responsible.</p>
+        <div class="badge-row"><span class="badge badge-u4">Exists</span><span class="badge badge-u4">Knowledge+Will+Wisdom</span></div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Mutual Fulfillment Among the Four Orders</h3>
+    <div class="flowchart">
+      <div style="text-align:center;font-size:.88rem;color:var(--muted);margin-bottom:1.2rem">Each order sustains and enriches the others — a natural cycle</div>
+      <!-- Cycle SVG -->
+      <svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;display:block;margin:0 auto">
+        <!-- Circular arrows -->
+        <defs>
+          <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#3498db"/>
+          </marker>
+        </defs>
+        <!-- Central -->
+        <ellipse cx="220" cy="150" rx="50" ry="30" fill="rgba(240,192,64,.1)" stroke="#f0c040" stroke-width="1.5"/>
+        <text x="220" y="146" text-anchor="middle" fill="#f0c040" font-family="DM Sans,sans-serif" font-size="10" font-weight="700">MUTUAL</text>
+        <text x="220" y="160" text-anchor="middle" fill="#f0c040" font-family="DM Sans,sans-serif" font-size="10">FULFILLMENT</text>
+        <!-- Four nodes -->
+        <rect x="10" y="20" width="110" height="55" rx="10" fill="rgba(52,152,219,.12)" stroke="#3498db" stroke-width="1.5"/>
+        <text x="65" y="42" text-anchor="middle" fill="#90caf9" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">🪨 Physical</text>
+        <text x="65" y="58" text-anchor="middle" fill="#90caf9" font-family="DM Sans,sans-serif" font-size="9">Soil, Air, Water</text>
+        <text x="65" y="70" text-anchor="middle" fill="#90caf9" font-family="DM Sans,sans-serif" font-size="8">Provides minerals</text>
+        
+        <rect x="320" y="20" width="110" height="55" rx="10" fill="rgba(76,175,80,.12)" stroke="#4CAF50" stroke-width="1.5"/>
+        <text x="375" y="42" text-anchor="middle" fill="#a8f0c8" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">🌿 Plant</text>
+        <text x="375" y="58" text-anchor="middle" fill="#a8f0c8" font-family="DM Sans,sans-serif" font-size="9">Trees, plants</text>
+        <text x="375" y="70" text-anchor="middle" fill="#a8f0c8" font-family="DM Sans,sans-serif" font-size="8">Provides oxygen, food</text>
+        
+        <rect x="10" y="225" width="110" height="55" rx="10" fill="rgba(255,152,0,.12)" stroke="#FF9800" stroke-width="1.5"/>
+        <text x="65" y="247" text-anchor="middle" fill="#f9c98f" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">🦁 Animal</text>
+        <text x="65" y="263" text-anchor="middle" fill="#f9c98f" font-family="DM Sans,sans-serif" font-size="9">All animals</text>
+        <text x="65" y="275" text-anchor="middle" fill="#f9c98f" font-family="DM Sans,sans-serif" font-size="8">Provides manure</text>
+        
+        <rect x="320" y="225" width="110" height="55" rx="10" fill="rgba(155,89,182,.12)" stroke="#9b59b6" stroke-width="1.5"/>
+        <text x="375" y="247" text-anchor="middle" fill="#d1a8f0" font-family="DM Sans,sans-serif" font-size="12" font-weight="700">🧑 Human</text>
+        <text x="375" y="263" text-anchor="middle" fill="#d1a8f0" font-family="DM Sans,sans-serif" font-size="9">Humans</text>
+        <text x="375" y="275" text-anchor="middle" fill="#d1a8f0" font-family="DM Sans,sans-serif" font-size="8">Should nurture nature</text>
+        
+        <!-- Arrows -->
+        <path d="M120 47 L170 130" stroke="#3498db" stroke-width="1.5" marker-end="url(#arrowBlue)" fill="none"/>
+        <path d="M270 130 L320 47" stroke="#4CAF50" stroke-width="1.5" marker-end="url(#arrowBlue)" fill="none"/>
+        <path d="M170 170 L120 248" stroke="#FF9800" stroke-width="1.5" marker-end="url(#arrowBlue)" fill="none"/>
+        <path d="M270 170 L320 248" stroke="#9b59b6" stroke-width="1.5" marker-end="url(#arrowBlue)" fill="none"/>
+      </svg>
+    </div>
+
+    <h3 class="section-title">Self-Regulation &amp; Recyclability in Nature</h3>
+    <div class="card-grid">
+      <div class="card accent-u4">
+        <div class="card-icon">♻️</div>
+        <h4>Recyclability</h4>
+        <p>In natural systems, every output becomes input for another process. Dead organisms → nutrients → soil → plants. Nature wastes nothing.</p>
+      </div>
+      <div class="card accent-u4">
+        <div class="card-icon">🎛️</div>
+        <h4>Self-Regulation</h4>
+        <p>Nature maintains balance automatically — predator-prey balance, carbon cycle, water cycle — without any external management.</p>
+      </div>
+      <div class="card accent-u4">
+        <div class="card-icon">🔗</div>
+        <h4>Interconnectedness</h4>
+        <p>Every unit in nature is connected to every other. Disrupting one part affects the whole system. Hence, human activities have global consequences.</p>
+      </div>
+      <div class="card accent-u4">
+        <div class="card-icon">⚠️</div>
+        <h4>Human Disruption</h4>
+        <p>Currently humans are NOT fulfilling their role in nature. Instead of nurturing, we are exploiting — causing environmental imbalances.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">Existence as Co-existence (Sah-astitva)</h3>
+    <div class="highlight-box u4">
+      <div class="hb-title">🌌 What is Existence?</div>
+      Existence = <strong>Units (every entity)</strong> existing within <strong>Space (Shunya — the all-pervasive substratum)</strong>. Units are material/sentient; Space is non-material, all-pervasive, and enables all interactions.
+    </div>
+
+    <div class="flowchart">
+      <div class="flow-row">
+        <div class="flow-node fn-u4" style="min-width:160px;text-align:center">
+          🌌 <strong>Space (Shunya)</strong><br>
+          <small>All-pervasive<br>Non-material<br>Enables interaction</small>
+        </div>
+        <div class="flow-arrow">contains</div>
+        <div class="flow-node fn-u3" style="min-width:160px;text-align:center">
+          🔮 <strong>Units (Ikayi)</strong><br>
+          <small>All entities<br>Material or Sentient<br>Mutually interacting</small>
+        </div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row">
+        <div class="flow-node fn-gold" style="min-width:280px;text-align:center">
+          <strong>Co-existence (Sah-astitva)</strong><br>
+          <small>All units are self-organized, mutually fulfilling<br>— the natural state of existence</small>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Holistic Perception — Seeing the Whole</h3>
+    <div class="levels-chart">
+      <div class="level-row">
+        <div class="level-label"><span>Individual Level</span><span style="color:var(--u1)">Harmony in Self</span></div>
+        <div class="level-bar-bg"><div class="level-bar" style="width:20%;background:var(--u1);animation-delay:.1s"></div></div>
+      </div>
+      <div class="level-row">
+        <div class="level-label"><span>Family Level</span><span style="color:var(--u2)">Harmony in Relationships</span></div>
+        <div class="level-bar-bg"><div class="level-bar" style="width:40%;background:var(--u2);animation-delay:.2s"></div></div>
+      </div>
+      <div class="level-row">
+        <div class="level-label"><span>Society Level</span><span style="color:var(--u3)">Harmony in Society</span></div>
+        <div class="level-bar-bg"><div class="level-bar" style="width:60%;background:var(--u3);animation-delay:.3s"></div></div>
+      </div>
+      <div class="level-row">
+        <div class="level-label"><span>Nature Level</span><span style="color:var(--u4)">Harmony with Nature</span></div>
+        <div class="level-bar-bg"><div class="level-bar" style="width:80%;background:var(--u4);animation-delay:.4s"></div></div>
+      </div>
+      <div class="level-row">
+        <div class="level-label"><span>Existence Level</span><span style="color:var(--u5)">Harmony in Existence</span></div>
+        <div class="level-bar-bg"><div class="level-bar" style="width:100%;background:var(--u5);animation-delay:.5s"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIT 5
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit5">
+  <div class="unit-header u5-header">
+    <div class="unit-label">Unit 5 · Professional Ethics</div>
+    <h2>Implications for Professional Ethics<br>— From Values to Action</h2>
+    <div class="unit-num-bg">5</div>
+  </div>
+  <div class="unit-body">
+
+    <div class="highlight-box u5">
+      <div class="hb-title">🎓 Central Theme</div>
+      All the harmony we've understood must now translate into <strong>ethical professional conduct</strong>. A true engineer/manager is not just technically competent — they are <strong>socially and ecologically responsible</strong>.
+    </div>
+
+    <h3 class="section-title">Natural Acceptance of Human Values</h3>
+    <div class="flowchart">
+      <div class="flow-row">
+        <div class="flow-node fn-u5" style="min-width:160px;text-align:center">Holistic Understanding<br>(Units 1–4)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-u5" style="min-width:160px;text-align:center">Natural Acceptance<br>of Human Values</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node fn-gold" style="min-width:160px;text-align:center">Definite Ethical<br>Conduct (Naturally)</div>
+      </div>
+      <div class="flow-arrow down">⬇</div>
+      <div class="flow-row">
+        <div class="flow-node fn-white" style="min-width:320px;text-align:center">No need for external rules or policing — ethics becomes a natural way of living</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Definitiveness of Ethical Human Conduct</h3>
+    <div class="highlight-box u5">
+      <div class="hb-title">📌 Key Understanding</div>
+      Ethical conduct is <strong>definite and universal</strong> — it doesn't change with culture, religion, or era. It is based on our Natural Acceptance of values like trust, respect, justice, and compassion, which are the same in every human being.
+    </div>
+
+    <h3 class="section-title">Three Pillars of Humanistic Systems</h3>
+    <div class="card-grid">
+      <div class="card accent-u5">
+        <div class="card-icon">🏫</div>
+        <h4>Humanistic Education</h4>
+        <p>Education that combines values with technical knowledge. Produces graduates who are both competent AND value-aligned.</p>
+        <p style="margin-top:.6rem;font-size:.8rem;color:var(--u5)">Goal: Students who can think holistically, not just technically.</p>
+      </div>
+      <div class="card accent-u5">
+        <div class="card-icon">📜</div>
+        <h4>Humanistic Constitution</h4>
+        <p>Laws and governance built on human values of Samadhan, Samridhi, Abhay, Sah-astitva — not just power or economy.</p>
+        <p style="margin-top:.6rem;font-size:.8rem;color:var(--u5)">Goal: Governance that ensures well-being of ALL, not just the powerful.</p>
+      </div>
+      <div class="card accent-u5">
+        <div class="card-icon">🌐</div>
+        <h4>Universal Human Order</h4>
+        <p>A global society where every individual, family, and nation lives in harmony with each other and with nature.</p>
+        <p style="margin-top:.6rem;font-size:.8rem;color:var(--u5)">Goal: Vasudhaiva Kutumbakam — the world as one family.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title">Competence in Professional Ethics</h3>
+
+    <!-- flowchart of 3 abilities -->
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:700;font-size:.95rem;color:var(--u5);margin-bottom:1.2rem">Three Key Professional Competencies</div>
+      <div class="flow-row" style="align-items:stretch;gap:1rem;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:.5rem">
+          <div class="flow-node fn-u5" style="width:100%;max-width:100%;padding:.9rem">
+            Ability 1: Utilize competence for<br><strong>Universal Human Order</strong>
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);text-align:center">Use your engineering/management for societal good, not just profit</div>
+        </div>
+        <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:.5rem">
+          <div class="flow-node fn-u4" style="width:100%;max-width:100%;padding:.9rem">
+            Ability 2: Identify <strong>People-Friendly<br>&amp; Eco-Friendly</strong> production
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);text-align:center">Design systems that enrich people AND nature, not exploit them</div>
+        </div>
+        <div style="flex:1;min-width:200px;display:flex;flex-direction:column;gap:.5rem">
+          <div class="flow-node fn-u3" style="width:100%;max-width:100%;padding:.9rem">
+            Ability 3: Develop <strong>Appropriate<br>Technologies</strong> for holistic systems
+          </div>
+          <div style="font-size:.78rem;color:var(--muted);text-align:center">Choose scale, method, and technology that is truly appropriate to needs</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Characteristics of Holistic Technologies</h3>
+    <div class="card-grid">
+      <div class="card accent-u5"><div class="card-icon">♻️</div><h4>Recyclable</h4><p>Production process creates no net waste — outputs feed back into inputs.</p></div>
+      <div class="card accent-u5"><div class="card-icon">🤝</div><h4>People-enriching</h4><p>Provides meaningful work, preserves dignity, supports community well-being.</p></div>
+      <div class="card accent-u5"><div class="card-icon">🌿</div><h4>Nature-compatible</h4><p>Works with natural cycles rather than against them. Minimal ecological disruption.</p></div>
+      <div class="card accent-u5"><div class="card-icon">📏</div><h4>Appropriate Scale</h4><p>Small is Beautiful (E.F. Schumacher) — not always bigger = better. Right scale for right need.</p></div>
+    </div>
+
+    <h3 class="section-title">Strategy for Transition to Universal Human Order</h3>
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:600;margin-bottom:1.2rem;color:var(--u5)">Two Levels of Change</div>
+      <div class="flow-row" style="gap:2rem;flex-wrap:wrap;align-items:stretch">
+        <div style="flex:1;min-width:220px">
+          <div style="text-align:center;font-weight:700;color:var(--u5);margin-bottom:.6rem;font-size:.9rem">🧑 At Individual Level</div>
+          <ul class="fancy-list" style="font-size:.83rem">
+            <li><span class="bullet" style="color:var(--u5)">→</span>Right understanding in personal life</li>
+            <li><span class="bullet" style="color:var(--u5)">→</span>Socially responsible behavior</li>
+            <li><span class="bullet" style="color:var(--u5)">→</span>Ecologically responsible choices</li>
+            <li><span class="bullet" style="color:var(--u5)">→</span>Practice value-based living</li>
+          </ul>
+        </div>
+        <div style="display:flex;align-items:center;font-size:1.5rem;color:var(--u5)">+</div>
+        <div style="flex:1;min-width:220px">
+          <div style="text-align:center;font-weight:700;color:var(--u4);margin-bottom:.6rem;font-size:.9rem">🏛️ At Society Level</div>
+          <ul class="fancy-list" style="font-size:.83rem">
+            <li><span class="bullet" style="color:var(--u4)">→</span>Mutually enriching institutions</li>
+            <li><span class="bullet" style="color:var(--u4)">→</span>Value-aligned organizations</li>
+            <li><span class="bullet" style="color:var(--u4)">→</span>Humanistic education systems</li>
+            <li><span class="bullet" style="color:var(--u4)">→</span>Governance based on human values</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-title">The Big Picture — Everything Connected</h3>
+
+    <!-- Final mega flowchart -->
+    <div class="flowchart">
+      <div style="text-align:center;font-weight:700;font-size:1rem;color:var(--gold);margin-bottom:1.4rem">The Complete Chain of UHV</div>
+      <div class="flow-arrow down" style="margin:0">↓</div>
+      <div class="flow-row"><div class="flow-node fn-u1" style="min-width:260px;padding:1rem;text-align:center">🧭 <strong>Unit 1:</strong> Need for Values + Self-Exploration<br><small>Natural Acceptance as the tool</small></div></div>
+      <div class="flow-arrow down">↓</div>
+      <div class="flow-row"><div class="flow-node fn-u2" style="min-width:260px;padding:1rem;text-align:center">🧠 <strong>Unit 2:</strong> Harmony in Self<br><small>I + Body, Sukh vs Suvidha, Sanyam &amp; Swasthya</small></div></div>
+      <div class="flow-arrow down">↓</div>
+      <div class="flow-row"><div class="flow-node fn-u3" style="min-width:260px;padding:1rem;text-align:center">🤝 <strong>Unit 3:</strong> Harmony in Relationships<br><small>Trust, Respect, Justice, Undivided Society</small></div></div>
+      <div class="flow-arrow down">↓</div>
+      <div class="flow-row"><div class="flow-node fn-u4" style="min-width:260px;padding:1rem;text-align:center">🌍 <strong>Unit 4:</strong> Harmony with Nature<br><small>4 Orders, Recyclability, Co-existence</small></div></div>
+      <div class="flow-arrow down">↓</div>
+      <div class="flow-row"><div class="flow-node fn-u5" style="min-width:260px;padding:1rem;text-align:center">🎓 <strong>Unit 5:</strong> Ethical Professional Conduct<br><small>Holistic tech + Humanistic systems + Responsible practice</small></div></div>
+      <div class="flow-arrow down">↓</div>
+      <div class="flow-row"><div class="flow-node fn-gold" style="min-width:280px;padding:1rem;text-align:center">🌏 <strong>Universal Human Order</strong><br>Happy individuals → Harmonious families → Peaceful society → Balanced nature</div></div>
+    </div>
+
+    <div class="quote-block">
+      The test of a good engineer is not just what they can build, but what they choose to build, and who it serves — and whether, when they are done, the world is a little more harmonious than when they began.
+    </div>
+
+    <div class="badge-row" style="justify-content:center;margin-top:2rem">
+      <span class="badge badge-u1">Samadhan</span>
+      <span class="badge badge-u2">Samridhi</span>
+      <span class="badge badge-u3">Abhay</span>
+      <span class="badge badge-u4">Sah-astitva</span>
+      <span class="badge badge-gold">Universal Human Order</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUICK REFERENCE -->
+<section class="unit-section" id="quickref">
+  <div class="unit-header" style="background:linear-gradient(135deg,#0d1520,#1a2540);border-radius:20px 20px 0 0;padding:2rem 2.5rem">
+    <div class="unit-label" style="color:var(--gold)">Quick Reference</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem">Key Terms at a Glance</h2>
+  </div>
+  <div class="unit-body">
+    <table class="compare-table">
+      <thead><tr style="background:rgba(240,192,64,.1)">
+        <th style="color:var(--gold)">Term</th>
+        <th style="color:var(--gold)">Unit</th>
+        <th style="color:var(--gold)">Meaning</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Natural Acceptance</strong></td><td><span class="badge badge-u1">U1</span></td><td>What we inherently accept as right, without conditioning</td></tr>
+        <tr><td><strong>Sukh</strong></td><td><span class="badge badge-u2">U2</span></td><td>Happiness — psychological well-being of 'I'</td></tr>
+        <tr><td><strong>Suvidha</strong></td><td><span class="badge badge-u2">U2</span></td><td>Physical facility — material need of the Body</td></tr>
+        <tr><td><strong>Sanyam</strong></td><td><span class="badge badge-u2">U2</span></td><td>Self-regulation of 'I' over the Body's needs</td></tr>
+        <tr><td><strong>Swasthya</strong></td><td><span class="badge badge-u2">U2</span></td><td>Physical health — result of proper Sanyam</td></tr>
+        <tr><td><strong>Vishwas</strong></td><td><span class="badge badge-u3">U3</span></td><td>Trust — foundational relationship value</td></tr>
+        <tr><td><strong>Samman</strong></td><td><span class="badge badge-u3">U3</span></td><td>Respect — right evaluation of the other</td></tr>
+        <tr><td><strong>Nyaya</strong></td><td><span class="badge badge-u3">U3</span></td><td>Justice — both parties feel mutually fulfilled</td></tr>
+        <tr><td><strong>Ubhay-tripti</strong></td><td><span class="badge badge-u3">U3</span></td><td>Mutual fulfillment in a relationship</td></tr>
+        <tr><td><strong>Sah-astitva</strong></td><td><span class="badge badge-u4">U4</span></td><td>Co-existence — mutual fulfillment in existence</td></tr>
+        <tr><td><strong>Samadhan</strong></td><td><span class="badge badge-u3">U3/5</span></td><td>Resolution / inner harmony</td></tr>
+        <tr><td><strong>Samridhi</strong></td><td><span class="badge badge-u3">U3/5</span></td><td>Prosperity for all families</td></tr>
+        <tr><td><strong>Abhay</strong></td><td><span class="badge badge-u3">U3/5</span></td><td>Fearlessness / no exploitation</td></tr>
+        <tr><td><strong>Akhand Samaj</strong></td><td><span class="badge badge-u3">U3</span></td><td>Undivided Society — no divisions of class/caste/nation</td></tr>
+        <tr><td><strong>Vivek</strong></td><td><span class="badge badge-u4">U4</span></td><td>Wisdom — unique to humans; ability to discern right from wrong</td></tr>
+        <tr><td><strong>Preconditioning</strong></td><td><span class="badge badge-u2">U2</span></td><td>Beliefs/desires imposed by society, family, media — not from Natural Acceptance</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p style="margin-bottom:.5rem">Universal Human Values &amp; Professional Ethics · B.Tech 2nd Year</p>
+  <p>Based on: <strong>R.R. Gaur, R. Sangal, G.P. Bagaria</strong> — A Foundation Course in Human Values and Professional Ethics, Excel Books</p>
+  <p style="margin-top:.8rem;font-size:.75rem;color:#444">Study notes compiled for academic reference</p>
+</footer>
+
+<script>
+// Intersection Observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.unit-section').forEach(el => {
+  el.style.animationPlayState = 'paused';
+  observer.observe(el);
+});
+
+// Smooth pill navigation
+document.querySelectorAll('.unit-pill, .nav-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(btn.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

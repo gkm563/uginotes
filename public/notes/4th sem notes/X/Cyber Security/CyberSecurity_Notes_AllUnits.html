@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Security – Complete Notes | All 5 Units</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --border: #1f2d45;
+  --accent1: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --accent5: #ef4444;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --u1: #00d4ff;
+  --u2: #7c3aed;
+  --u3: #10b981;
+  --u4: #f59e0b;
+  --u5: #ef4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── TOP NAV ── */
+#topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  background: rgba(10,14,26,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0; padding: 0 24px;
+  height: 56px;
+}
+.nav-brand {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: var(--accent1);
+  letter-spacing: 1px;
+  margin-right: 32px;
+  white-space: nowrap;
+}
+.nav-tabs { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  color: var(--text2);
+  background: none;
+}
+.nav-tab:hover { color: var(--text); border-color: var(--border); }
+.nav-tab.active { color: var(--bg); }
+.nav-tab[data-u="1"].active { background: var(--u1); border-color: var(--u1); }
+.nav-tab[data-u="2"].active { background: var(--u2); border-color: var(--u2); }
+.nav-tab[data-u="3"].active { background: var(--u3); border-color: var(--u3); }
+.nav-tab[data-u="4"].active { background: var(--u4); border-color: var(--u4); }
+.nav-tab[data-u="5"].active { background: var(--u5); border-color: var(--u5); }
+
+/* ── LAYOUT ── */
+#main { display: flex; margin-top: 56px; min-height: calc(100vh - 56px); }
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: 260px; min-width: 260px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky; top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  padding: 16px 0;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.sidebar-unit { margin-bottom: 8px; }
+.sidebar-unit-header {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 20px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; color: var(--text2);
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+.sidebar-unit-header:hover { color: var(--text); }
+.sidebar-unit-header[data-u="1"] { border-left-color: var(--u1); color: var(--u1); }
+.sidebar-unit-header[data-u="2"] { border-left-color: var(--u2); color: var(--u2); }
+.sidebar-unit-header[data-u="3"] { border-left-color: var(--u3); color: var(--u3); }
+.sidebar-unit-header[data-u="4"] { border-left-color: var(--u4); color: var(--u4); }
+.sidebar-unit-header[data-u="5"] { border-left-color: var(--u5); color: var(--u5); }
+.sidebar-items { display: flex; flex-direction: column; }
+.sidebar-item {
+  padding: 6px 20px 6px 32px;
+  font-size: 12.5px; color: var(--text3);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.sidebar-item:hover { color: var(--text); background: var(--surface2); }
+.sidebar-item.active { color: var(--text); background: var(--surface2); }
+
+/* ── CONTENT ── */
+#content { flex: 1; padding: 40px 48px; max-width: 960px; min-width: 0; }
+@media (max-width: 900px) { 
+  #sidebar { display: none; }
+  #content { padding: 24px 20px; }
+}
+
+/* ── UNIT SECTIONS ── */
+.unit-section { display: none; }
+.unit-section.active { display: block; }
+
+/* ── HERO BANNER ── */
+.unit-hero {
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 40px;
+  position: relative; overflow: hidden;
+}
+.unit-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  opacity: 0.07;
+  background: repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 0, transparent 50%);
+  background-size: 12px 12px;
+}
+.unit-hero[data-u="1"] { background: linear-gradient(135deg, #003d5c 0%, #001a2e 100%); border: 1px solid #00d4ff33; }
+.unit-hero[data-u="2"] { background: linear-gradient(135deg, #2d1b69 0%, #0f0a2b 100%); border: 1px solid #7c3aed33; }
+.unit-hero[data-u="3"] { background: linear-gradient(135deg, #064e3b 0%, #021c15 100%); border: 1px solid #10b98133; }
+.unit-hero[data-u="4"] { background: linear-gradient(135deg, #451a03 0%, #1c0a00 100%); border: 1px solid #f59e0b33; }
+.unit-hero[data-u="5"] { background: linear-gradient(135deg, #450a0a 0%, #1c0000 100%); border: 1px solid #ef444433; }
+.unit-number {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 8px; opacity: 0.6;
+}
+.unit-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px; font-weight: 800;
+  line-height: 1.2; margin-bottom: 12px;
+}
+.unit-subtitle { font-size: 13px; color: var(--text2); max-width: 600px; }
+.unit-badge {
+  display: inline-block;
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  margin-top: 16px; margin-right: 8px;
+}
+[data-u="1"] .unit-badge { background: #00d4ff22; color: var(--u1); border: 1px solid #00d4ff44; }
+[data-u="2"] .unit-badge { background: #7c3aed22; color: var(--u2); border: 1px solid #7c3aed44; }
+[data-u="3"] .unit-badge { background: #10b98122; color: var(--u3); border: 1px solid #10b98144; }
+[data-u="4"] .unit-badge { background: #f59e0b22; color: var(--u4); border: 1px solid #f59e0b44; }
+[data-u="5"] .unit-badge { background: #ef444422; color: var(--u5); border: 1px solid #ef444444; }
+
+/* ── TOPIC CARDS ── */
+.topic-section { margin-bottom: 48px; }
+.topic-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.topic-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  padding: 2px 8px; border-radius: 4px;
+  background: var(--surface2);
+  color: var(--text3);
+}
+.subtopic { margin-bottom: 28px; }
+.subtopic-title {
+  font-size: 15px; font-weight: 600;
+  margin-bottom: 12px; color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.subtopic-title::before {
+  content: '';
+  width: 3px; height: 16px;
+  border-radius: 2px;
+  display: inline-block;
+}
+[data-u="1"] .subtopic-title::before { background: var(--u1); }
+[data-u="2"] .subtopic-title::before { background: var(--u2); }
+[data-u="3"] .subtopic-title::before { background: var(--u3); }
+[data-u="4"] .subtopic-title::before { background: var(--u4); }
+[data-u="5"] .subtopic-title::before { background: var(--u5); }
+
+p { margin-bottom: 12px; color: var(--text2); }
+
+/* ── DEFINITION BOX ── */
+.def-box {
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  border-left: 4px solid;
+  position: relative;
+}
+.def-box::before {
+  content: 'DEFINITION';
+  position: absolute; top: -10px; left: 16px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  padding: 2px 8px; border-radius: 4px;
+}
+[data-u="1"] .def-box { border-left-color: var(--u1); }
+[data-u="1"] .def-box::before { background: var(--u1); color: #000; }
+[data-u="2"] .def-box { border-left-color: var(--u2); }
+[data-u="2"] .def-box::before { background: var(--u2); color: #fff; }
+[data-u="3"] .def-box { border-left-color: var(--u3); }
+[data-u="3"] .def-box::before { background: var(--u3); color: #000; }
+[data-u="4"] .def-box { border-left-color: var(--u4); }
+[data-u="4"] .def-box::before { background: var(--u4); color: #000; }
+[data-u="5"] .def-box { border-left-color: var(--u5); }
+[data-u="5"] .def-box::before { background: var(--u5); color: #fff; }
+.def-box p { margin: 0; color: var(--text); font-size: 14px; }
+
+/* ── EXAMPLE BOX ── */
+.example-box {
+  background: #0d1f0d;
+  border: 1px solid #1a3d1a;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+}
+.example-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; color: var(--accent3);
+  margin-bottom: 6px;
+}
+.example-box p { color: #86efac; margin: 0; font-size: 14px; }
+
+/* ── KEY POINT BOX ── */
+.keypoint-box {
+  background: #1a1200;
+  border: 1px solid #3d2a00;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.keypoint-icon { font-size: 18px; margin-top: 2px; }
+.keypoint-box p { color: #fcd34d; margin: 0; font-size: 14px; }
+
+/* ── INFO BOX ── */
+.info-box {
+  background: #0a1929;
+  border: 1px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+.info-box p { color: #93c5fd; margin: 0; font-size: 14px; }
+
+/* ── LISTS ── */
+ul.notes-list { padding-left: 0; list-style: none; margin: 12px 0; }
+ul.notes-list li {
+  padding: 6px 0 6px 20px;
+  position: relative; color: var(--text2);
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+ul.notes-list li:last-child { border-bottom: none; }
+ul.notes-list li::before {
+  content: '→';
+  position: absolute; left: 0;
+  color: var(--text3);
+}
+[data-u="1"] ul.notes-list li::before { color: var(--u1); }
+[data-u="2"] ul.notes-list li::before { color: var(--u2); }
+[data-u="3"] ul.notes-list li::before { color: var(--u3); }
+[data-u="4"] ul.notes-list li::before { color: var(--u4); }
+[data-u="5"] ul.notes-list li::before { color: var(--u5); }
+
+ol.notes-ol { padding-left: 24px; margin: 12px 0; }
+ol.notes-ol li { color: var(--text2); font-size: 14px; margin-bottom: 6px; padding-left: 4px; }
+
+/* ── CARD GRID ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin: 16px 0; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.card:hover { transform: translateY(-2px); }
+[data-u="1"] .card:hover { border-color: var(--u1); }
+[data-u="2"] .card:hover { border-color: var(--u2); }
+[data-u="3"] .card:hover { border-color: var(--u3); }
+[data-u="4"] .card:hover { border-color: var(--u4); }
+[data-u="5"] .card:hover { border-color: var(--u5); }
+.card-icon { font-size: 24px; margin-bottom: 8px; }
+.card-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.card-body { font-size: 12.5px; color: var(--text3); }
+
+/* ── DIFF TABLES ── */
+.diff-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 10px; border: 1px solid var(--border); }
+table.diff-table { width: 100%; border-collapse: collapse; }
+table.diff-table th {
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-align: left;
+  background: var(--surface2);
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+}
+table.diff-table td {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+table.diff-table tr:last-child td { border-bottom: none; }
+table.diff-table tr:hover td { background: var(--surface2); }
+table.diff-table th:first-child, table.diff-table td:first-child {
+  font-weight: 600; color: var(--text);
+  width: 140px;
+}
+[data-u="1"] table.diff-table th:first-child { color: var(--u1); }
+[data-u="2"] table.diff-table th:first-child { color: var(--u2); }
+[data-u="3"] table.diff-table th:first-child { color: var(--u3); }
+[data-u="4"] table.diff-table th:first-child { color: var(--u4); }
+[data-u="5"] table.diff-table th:first-child { color: var(--u5); }
+
+.diff-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700;
+  margin: 32px 0 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.diff-label .badge {
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 20px; font-weight: 600; letter-spacing: 1px;
+}
+[data-u="1"] .diff-label .badge { background: #00d4ff22; color: var(--u1); border: 1px solid #00d4ff44; }
+[data-u="2"] .diff-label .badge { background: #7c3aed22; color: var(--u2); border: 1px solid #7c3aed44; }
+[data-u="3"] .diff-label .badge { background: #10b98122; color: var(--u3); border: 1px solid #10b98144; }
+[data-u="4"] .diff-label .badge { background: #f59e0b22; color: var(--u4); border: 1px solid #f59e0b44; }
+[data-u="5"] .diff-label .badge { background: #ef444422; color: var(--u5); border: 1px solid #ef444444; }
+
+/* ── DIAGRAMS (SVG-like with HTML) ── */
+.diagram-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+.diagram-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 20px;
+}
+
+/* CIA Triad */
+.cia-triad {
+  display: flex; justify-content: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.cia-item {
+  width: 130px;
+  padding: 20px 12px;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+}
+.cia-c { background: #003d5c22; border: 2px solid var(--u1); }
+.cia-i { background: #2d1b6922; border: 2px solid var(--u2); }
+.cia-a { background: #064e3b22; border: 2px solid var(--u3); }
+.cia-icon { font-size: 28px; margin-bottom: 8px; }
+.cia-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.cia-desc { font-size: 11px; color: var(--text3); }
+
+/* Attack lifecycle */
+.flow-steps { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.flow-step {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  position: relative;
+}
+.flow-arrow { color: var(--text3); font-size: 18px; }
+
+/* Forensics Lifecycle */
+.lifecycle-steps { display: flex; flex-direction: column; gap: 10px; max-width: 400px; margin: 0 auto; }
+.lc-step {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+}
+.lc-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  flex-shrink: 0;
+}
+.lc-text { font-size: 13px; }
+.lc-text strong { display: block; font-size: 14px; color: var(--text); }
+.lc-connector {
+  width: 2px; height: 16px;
+  background: var(--border);
+  margin: 0 auto;
+}
+
+/* Botnet diagram */
+.botnet-diagram {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.botnet-server {
+  padding: 10px 24px;
+  border-radius: 8px; font-size: 13px; font-weight: 700;
+  background: #ef444422; border: 2px solid var(--u5);
+  color: var(--u5);
+}
+.botnet-line { width: 2px; height: 20px; background: var(--border); }
+.botnet-bots { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.botnet-bot {
+  padding: 7px 14px;
+  border-radius: 6px; font-size: 12px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text3);
+}
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ── HIGHLIGHT CODE ── */
+.code-inline {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 4px;
+  color: var(--accent3);
+}
+.code-block {
+  font-family: 'Space Mono', monospace;
+  font-size: 12.5px;
+  background: #0d1117;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0;
+  overflow-x: auto;
+  color: #86efac;
+  line-height: 1.8;
+}
+
+/* ── ACCORDION ── */
+.accordion { margin: 12px 0; }
+.accordion-item {
+  border: 1px solid var(--border);
+  border-radius: 8px; margin-bottom: 8px;
+  overflow: hidden;
+}
+.accordion-header {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600; font-size: 13.5px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--surface2);
+  user-select: none;
+}
+.accordion-header:hover { background: var(--border); }
+.accordion-body {
+  padding: 0 16px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.2s;
+  font-size: 13.5px; color: var(--text2);
+  background: var(--surface);
+}
+.accordion-body.open { max-height: 600px; padding: 14px 16px; }
+.accordion-chevron { transition: transform 0.2s; }
+.accordion-chevron.open { transform: rotate(180deg); }
+
+/* ── PROGRESS BAR ── */
+.progress-bar-wrap {
+  background: var(--surface2);
+  border-radius: 4px; height: 6px;
+  overflow: hidden; margin: 6px 0 14px;
+}
+.progress-bar { height: 100%; border-radius: 4px; }
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.tag {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── SCROLLBAR ── */
+#content::-webkit-scrollbar { width: 6px; }
+#content::-webkit-scrollbar-track { background: transparent; }
+#content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── MOBILE TOC ── */
+.mobile-toc-btn {
+  display: none;
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 900;
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: var(--accent1);
+  color: #000; border: none;
+  font-size: 20px; cursor: pointer;
+  box-shadow: 0 4px 20px #00d4ff44;
+}
+@media (max-width: 900px) { .mobile-toc-btn { display: flex; align-items: center; justify-content: center; } }
+
+/* ── PROGRESS INDICATOR ── */
+#reading-progress {
+  position: fixed; top: 56px; left: 0; right: 0;
+  height: 3px; z-index: 998;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.1s;
+}
+</style>
+</head>
+<body>
+
+<div id="reading-progress"></div>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+  <div class="nav-brand">🛡 CYBER SEC</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-u="1" onclick="showUnit(1)">Unit 1 – Intro to Cybercrime</button>
+    <button class="nav-tab" data-u="2" onclick="showUnit(2)">Unit 2 – Mobile Security</button>
+    <button class="nav-tab" data-u="3" onclick="showUnit(3)">Unit 3 – Tools &amp; Methods</button>
+    <button class="nav-tab" data-u="4" onclick="showUnit(4)">Unit 4 – Computer Forensics</button>
+    <button class="nav-tab" data-u="5" onclick="showUnit(5)">Unit 5 – Laws &amp; Policies</button>
+  </div>
+</nav>
+
+<div id="main">
+<!-- SIDEBAR -->
+<aside id="sidebar" id="sidebar-nav"></aside>
+
+<!-- CONTENT -->
+<main id="content">
+
+<!-- ═══════════════════════════════════════════════════
+     UNIT 1
+═══════════════════════════════════════════════════ -->
+<section class="unit-section active" id="unit1" data-u="1">
+
+<div class="unit-hero" data-u="1">
+  <div class="unit-number">Unit 1 · BCC301/401</div>
+  <div class="unit-title">Introduction to Cybercrime</div>
+  <div class="unit-subtitle">Foundations of cybercrime, information security, criminal types, cyber offenses, social engineering, botnets, and attack vectors.</div>
+  <span class="unit-badge">4 Lectures</span>
+  <span class="unit-badge">K1 K2</span>
+</div>
+
+<!-- 1.1 -->
+<div class="topic-section" id="u1-s1">
+  <div class="topic-title"><span class="topic-num">1.1</span> What is Cybercrime?</div>
+
+  <div class="def-box">
+    <p><strong>Cybercrime</strong> is any illegal activity carried out using a computer, network, internet, or digital device. It can target the computer itself, use a computer as a tool, or both.</p>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Origin of the Word "Cyber"</div>
+    <p>The word <em>cyber</em> comes from <strong>cybernetics</strong> — the science of communication and control in machines. After the rapid growth of the internet in the 1990s, digital crimes became common, and the term "cybercrime" was widely adopted.</p>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Characteristics of Cybercrime</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🌐</div><div class="card-title">Borderless</div><div class="card-body">No geographical limits — attacker can be in any country.</div></div>
+      <div class="card"><div class="card-icon">🕵️</div><div class="card-title">Anonymous</div><div class="card-body">Criminals hide behind VPNs, proxies, fake IDs.</div></div>
+      <div class="card"><div class="card-icon">⚡</div><div class="card-title">Fast Execution</div><div class="card-body">Attacks can happen in milliseconds.</div></div>
+      <div class="card"><div class="card-icon">🔍</div><div class="card-title">Hard to Trace</div><div class="card-body">Digital evidence easily erased or hidden.</div></div>
+      <div class="card"><div class="card-icon">💸</div><div class="card-title">Low Cost, High Impact</div><div class="card-body">Cheap tools cause billion-dollar damage.</div></div>
+    </div>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Three Roles of a Computer in Cybercrime</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🎯</div><div class="card-title">Target</div><div class="card-body">Computer is the victim. Example: Hacking a server to steal data.</div></div>
+      <div class="card"><div class="card-icon">🔧</div><div class="card-title">Tool</div><div class="card-body">Computer used to commit crime. Example: Sending phishing emails.</div></div>
+      <div class="card"><div class="card-icon">🔄</div><div class="card-title">Both</div><div class="card-body">A hacked machine is also used to attack others (botnet).</div></div>
+    </div>
+    <div class="example-box"><div class="example-label">EXAMPLE</div><p>A hacker in another country attacks Indian bank servers remotely — computer is both tool and target.</p></div>
+  </div>
+</div>
+
+<!-- 1.2 -->
+<div class="topic-section" id="u1-s2">
+  <div class="topic-title"><span class="topic-num">1.2</span> Information Security &amp; CIA Triad</div>
+  <div class="def-box">
+    <p><strong>Information Security</strong> means protecting digital information from unauthorized access, misuse, destruction, or disclosure.</p>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diagram-title">CIA Triad — Three Pillars of Information Security</div>
+    <div class="cia-triad">
+      <div class="cia-item cia-c">
+        <div class="cia-icon">🔒</div>
+        <div class="cia-name" style="color:var(--u1)">Confidentiality</div>
+        <div class="cia-desc">Data accessible only to authorized users<br><br>🔑 Encryption, Access Control, Passwords<br><br>Example: Bank account data hidden from strangers</div>
+      </div>
+      <div class="cia-item cia-i">
+        <div class="cia-icon">✅</div>
+        <div class="cia-name" style="color:var(--u2)">Integrity</div>
+        <div class="cia-desc">Data must remain accurate and unchanged<br><br>🔑 Hashing (SHA-256), Digital Signatures<br><br>Example: Exam marks not tampered</div>
+      </div>
+      <div class="cia-item cia-a">
+        <div class="cia-icon">🌐</div>
+        <div class="cia-name" style="color:var(--u3)">Availability</div>
+        <div class="cia-desc">Data must be accessible when needed<br><br>🔑 Backup Servers, Cloud Hosting<br><br>Example: Exam portal works during exam</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="diff-label">📊 Comparison: Confidentiality vs Integrity vs Availability <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Confidentiality</th><th>Integrity</th><th>Availability</th></tr>
+    <tr><td>Meaning</td><td>Prevent unauthorized access</td><td>Prevent unauthorized modification</td><td>Ensure access when required</td></tr>
+    <tr><td>Technique</td><td>Encryption</td><td>Hashing</td><td>Backup servers</td></tr>
+    <tr><td>Risk if broken</td><td>Data leak</td><td>Data corruption</td><td>System crash</td></tr>
+    <tr><td>Example</td><td>Password protection</td><td>Digital signature</td><td>Cloud hosting</td></tr>
+  </table></div>
+</div>
+
+<!-- 1.3 -->
+<div class="topic-section" id="u1-s3">
+  <div class="topic-title"><span class="topic-num">1.3</span> Who are Cybercriminals?</div>
+  <p>Cybercriminals are individuals or groups who exploit digital systems for illegal gain. They vary in skill, motivation, and target.</p>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🧑‍💻</div><div class="card-title">Script Kiddies</div><div class="card-body">Low skill. Use ready-made tools. Example: Downloading hacking tools to attack websites.</div></div>
+    <div class="card"><div class="card-icon">💰</div><div class="card-title">Professional Hackers</div><div class="card-body">Highly skilled. Financially motivated. Example: Bank fraud operations.</div></div>
+    <div class="card"><div class="card-icon">🏢</div><div class="card-title">Insider Threats</div><div class="card-body">Employees within organizations. Example: Employee leaking company data.</div></div>
+    <div class="card"><div class="card-icon">✊</div><div class="card-title">Hacktivists</div><div class="card-body">Political or social motive. Example: Defacing government websites.</div></div>
+    <div class="card"><div class="card-icon">💣</div><div class="card-title">Cyber Terrorists</div><div class="card-body">Target national security. Example: Attacking power grid infrastructure.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Hacker vs Cybercriminal <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Hacker</th><th>Cybercriminal</th></tr>
+    <tr><td>Intention</td><td>May be ethical</td><td>Always illegal</td></tr>
+    <tr><td>Permission</td><td>Can have authorization</td><td>No authorization</td></tr>
+    <tr><td>Goal</td><td>Find weaknesses</td><td>Exploit for gain</td></tr>
+    <tr><td>Legal Status</td><td>Can be legal</td><td>Illegal</td></tr>
+    <tr><td>Example</td><td>Ethical/white-hat hacker</td><td>Bank fraudster</td></tr>
+  </table></div>
+</div>
+
+<!-- 1.4 -->
+<div class="topic-section" id="u1-s4">
+  <div class="topic-title"><span class="topic-num">1.4</span> Classification of Cybercrimes</div>
+  <p>Cybercrimes are classified based on their <strong>target</strong>:</p>
+  <div class="accordion">
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">🧑 Crimes Against Individuals <span class="accordion-chevron">▼</span></div>
+      <div class="accordion-body"><ul class="notes-list"><li>Identity Theft</li><li>Cyber Stalking</li><li>Email Spoofing</li><li>Phishing</li><li>Online Harassment</li></ul><div class="example-box"><div class="example-label">EXAMPLE</div><p>Stealing someone's Aadhaar details for fraud.</p></div></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">🏠 Crimes Against Property <span class="accordion-chevron">▼</span></div>
+      <div class="accordion-body"><ul class="notes-list"><li>Intellectual Property Theft</li><li>Ransomware</li><li>Data Theft</li><li>Credit Card Fraud</li></ul><div class="example-box"><div class="example-label">EXAMPLE</div><p>Encrypting company data and demanding ransom.</p></div></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">🏢 Crimes Against Organizations <span class="accordion-chevron">▼</span></div>
+      <div class="accordion-body"><ul class="notes-list"><li>DDoS Attacks</li><li>Database Hacking</li><li>Website Defacement</li><li>Corporate Espionage</li></ul><div class="example-box"><div class="example-label">EXAMPLE</div><p>Taking down an e-commerce website during sale season.</p></div></div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-header" onclick="toggleAcc(this)">🏛 Crimes Against Government <span class="accordion-chevron">▼</span></div>
+      <div class="accordion-body"><ul class="notes-list"><li>Cyber Warfare</li><li>Espionage / Spying</li><li>Critical Infrastructure Attacks</li></ul><div class="example-box"><div class="example-label">EXAMPLE</div><p>Attacking a railway control system.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 1.5 -->
+<div class="topic-section" id="u1-s5">
+  <div class="topic-title"><span class="topic-num">1.5</span> Global Perspective on Cybercrime</div>
+  <p>Cybercrime is a <strong>global problem</strong> because the internet connects all nations. Key factors that make it global:</p>
+  <ul class="notes-list">
+    <li>Internet has no borders — attackers operate internationally</li>
+    <li>Cryptocurrency enables anonymous payments (e.g., ransomware payments)</li>
+    <li>Law enforcement coordination across countries is difficult</li>
+    <li>Different countries have different cyber laws</li>
+  </ul>
+  <div class="info-box"><p>📌 <strong>Global Impact:</strong> Cybercrime causes billions in financial losses annually, creates national security threats, and violates data privacy of millions of users worldwide.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Survival Mantra for Netizens (Netizen = Internet User)</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🔐</div><div class="card-title">Strong Passwords</div><div class="card-body">Use long, complex, unique passwords for each account.</div></div>
+      <div class="card"><div class="card-icon">📱</div><div class="card-title">2-Factor Auth</div><div class="card-body">Enable 2FA everywhere for extra security.</div></div>
+      <div class="card"><div class="card-icon">🔗</div><div class="card-title">Avoid Suspicious Links</div><div class="card-body">Don't click unknown links in emails or SMS.</div></div>
+      <div class="card"><div class="card-icon">🔄</div><div class="card-title">Software Updates</div><div class="card-body">Regular updates patch security vulnerabilities.</div></div>
+      <div class="card"><div class="card-icon">🛡</div><div class="card-title">Antivirus</div><div class="card-body">Install and keep antivirus software active.</div></div>
+      <div class="card"><div class="card-icon">💾</div><div class="card-title">Regular Backups</div><div class="card-body">Back up important data to prevent ransomware loss.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 1.6 -->
+<div class="topic-section" id="u1-s6">
+  <div class="topic-title"><span class="topic-num">1.6</span> How Criminals Plan Attacks</div>
+
+  <div class="diagram-box">
+    <div class="diagram-title">Attack Lifecycle — Step by Step</div>
+    <div class="flow-steps">
+      <div class="flow-step" style="border-color:var(--u1);color:var(--u1)">1. Reconnaissance<br><small style="color:var(--text3);font-size:10px">Gather info</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:#7c3aed;color:#7c3aed">2. Scanning<br><small style="color:var(--text3);font-size:10px">Find vulns</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--u3);color:var(--u3)">3. Gaining Access<br><small style="color:var(--text3);font-size:10px">Exploit weakness</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--u4);color:var(--u4)">4. Maintain Access<br><small style="color:var(--text3);font-size:10px">Install backdoor</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color:var(--u5);color:var(--u5)">5. Cover Tracks<br><small style="color:var(--text3);font-size:10px">Delete logs</small></div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">Step 1: Reconnaissance — Information Gathering <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Attacker collects information about the target <strong>without touching</strong> the system. Sources: company websites, LinkedIn, Google, public records (OSINT).</p><div class="example-box"><div class="example-label">EXAMPLE</div><p>Checking a company's employee list on LinkedIn to find email patterns.</p></div></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">Step 2: Scanning — Finding Vulnerabilities <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Attacker scans the target system for open ports, running services, and known vulnerabilities using tools like Nmap, Nessus.</p><div class="example-box"><div class="example-label">EXAMPLE</div><p>Finding an open port 3306 (MySQL) on a server — potential SQL injection target.</p></div></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">Step 3: Gaining Access — Exploiting Weakness <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Attacker uses found vulnerabilities to enter the system. Methods: SQL injection, phishing, buffer overflow, password cracking.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">Step 4: Maintaining Access — Persistence <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Attacker installs a backdoor or rootkit to maintain long-term access even if initial vulnerability is patched.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">Step 5: Covering Tracks — Hiding Evidence <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Attacker deletes log files, uses proxy chains, and removes malware to avoid detection and investigation.</p></div></div>
+  </div>
+</div>
+
+<!-- 1.7 -->
+<div class="topic-section" id="u1-s7">
+  <div class="topic-title"><span class="topic-num">1.7</span> Social Engineering</div>
+  <div class="def-box">
+    <p><strong>Social Engineering</strong> is psychological manipulation of people into performing actions or divulging confidential information. It exploits human psychology, not technical vulnerabilities.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📧</div><div class="card-title">Phishing</div><div class="card-body">Fake emails tricking users to click malicious links. Mass attacks.</div></div>
+    <div class="card"><div class="card-icon">🎯</div><div class="card-title">Spear Phishing</div><div class="card-body">Targeted attack on a specific person with personalized content.</div></div>
+    <div class="card"><div class="card-icon">📞</div><div class="card-title">Vishing</div><div class="card-body">Voice call scam. Fake bank customer care calling for OTP.</div></div>
+    <div class="card"><div class="card-icon">💬</div><div class="card-title">Smishing</div><div class="card-body">SMS-based scam. Fake OTP or lucky draw messages.</div></div>
+    <div class="card"><div class="card-icon">💾</div><div class="card-title">Baiting</div><div class="card-body">Leaving infected USB drives in public places hoping someone plugs it in.</div></div>
+  </div>
+  <div class="example-box"><div class="example-label">REAL INDIA EXAMPLE</div><p>Fake college fee payment portal sending SMS to students: "Pay fee before 5 PM or admission cancelled — click here." Student enters bank details on fake site.</p></div>
+
+  <div class="diff-label">📊 Phishing vs Spear Phishing vs Whaling <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Phishing</th><th>Spear Phishing</th><th>Whaling</th></tr>
+    <tr><td>Target</td><td>Mass users</td><td>Specific person</td><td>High-level executives (CEO/CFO)</td></tr>
+    <tr><td>Personalization</td><td>No</td><td>Yes</td><td>Highly personalized</td></tr>
+    <tr><td>Success Rate</td><td>Low</td><td>Medium</td><td>High</td></tr>
+    <tr><td>Example</td><td>Fake bank email to millions</td><td>Fake mail to professor</td><td>Fake board resolution to CEO</td></tr>
+  </table></div>
+</div>
+
+<!-- 1.8 -->
+<div class="topic-section" id="u1-s8">
+  <div class="topic-title"><span class="topic-num">1.8</span> Cyber Stalking, Cybercafes &amp; Botnets</div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Cyber Stalking</div>
+    <div class="def-box"><p><strong>Cyber Stalking</strong> is repeated online harassment or monitoring of a person using digital means.</p></div>
+    <p>Methods used: Spyware, fake social media accounts, threatening emails, GPS tracking apps.</p>
+    <p><strong>Legal protection:</strong> Covered under IT Act 2000 and IPC provisions.</p>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Cybercafes and Cybercrime</div>
+    <p>Earlier, cybercriminals used cybercafes to hide identity because there was no strict ID verification, IPs were shared among many users, and no tracking logs were maintained. Modern equivalent: VPN, TOR browser, proxy servers.</p>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Botnets — The Fuel for Cybercrime</div>
+    <div class="def-box"><p><strong>Botnet</strong> = Network of infected computers (called <em>bots</em> or <em>zombies</em>) controlled remotely by an attacker (called the <em>botmaster</em>) through a Command &amp; Control (C&amp;C) server.</p></div>
+
+    <div class="diagram-box">
+      <div class="diagram-title">How a Botnet Works</div>
+      <div class="botnet-diagram">
+        <div class="botnet-server">🕹 Attacker / C&C Server</div>
+        <div class="botnet-line"></div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px">Sends commands to all bots</div>
+        <div class="botnet-line"></div>
+        <div class="botnet-bots">
+          <div class="botnet-bot">🖥 Bot 1<br><small>Infected PC</small></div>
+          <div class="botnet-bot">📱 Bot 2<br><small>Phone</small></div>
+          <div class="botnet-bot">💻 Bot 3<br><small>Laptop</small></div>
+          <div class="botnet-bot">🖥 Bot 4<br><small>Server</small></div>
+          <div class="botnet-bot">📡 Bot N<br><small>IoT Device</small></div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px">↓ All bots attack target simultaneously</div>
+        <div style="margin-top:8px;padding:8px 20px;background:#ef444422;border:1px solid var(--u5);border-radius:6px;font-size:13px;color:var(--u5)">🎯 Target Website / Server</div>
+      </div>
+    </div>
+
+    <div class="diff-label">📊 Centralized vs P2P Botnet <span class="badge">EXAM TABLE</span></div>
+    <div class="diff-table-wrap"><table class="diff-table">
+      <tr><th>Basis</th><th>Centralized Botnet</th><th>P2P Botnet</th></tr>
+      <tr><td>Control</td><td>Single C&C server</td><td>Multiple distributed nodes</td></tr>
+      <tr><td>Detection</td><td>Easier</td><td>Harder</td></tr>
+      <tr><td>Shutdown</td><td>Easy (remove server)</td><td>Very difficult</td></tr>
+      <tr><td>Structure</td><td>Star topology</td><td>Decentralized mesh</td></tr>
+      <tr><td>Example</td><td>Basic IRC botnets</td><td>Advanced modern botnets</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- 1.9 -->
+<div class="topic-section" id="u1-s9">
+  <div class="topic-title"><span class="topic-num">1.9</span> Attack Vector &amp; Key Differences</div>
+  <div class="def-box"><p><strong>Attack Vector</strong> is the method or path used by an attacker to gain unauthorized access to a system or network.</p></div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🌐</div><div class="card-title">Network Based</div><div class="card-body">Open ports, weak firewall, unpatched services.</div></div>
+    <div class="card"><div class="card-icon">📱</div><div class="card-title">Application Based</div><div class="card-body">SQL injection, Cross-Site Scripting (XSS).</div></div>
+    <div class="card"><div class="card-icon">👤</div><div class="card-title">Human Based</div><div class="card-body">Phishing, social engineering, baiting.</div></div>
+    <div class="card"><div class="card-icon">💾</div><div class="card-title">Physical Based</div><div class="card-body">USB malware, tailgating into data centers.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Key Difference Tables — Unit 1 <span class="badge">ALL EXAM TABLES</span></div>
+
+  <div class="diff-label" style="font-size:14px">① Cybercrime vs Traditional Crime</div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Cybercrime</th><th>Traditional Crime</th></tr>
+    <tr><td>Medium</td><td>Computer / Internet</td><td>Physical world</td></tr>
+    <tr><td>Location</td><td>Borderless</td><td>Limited to specific location</td></tr>
+    <tr><td>Identity</td><td>Anonymous</td><td>Criminal usually visible</td></tr>
+    <tr><td>Speed</td><td>Very fast (seconds)</td><td>Slower</td></tr>
+    <tr><td>Evidence</td><td>Digital logs</td><td>Physical evidence</td></tr>
+    <tr><td>Example</td><td>Phishing, hacking</td><td>Theft, robbery</td></tr>
+  </table></div>
+
+  <div class="diff-label" style="font-size:14px">② Vulnerability vs Threat vs Risk vs Exploit</div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Term</th><th>Meaning</th><th>Example</th></tr>
+    <tr><td>Vulnerability</td><td>Weakness in a system</td><td>Weak/default password</td></tr>
+    <tr><td>Threat</td><td>Possible source of danger</td><td>A hacker targeting your server</td></tr>
+    <tr><td>Exploit</td><td>Tool/code that takes advantage of vulnerability</td><td>Brute force script</td></tr>
+    <tr><td>Risk</td><td>Probability of damage occurring</td><td>Account getting hacked</td></tr>
+  </table></div>
+
+  <div class="diff-label" style="font-size:14px">③ Cyber Stalking vs Cyber Bullying</div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Cyber Stalking</th><th>Cyber Bullying</th></tr>
+    <tr><td>Nature</td><td>Repeated monitoring/following</td><td>Public harassment</td></tr>
+    <tr><td>Target</td><td>Specific person</td><td>Usually students</td></tr>
+    <tr><td>Intent</td><td>Obsession / control</td><td>Humiliation</td></tr>
+    <tr><td>Example</td><td>Tracking someone's messages</td><td>Posting abusive comments publicly</td></tr>
+  </table></div>
+
+  <div class="diff-label" style="font-size:14px">④ DoS vs DDoS</div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>DoS</th><th>DDoS</th></tr>
+    <tr><td>Full Form</td><td>Denial of Service</td><td>Distributed Denial of Service</td></tr>
+    <tr><td>Source</td><td>Single system</td><td>Multiple systems (botnet)</td></tr>
+    <tr><td>Strength</td><td>Moderate</td><td>Very powerful</td></tr>
+    <tr><td>Detection</td><td>Easier</td><td>Harder</td></tr>
+    <tr><td>Example</td><td>One attacker flooding server</td><td>10,000 bots attacking website</td></tr>
+  </table></div>
+
+  <div class="diff-label" style="font-size:14px">⑤ Cybercrime vs Cyber Warfare</div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Cybercrime</th><th>Cyber Warfare</th></tr>
+    <tr><td>Motive</td><td>Financial gain</td><td>Political / National security</td></tr>
+    <tr><td>Target</td><td>Individuals, companies</td><td>Government, military</td></tr>
+    <tr><td>Actor</td><td>Individual criminals</td><td>Nation-state sponsored groups</td></tr>
+    <tr><td>Example</td><td>Ransomware on hospital</td><td>Attacking power grid of a country</td></tr>
+  </table></div>
+</div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     UNIT 2
+═══════════════════════════════════════════════════ -->
+<section class="unit-section" id="unit2" data-u="2">
+
+<div class="unit-hero" data-u="2">
+  <div class="unit-number">Unit 2 · BCC301/401</div>
+  <div class="unit-title">Cybercrime: Mobile &amp; Wireless Devices</div>
+  <div class="unit-subtitle">Mobile security threats, wireless attacks, credit card fraud, authentication, organizational policies for mobile computing.</div>
+  <span class="unit-badge">4 Lectures</span>
+  <span class="unit-badge">K1 K2</span>
+</div>
+
+<!-- 2.1 -->
+<div class="topic-section" id="u2-s1">
+  <div class="topic-title"><span class="topic-num">2.1</span> Introduction to Mobile &amp; Wireless Devices</div>
+  <div class="def-box"><p><strong>Mobile devices</strong> are portable computing devices that can process, store, and transmit data wirelessly. They include smartphones, tablets, laptops, smartwatches, and IoT devices.</p></div>
+  <div class="def-box"><p><strong>Wireless communication</strong> means transmitting data without physical cables, using radio waves via technologies like Wi-Fi (802.11), Bluetooth, NFC, and 3G/4G/5G.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Why Are Mobile Devices a Security Concern?</div>
+    <div class="info-box"><p>📌 Earlier, sensitive data sat in desktop computers at fixed locations. Now it's in our <strong>pockets</strong> — banking apps, office email, cloud storage, OTPs. If a phone is compromised, the attacker can access everything.</p></div>
+    <div class="example-box"><div class="example-label">EXAMPLE</div><p>If attacker gains access to your mobile: Reads OTP → Accesses bank app → Resets passwords → Steals money. One device = full digital identity compromised.</p></div>
+  </div>
+</div>
+
+<!-- 2.2 -->
+<div class="topic-section" id="u2-s2">
+  <div class="topic-title"><span class="topic-num">2.2</span> Proliferation of Mobile Devices</div>
+  <p><strong>Proliferation</strong> means rapid increase in number. India saw explosive growth due to cheap internet (Jio), affordable smartphones, Digital India movement, WFH culture, and online education.</p>
+  <div class="keypoint-box"><div class="keypoint-icon">⚠️</div><div><p><strong>Engineering Concept — Attack Surface:</strong> More devices = More entry points. Earlier: 1 desktop = 1 attack surface. Now: Laptop + Mobile + Tablet + Smartwatch + Home router = 5+ attack surfaces. More devices → More vulnerabilities → More risk.</p></div></div>
+</div>
+
+<!-- 2.3 -->
+<div class="topic-section" id="u2-s3">
+  <div class="topic-title"><span class="topic-num">2.3</span> Trends in Mobility</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📱</div><div class="card-title">BYOD</div><div class="card-body">Bring Your Own Device — employees use personal phones for work. Personal apps can expose company data.</div></div>
+    <div class="card"><div class="card-icon">🏠</div><div class="card-title">Remote Work</div><div class="card-body">Connect to company servers from home. Risk: weak home WiFi, shared network, no firewall.</div></div>
+    <div class="card"><div class="card-icon">☁️</div><div class="card-title">Cloud-Based Apps</div><div class="card-body">Data in cloud. Risk: account takeover, API vulnerabilities, weak authentication.</div></div>
+    <div class="card"><div class="card-icon">💳</div><div class="card-title">Mobile Payments</div><div class="card-body">UPI, wallets, NFC. Risk: QR code scam, fake payment requests, screen sharing fraud.</div></div>
+  </div>
+</div>
+
+<!-- 2.4 -->
+<div class="topic-section" id="u2-s4">
+  <div class="topic-title"><span class="topic-num">2.4</span> Credit Card Frauds in Mobile Era</div>
+  <div class="diagram-box">
+    <div class="diagram-title">Technical Flow of Credit Card Fraud</div>
+    <div class="flow-steps">
+      <div class="flow-step">1. Install<br>malicious app</div><div class="flow-arrow">→</div>
+      <div class="flow-step">2. App requests<br>permissions</div><div class="flow-arrow">→</div>
+      <div class="flow-step">3. User enters<br>card details</div><div class="flow-arrow">→</div>
+      <div class="flow-step">4. Data sent to<br>attacker server</div><div class="flow-arrow">→</div>
+      <div class="flow-step">5. Attacker makes<br>transaction</div>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📱</div><div class="card-title">Phishing App</div><div class="card-body">Fake banking app collects card details.</div></div>
+    <div class="card"><div class="card-icon">💬</div><div class="card-title">Smishing</div><div class="card-body">SMS with fake payment link.</div></div>
+    <div class="card"><div class="card-icon">🦠</div><div class="card-title">Malware/Trojan</div><div class="card-body">Records keystrokes while typing card details.</div></div>
+    <div class="card"><div class="card-icon">📶</div><div class="card-title">Public WiFi MITM</div><div class="card-body">Man-in-the-middle attack on unsecured WiFi.</div></div>
+    <div class="card"><div class="card-icon">📞</div><div class="card-title">SIM Swap</div><div class="card-body">Attacker gets duplicate SIM, receives OTPs.</div></div>
+  </div>
+  <div class="keypoint-box"><div class="keypoint-icon">🛡</div><div><p><strong>Prevention:</strong> Install apps only from Play Store/App Store. Enable transaction alerts. Disable screen sharing. Never share OTP. Use virtual cards for online shopping.</p></div></div>
+</div>
+
+<!-- 2.5 -->
+<div class="topic-section" id="u2-s5">
+  <div class="topic-title"><span class="topic-num">2.5</span> Security Challenges of Mobile Devices</div>
+  <div class="accordion">
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">📵 Physical Loss or Theft <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Mobile is portable and easily lost. Risk: Data exposure, banking app misuse. Solution: Device encryption, remote wipe capability, biometric lock.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">🦠 Malware Infection <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>APK files from unknown sources carry spyware, trojans, ransomware. Never install apps from untrusted sources.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">🔑 Weak Authentication <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Using PIN 1234 or simple patterns is dangerous. Solution: Strong password + Biometric + Multi-Factor Authentication (MFA).</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">📶 Unsecured Wireless Communication <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Public WiFi is a major attack vector. Attacks: Packet sniffing (capturing data), Evil Twin attack (fake WiFi with same name). Always use VPN on public networks.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">📤 Data Leakage via Apps <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Apps that request unnecessary permissions (contacts, camera, microphone, location, storage) can leak sensitive data if compromised. Review app permissions regularly.</p></div></div>
+  </div>
+</div>
+
+<!-- 2.6 -->
+<div class="topic-section" id="u2-s6">
+  <div class="topic-title"><span class="topic-num">2.6</span> Authentication Service Security</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🧠</div><div class="card-title">Something You Know</div><div class="card-body">Password, PIN, security questions.</div></div>
+    <div class="card"><div class="card-icon">📦</div><div class="card-title">Something You Have</div><div class="card-body">OTP, hardware token, SIM card.</div></div>
+    <div class="card"><div class="card-icon">👁</div><div class="card-title">Something You Are</div><div class="card-body">Fingerprint, Face ID, iris scan (biometrics).</div></div>
+  </div>
+  <div class="def-box"><p><strong>Multi-Factor Authentication (MFA)</strong> uses two or more authentication factors together. Example: UPI PIN (something you know) + OTP (something you have).</p></div>
+  <div class="diff-label">📊 Single Factor vs Multi-Factor Authentication <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Single-Factor Auth</th><th>Multi-Factor Auth (MFA)</th></tr>
+    <tr><td>Security Level</td><td>Low</td><td>High</td></tr>
+    <tr><td>Factors Used</td><td>One (password only)</td><td>Two or more</td></tr>
+    <tr><td>Risk</td><td>Easy to hack</td><td>Harder to compromise</td></tr>
+    <tr><td>Example</td><td>Only password for login</td><td>Password + OTP</td></tr>
+    <tr><td>Usage</td><td>Basic login systems</td><td>Banking apps, corporate systems</td></tr>
+  </table></div>
+</div>
+
+<!-- 2.7 -->
+<div class="topic-section" id="u2-s7">
+  <div class="topic-title"><span class="topic-num">2.7</span> Attacks on Mobile Phones</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🦠</div><div class="card-title">Malware Attacks</div><div class="card-body">Trojans, spyware, ransomware, adware via fake cracked apps.</div></div>
+    <div class="card"><div class="card-icon">📡</div><div class="card-title">Bluetooth Attacks</div><div class="card-body">Bluejacking (spam messages), Bluesnarfing (data theft without permission).</div></div>
+    <div class="card"><div class="card-icon">📶</div><div class="card-title">WiFi Attacks</div><div class="card-body">Man-in-the-Middle, Rogue Access Point, Packet Sniffing.</div></div>
+    <div class="card"><div class="card-icon">📞</div><div class="card-title">SIM Swap Attack</div><div class="card-body">Attacker tricks telecom to issue duplicate SIM. Receives all OTPs. Empties bank account.</div></div>
+    <div class="card"><div class="card-icon">🔒</div><div class="card-title">Mobile Ransomware</div><div class="card-body">Encrypts all phone data and demands payment for decryption key.</div></div>
+  </div>
+
+  <div class="diff-label">📊 WiFi vs Bluetooth (Security View) <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>WiFi</th><th>Bluetooth</th></tr>
+    <tr><td>Range</td><td>Long (50–100 meters)</td><td>Short (~10 meters)</td></tr>
+    <tr><td>Usage</td><td>Internet access</td><td>Device-to-device</td></tr>
+    <tr><td>Common Attack</td><td>Evil Twin, MITM</td><td>Bluesnarfing</td></tr>
+    <tr><td>Encryption</td><td>WPA2/WPA3</td><td>Pairing-based encryption</td></tr>
+    <tr><td>Risk Level</td><td>High (especially public)</td><td>Medium</td></tr>
+  </table></div>
+</div>
+
+<!-- 2.8 -->
+<div class="topic-section" id="u2-s8">
+  <div class="topic-title"><span class="topic-num">2.8</span> Organizational Measures &amp; Policies</div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Mobile Device Management (MDM)</div>
+    <div class="def-box"><p><strong>MDM</strong> is software used by organizations to monitor devices, enforce security policies, and remotely wipe corporate data from devices.</p></div>
+    <ul class="notes-list">
+      <li>Monitor all enrolled devices centrally</li>
+      <li>Enforce password and encryption policies</li>
+      <li>Remote wipe if device is lost or stolen</li>
+      <li>Block installation of unauthorized apps</li>
+    </ul>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Containerization</div>
+    <p>Separates work data and personal data into two isolated environments on the same device. Work apps cannot access personal apps and vice versa.</p>
+  </div>
+
+  <div class="diff-label">📊 BYOD vs Corporate Owned Device <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>BYOD</th><th>Corporate Owned</th></tr>
+    <tr><td>Ownership</td><td>Employee</td><td>Organization</td></tr>
+    <tr><td>Control</td><td>Limited</td><td>Full administrative control</td></tr>
+    <tr><td>Security Risk</td><td>High</td><td>Lower</td></tr>
+    <tr><td>Monitoring</td><td>Restricted (privacy issues)</td><td>Fully allowed</td></tr>
+    <tr><td>Data Separation</td><td>Difficult to enforce</td><td>Easy to enforce</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 MDM vs Containerization <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>MDM</th><th>Containerization</th></tr>
+    <tr><td>Control Scope</td><td>Full device</td><td>Only work data</td></tr>
+    <tr><td>User Privacy</td><td>Less privacy</td><td>More privacy maintained</td></tr>
+    <tr><td>Data Separation</td><td>Entire device managed</td><td>Work and personal separated</td></tr>
+    <tr><td>Use Case</td><td>Corporate-owned devices</td><td>BYOD environments</td></tr>
+    <tr><td>Example</td><td>Company remotely wiping phone</td><td>Work profile in Android</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Remote Wipe vs Factory Reset <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Remote Wipe</th><th>Factory Reset</th></tr>
+    <tr><td>Triggered By</td><td>Organization/IT admin</td><td>User manually</td></tr>
+    <tr><td>Purpose</td><td>Remove company data</td><td>Reset entire device</td></tr>
+    <tr><td>Control</td><td>IT department</td><td>User</td></tr>
+    <tr><td>Use Case</td><td>Lost corporate device</td><td>Selling old phone</td></tr>
+  </table></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Organizational Security Policies in Mobile Era</div>
+    <ul class="notes-list">
+      <li><strong>BYOD Policy:</strong> Defines allowed apps, security requirements, and monitoring rights</li>
+      <li><strong>Acceptable Use Policy:</strong> What employees can and cannot do on devices</li>
+      <li><strong>Incident Response Policy:</strong> Report → Isolate device → Remote wipe → Investigate</li>
+      <li><strong>Data Classification Policy:</strong> Public / Internal / Confidential / Restricted</li>
+    </ul>
+  </div>
+</div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     UNIT 3
+═══════════════════════════════════════════════════ -->
+<section class="unit-section" id="unit3" data-u="3">
+
+<div class="unit-hero" data-u="3">
+  <div class="unit-number">Unit 3 · BCC301/401</div>
+  <div class="unit-title">Tools &amp; Methods Used in Cybercrime</div>
+  <div class="unit-subtitle">Proxy servers, phishing, password cracking, malware, steganography, DoS/DDoS, SQL injection, buffer overflow, wireless attacks, and identity theft.</div>
+  <span class="unit-badge">4 Lectures</span>
+  <span class="unit-badge">K2</span>
+</div>
+
+<!-- 3.1 -->
+<div class="topic-section" id="u3-s1">
+  <div class="topic-title"><span class="topic-num">3.1</span> Proxy Servers &amp; Anonymizers</div>
+  <div class="def-box"><p><strong>Proxy Server</strong> is an intermediate server between user and internet. Website sees the proxy IP, not the real user IP. Used by attackers to hide identity, avoid tracing, and bypass restrictions.</p></div>
+  <div class="diagram-box">
+    <div class="diagram-title">Normal vs Proxy Connection</div>
+    <div style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:8px">NORMAL CONNECTION</div>
+        <div class="flow-steps"><div class="flow-step">👤 User</div><div class="flow-arrow">→</div><div class="flow-step">🌐 Website<br><small style="font-size:9px;color:var(--text3)">sees user IP</small></div></div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--text3);margin-bottom:8px">PROXY CONNECTION</div>
+        <div class="flow-steps"><div class="flow-step">👤 User</div><div class="flow-arrow">→</div><div class="flow-step" style="border-color:var(--u3)">🖥 Proxy</div><div class="flow-arrow">→</div><div class="flow-step">🌐 Website<br><small style="font-size:9px;color:var(--text3)">sees proxy IP</small></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="def-box"><p><strong>Anonymizers</strong> completely hide identity. Examples: VPN (Virtual Private Network) and TOR (The Onion Router) — routes traffic through multiple encrypted layers.</p></div>
+</div>
+
+<!-- 3.2 -->
+<div class="topic-section" id="u3-s2">
+  <div class="topic-title"><span class="topic-num">3.2</span> Phishing &amp; Identity Theft</div>
+  <div class="def-box"><p><strong>Phishing</strong> is a social engineering attack where an attacker tricks a user into revealing passwords, OTPs, or credit card details by impersonating a trusted entity.</p></div>
+  <div class="diagram-box">
+    <div class="diagram-title">How Phishing Works</div>
+    <div class="flow-steps">
+      <div class="flow-step">1. Fake email<br>sent to user</div><div class="flow-arrow">→</div>
+      <div class="flow-step">2. User clicks<br>malicious link</div><div class="flow-arrow">→</div>
+      <div class="flow-step">3. Fake login<br>page appears</div><div class="flow-arrow">→</div>
+      <div class="flow-step">4. User enters<br>credentials</div><div class="flow-arrow">→</div>
+      <div class="flow-step">5. Data sent<br>to attacker</div>
+    </div>
+  </div>
+  <div class="info-box"><p>📌 Attackers use look-alike domain names. Example: <code style="color:var(--accent3)">realbank.com</code> vs <code style="color:var(--u5)">rea1bank.com</code> (1 instead of l). Called <strong>typosquatting</strong>.</p></div>
+
+  <div class="def-box"><p><strong>Identity Theft (ID Theft)</strong> is stealing personal information (Aadhaar, PAN, bank details) to commit fraud — taking loans, opening accounts, or making purchases in someone else's name.</p></div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">💳</div><div class="card-title">Financial Identity Theft</div><div class="card-body">Using stolen identity for financial transactions.</div></div>
+    <div class="card"><div class="card-icon">🏥</div><div class="card-title">Medical Identity Theft</div><div class="card-body">Using stolen identity to claim medical benefits.</div></div>
+    <div class="card"><div class="card-icon">⚖️</div><div class="card-title">Criminal Identity Theft</div><div class="card-body">Giving victim's identity when arrested.</div></div>
+    <div class="card"><div class="card-icon">🔀</div><div class="card-title">Synthetic Identity Theft</div><div class="card-body">Combining real and fake info to create new identity.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Phishing vs Identity Theft <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Phishing</th><th>Identity Theft</th></tr>
+    <tr><td>Nature</td><td>Method of attack</td><td>Result/outcome of attack</td></tr>
+    <tr><td>Purpose</td><td>Collect credentials</td><td>Use stolen identity for fraud</td></tr>
+    <tr><td>Medium</td><td>Email/SMS/Fake website</td><td>Financial/legal systems</td></tr>
+    <tr><td>Example</td><td>Fake bank login page</td><td>Fake loan using stolen Aadhaar</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.3 -->
+<div class="topic-section" id="u3-s3">
+  <div class="topic-title"><span class="topic-num">3.3</span> Password Cracking</div>
+  <p>Password cracking is an attempt to recover or guess passwords by various techniques.</p>
+  <div class="accordion">
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">💪 Brute Force Attack <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Tries every possible combination systematically (aaa, aab, aac... zzz). Guaranteed to succeed eventually but very slow for complex passwords.</p><div class="example-box"><div class="example-label">EXAMPLE</div><p>Tool tries: 000000, 000001, 000002 … 999999 until password found.</p></div></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">📖 Dictionary Attack <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Tries common passwords and words from a dictionary file. Faster than brute force but not guaranteed.</p><div class="example-box"><div class="example-label">EXAMPLE</div><p>Tries: password, 123456, qwerty, admin, welcome123...</p></div></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">🌈 Rainbow Table Attack <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Uses precomputed hash values for fast lookup. If system stores passwords as hashes without salt, attacker can match instantly. <strong>Prevention:</strong> Add salt (random data) before hashing.</p></div></div>
+    <div class="accordion-item"><div class="accordion-header" onclick="toggleAcc(this)">🔄 Credential Stuffing <span class="accordion-chevron">▼</span></div><div class="accordion-body"><p>Uses leaked username-password pairs from one breach on other websites. Works because users reuse passwords. <strong>Prevention:</strong> Unique password for every site.</p></div></div>
+  </div>
+
+  <div class="diff-label">📊 Brute Force vs Dictionary Attack <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Brute Force</th><th>Dictionary Attack</th></tr>
+    <tr><td>Method</td><td>Try all combinations</td><td>Try common passwords</td></tr>
+    <tr><td>Speed</td><td>Very slow</td><td>Faster</td></tr>
+    <tr><td>Guaranteed?</td><td>Yes (eventually)</td><td>Not guaranteed</td></tr>
+    <tr><td>Example</td><td>Try aaaa to zzzz</td><td>Try 123456, password</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.4 -->
+<div class="topic-section" id="u3-s4">
+  <div class="topic-title"><span class="topic-num">3.4</span> Keyloggers &amp; Spyware</div>
+  <div class="def-box"><p><strong>Keylogger</strong> is software (or hardware) that secretly records every keystroke made on a device, capturing passwords, messages, and card details without user knowledge.</p></div>
+  <div class="info-box"><p>📌 Types: (1) Software keylogger — runs in background as a process. (2) Hardware keylogger — USB device plugged between keyboard and computer.</p></div>
+  <div class="def-box"><p><strong>Spyware</strong> secretly monitors user activity — collecting browsing history, taking screenshots, recording microphone audio — and sends it to attacker.</p></div>
+
+  <div class="diff-label">📊 Keylogger vs Spyware <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Keylogger</th><th>Spyware</th></tr>
+    <tr><td>Function</td><td>Records keystrokes only</td><td>Monitors all activity</td></tr>
+    <tr><td>Data Captured</td><td>Passwords, typed text</td><td>Browsing, screenshots, audio</td></tr>
+    <tr><td>Scope</td><td>Limited (keyboard input)</td><td>Broader surveillance</td></tr>
+    <tr><td>Example</td><td>Keyboard recording software</td><td>Commercial tracking software</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.5 -->
+<div class="topic-section" id="u3-s5">
+  <div class="topic-title"><span class="topic-num">3.5</span> Virus, Worms, Trojans &amp; Backdoors</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🦠</div><div class="card-title">Virus</div><div class="card-body">Attaches to a legitimate file. Spreads only when that file is executed. Needs human action. Example: Infected .exe file.</div></div>
+    <div class="card"><div class="card-icon">🐛</div><div class="card-title">Worm</div><div class="card-body">Self-replicating. Spreads automatically through network. No human action needed. Example: WannaCry worm.</div></div>
+    <div class="card"><div class="card-icon">🐴</div><div class="card-title">Trojan Horse</div><div class="card-body">Malicious software disguised as legitimate. Example: Fake cracked game that installs malware.</div></div>
+    <div class="card"><div class="card-icon">🚪</div><div class="card-title">Backdoor</div><div class="card-body">Hidden access method bypassing authentication. Used for remote control or data theft.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Virus vs Worm <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Virus</th><th>Worm</th></tr>
+    <tr><td>Dependency</td><td>Needs a host file</td><td>Independent program</td></tr>
+    <tr><td>Spread Method</td><td>Through infected file execution</td><td>Through network automatically</td></tr>
+    <tr><td>Human Action</td><td>Required</td><td>Not required</td></tr>
+    <tr><td>Speed of Spread</td><td>Slow</td><td>Fast</td></tr>
+    <tr><td>Example</td><td>Infected .exe file</td><td>Network worm</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Trojan Horse vs Backdoor <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Trojan Horse</th><th>Backdoor</th></tr>
+    <tr><td>Definition</td><td>Malware disguised as real software</td><td>Hidden access method</td></tr>
+    <tr><td>Purpose</td><td>Install malicious code</td><td>Bypass authentication</td></tr>
+    <tr><td>Visibility</td><td>Visible as an app/software</td><td>Hidden entry point</td></tr>
+    <tr><td>Usage</td><td>To install malware</td><td>Remote control access</td></tr>
+    <tr><td>Example</td><td>Fake game download</td><td>Hidden admin login</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.6 -->
+<div class="topic-section" id="u3-s6">
+  <div class="topic-title"><span class="topic-num">3.6</span> Steganography</div>
+  <div class="def-box"><p><strong>Steganography</strong> is the technique of hiding secret data inside ordinary, non-secret files (images, audio, video) so that the existence of the hidden message is not apparent.</p></div>
+  <div class="keypoint-box"><div class="keypoint-icon">🔑</div><div><p><strong>Key Difference:</strong> Encryption hides the <em>content</em> (message exists but is unreadable). Steganography hides the <em>existence</em> (message is invisible, appears to not exist at all).</p></div></div>
+
+  <div class="diff-label">📊 Encryption vs Steganography <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Encryption</th><th>Steganography</th></tr>
+    <tr><td>Purpose</td><td>Hide content of message</td><td>Hide existence of message</td></tr>
+    <tr><td>Visibility</td><td>Message visible but unreadable</td><td>Message completely invisible</td></tr>
+    <tr><td>Technique</td><td>Mathematical algorithms (AES, RSA)</td><td>Embedding in image/audio/video</td></tr>
+    <tr><td>Example</td><td>Encrypted file showing garbled text</td><td>Secret message hidden in JPEG image</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.7 -->
+<div class="topic-section" id="u3-s7">
+  <div class="topic-title"><span class="topic-num">3.7</span> DoS &amp; DDoS Attacks</div>
+  <div class="def-box"><p><strong>DoS (Denial of Service)</strong> — A single attacker floods a server with requests, consuming all resources, causing it to crash and become unavailable to legitimate users.</p></div>
+  <div class="def-box"><p><strong>DDoS (Distributed Denial of Service)</strong> — Thousands of infected systems (botnet) simultaneously flood a target. Extremely powerful and hard to stop.</p></div>
+  <div class="example-box"><div class="example-label">EXAMPLE</div><p>10,000 bots each sending 1000 requests/second to one website = 10 million requests/second → server crashes → real users cannot access site.</p></div>
+</div>
+
+<!-- 3.8 -->
+<div class="topic-section" id="u3-s8">
+  <div class="topic-title"><span class="topic-num">3.8</span> SQL Injection</div>
+  <div class="def-box"><p><strong>SQL Injection</strong> is an attack on a database via web application input fields. Attacker inserts malicious SQL code to manipulate database queries.</p></div>
+  <p>If a developer writes vulnerable code:</p>
+  <div class="code-block">SELECT * FROM users WHERE username = '"+ input +"'</div>
+  <p>If attacker types: <span class="code-inline">' OR '1'='1</span></p>
+  <p>Query becomes:</p>
+  <div class="code-block">SELECT * FROM users WHERE username = '' OR '1'='1'
+-- This is ALWAYS TRUE → bypasses login!</div>
+  <div class="keypoint-box"><div class="keypoint-icon">🛡</div><div><p><strong>Prevention:</strong> Use Prepared Statements and Parameterized Queries. Never concatenate user input directly into SQL strings. Validate and sanitize all inputs.</p></div></div>
+</div>
+
+<!-- 3.9 -->
+<div class="topic-section" id="u3-s9">
+  <div class="topic-title"><span class="topic-num">3.9</span> Buffer Overflow</div>
+  <div class="def-box"><p><strong>Buffer Overflow</strong> occurs when a program writes more data into a memory buffer than it was allocated, overwriting adjacent memory — potentially causing crash or execution of malicious code.</p></div>
+  <div class="code-block">// Vulnerable C code
+char buffer[10];          // Allocated 10 bytes
+gets(buffer);             // User inputs 20 chars → OVERFLOW!
+// Overwrites adjacent memory → attacker injects shellcode</div>
+  <div class="keypoint-box"><div class="keypoint-icon">🛡</div><div><p><strong>Prevention:</strong> Always check bounds before writing to buffers. Use safe languages (Java, Python). Enable Stack Protection (ASLR, Stack Canaries).</p></div></div>
+
+  <div class="diff-label">📊 SQL Injection vs Buffer Overflow <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>SQL Injection</th><th>Buffer Overflow</th></tr>
+    <tr><td>Target</td><td>Database</td><td>Memory (RAM)</td></tr>
+    <tr><td>Root Cause</td><td>Improper input validation</td><td>No bounds checking on memory</td></tr>
+    <tr><td>Language</td><td>Web apps (PHP, SQL)</td><td>Low-level languages (C/C++)</td></tr>
+    <tr><td>Result</td><td>Data theft / login bypass</td><td>Execute malicious code / crash</td></tr>
+    <tr><td>Prevention</td><td>Prepared statements</td><td>Bounds checking, safe coding</td></tr>
+  </table></div>
+</div>
+
+<!-- 3.10 -->
+<div class="topic-section" id="u3-s10">
+  <div class="topic-title"><span class="topic-num">3.10</span> Attacks on Wireless Networks</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👯</div><div class="card-title">Evil Twin Attack</div><div class="card-body">Fake WiFi with same name as legitimate network. User connects → data stolen by attacker.</div></div>
+    <div class="card"><div class="card-icon">👁</div><div class="card-title">Packet Sniffing</div><div class="card-body">Attacker captures and reads network traffic. Works on unencrypted HTTP traffic.</div></div>
+    <div class="card"><div class="card-icon">🔓</div><div class="card-title">WPA Cracking</div><div class="card-body">Weak WiFi passwords cracked using tools like Aircrack-ng.</div></div>
+    <div class="card"><div class="card-icon">📡</div><div class="card-title">Rogue Access Point</div><div class="card-body">Unauthorized WiFi inside a company network. Bypasses firewall, gives attacker internal access.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Wireless Sniffing vs Evil Twin Attack <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Sniffing</th><th>Evil Twin</th></tr>
+    <tr><td>Method</td><td>Passively capture network packets</td><td>Create fake WiFi hotspot</td></tr>
+    <tr><td>Goal</td><td>Monitor / read traffic</td><td>Steal credentials</td></tr>
+    <tr><td>User Interaction</td><td>None needed</td><td>User must connect to fake AP</td></tr>
+    <tr><td>Risk</td><td>Data leakage</td><td>Full account compromise</td></tr>
+  </table></div>
+</div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     UNIT 4
+═══════════════════════════════════════════════════ -->
+<section class="unit-section" id="unit4" data-u="4">
+
+<div class="unit-hero" data-u="4">
+  <div class="unit-number">Unit 4 · BCC301/401</div>
+  <div class="unit-title">Understanding Computer Forensics</div>
+  <div class="unit-subtitle">Digital forensics science, evidence types, forensic lifecycle, chain of custody, network forensics, email analysis, and social media evidence.</div>
+  <span class="unit-badge">4 Lectures</span>
+  <span class="unit-badge">K1 K2</span>
+</div>
+
+<!-- 4.1 -->
+<div class="topic-section" id="u4-s1">
+  <div class="topic-title"><span class="topic-num">4.1</span> Introduction to Computer Forensics</div>
+  <div class="def-box"><p><strong>Computer Forensics</strong> is the process of <em>identifying, collecting, preserving, analyzing, and presenting</em> digital evidence in a legally admissible manner to investigate cybercrimes.</p></div>
+  <div class="def-box"><p><strong>Digital Evidence</strong> is any information stored or transmitted in digital form that can be used in a court of law. Examples: Emails, chat messages, browser history, server logs, CCTV recordings, hard disk data.</p></div>
+  <div class="info-box"><p>📌 <strong>Engineering Analogy:</strong> Digital forensics is like debugging a crashed program — you reverse-engineer the crime by analyzing logs, files, and digital traces to understand what happened, when, and who did it.</p></div>
+</div>
+
+<!-- 4.2 -->
+<div class="topic-section" id="u4-s2">
+  <div class="topic-title"><span class="topic-num">4.2</span> Digital Forensics Science &amp; Branches</div>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">💻</div><div class="card-title">Computer Forensics</div><div class="card-body">Analyze PCs, laptops, hard disks. Used in desktop cybercrime cases.</div></div>
+    <div class="card"><div class="card-icon">🌐</div><div class="card-title">Network Forensics</div><div class="card-body">Analyze network traffic logs, packet captures. Trace attack path.</div></div>
+    <div class="card"><div class="card-icon">📱</div><div class="card-title">Mobile Forensics</div><div class="card-body">Analyze smartphones, tablets — call logs, messages, apps.</div></div>
+    <div class="card"><div class="card-icon">☁️</div><div class="card-title">Cloud Forensics</div><div class="card-body">Investigate crimes involving cloud storage. Jurisdiction challenges.</div></div>
+    <div class="card"><div class="card-icon">🗄</div><div class="card-title">Database Forensics</div><div class="card-body">Analyze database access logs, detect unauthorized modifications.</div></div>
+  </div>
+  <div class="example-box"><div class="example-label">EXAMPLE</div><p>Ransomware attack investigation: Computer forensics (infected system) + Network forensics (traffic logs) + Mobile forensics (attacker communication) + Cloud forensics (cloud backup).</p></div>
+</div>
+
+<!-- 4.3 -->
+<div class="topic-section" id="u4-s3">
+  <div class="topic-title"><span class="topic-num">4.3</span> Types of Digital Evidence</div>
+
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--u5)"><div class="card-icon">⚡</div><div class="card-title" style="color:var(--u5)">Volatile Data</div><div class="card-body">Temporary. Disappears when power is OFF. Examples: RAM data, running processes, network connections, logged-in users. <strong>Must be collected FIRST!</strong></div></div>
+    <div class="card" style="border-color:var(--u3)"><div class="card-icon">💾</div><div class="card-title" style="color:var(--u3)">Non-Volatile Data</div><div class="card-body">Permanent. Remains after shutdown. Examples: Hard disk files, SSD data, USB drives, email archives. Can be collected later.</div></div>
+  </div>
+
+  <div class="keypoint-box"><div class="keypoint-icon">⚠️</div><div><p><strong>Critical Rule:</strong> Always collect volatile data FIRST before shutting down the machine. Once power is off, RAM data (open files, passwords, running processes) is permanently lost.</p></div></div>
+
+  <p><strong>Properties of good digital evidence:</strong> It must maintain integrity (unchanged), be legally admissible, be properly documented, and be authentic.</p>
+  <p>Integrity maintained using: Hash functions (SHA-256), Write blockers, Disk imaging.</p>
+
+  <div class="diff-label">📊 Volatile vs Non-Volatile Data <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Volatile Data</th><th>Non-Volatile Data</th></tr>
+    <tr><td>Nature</td><td>Temporary</td><td>Permanent</td></tr>
+    <tr><td>Storage</td><td>RAM</td><td>Hard disk, SSD</td></tr>
+    <tr><td>Data Loss</td><td>Lost when power is off</td><td>Remains after shutdown</td></tr>
+    <tr><td>Examples</td><td>Running processes, RAM contents</td><td>Files, documents, logs</td></tr>
+    <tr><td>Forensic Priority</td><td>Must collect FIRST</td><td>Can collect later</td></tr>
+  </table></div>
+</div>
+
+<!-- 4.4 -->
+<div class="topic-section" id="u4-s4">
+  <div class="topic-title"><span class="topic-num">4.4</span> Digital Forensics Lifecycle</div>
+  <p>The forensic lifecycle is a systematic process to investigate cybercrime. Every step must be documented.</p>
+
+  <div class="diagram-box">
+    <div class="diagram-title">Digital Forensics Lifecycle — 6 Steps</div>
+    <div class="lifecycle-steps">
+      <div class="lc-step">
+        <div class="lc-num" style="background:#00d4ff22;color:var(--u4);border:2px solid var(--u4)">1</div>
+        <div class="lc-text"><strong>Identification</strong><br>Recognize that a crime has occurred. Identify devices and systems involved.</div>
+      </div>
+      <div class="lc-connector"></div>
+      <div class="lc-step">
+        <div class="lc-num" style="background:#f59e0b22;color:var(--u4);border:2px solid var(--u4)">2</div>
+        <div class="lc-text"><strong>Preservation</strong><br>Secure evidence. Do NOT modify original system. Use write blockers &amp; disk imaging.</div>
+      </div>
+      <div class="lc-connector"></div>
+      <div class="lc-step">
+        <div class="lc-num" style="background:#f59e0b22;color:var(--u4);border:2px solid var(--u4)">3</div>
+        <div class="lc-text"><strong>Collection</strong><br>Copy data safely using forensic imaging tools. Work on copy, not original.</div>
+      </div>
+      <div class="lc-connector"></div>
+      <div class="lc-step">
+        <div class="lc-num" style="background:#f59e0b22;color:var(--u4);border:2px solid var(--u4)">4</div>
+        <div class="lc-text"><strong>Examination</strong><br>Extract relevant data. Recover deleted files. Filter useful information.</div>
+      </div>
+      <div class="lc-connector"></div>
+      <div class="lc-step">
+        <div class="lc-num" style="background:#f59e0b22;color:var(--u4);border:2px solid var(--u4)">5</div>
+        <div class="lc-text"><strong>Analysis</strong><br>Interpret extracted evidence. Build timeline. Identify suspect behavior.</div>
+      </div>
+      <div class="lc-connector"></div>
+      <div class="lc-step">
+        <div class="lc-num" style="background:#f59e0b22;color:var(--u4);border:2px solid var(--u4)">6</div>
+        <div class="lc-text"><strong>Presentation</strong><br>Submit formal report to court. Expert witness testimony if needed.</div>
+      </div>
+    </div>
+  </div>
+  <div class="keypoint-box"><div class="keypoint-icon">⭐</div><div><p><strong>Golden Rule of Forensics:</strong> NEVER work on original evidence. Always create a forensic image (bit-by-bit copy) and work on that copy.</p></div></div>
+</div>
+
+<!-- 4.5 -->
+<div class="topic-section" id="u4-s5">
+  <div class="topic-title"><span class="topic-num">4.5</span> Chain of Custody</div>
+  <div class="def-box"><p><strong>Chain of Custody</strong> is a documented record that shows who collected the evidence, when, where, and every person who handled it thereafter. It ensures evidence authenticity and admissibility in court.</p></div>
+  <p><strong>Why important?</strong> If evidence is tampered or chain is broken → case can be dismissed. Every evidence transfer must be documented with date, time, and signatures.</p>
+  <div class="example-box"><div class="example-label">EXAMPLE</div><p>Police seize a laptop: Date/time recorded → Officer's name recorded → Sealed with evidence bag → Storage location logged → Each transfer signed. This chain ensures the laptop presented in court is the same one seized from the crime scene.</p></div>
+
+  <div class="diff-label">📊 Chain of Custody vs Digital Evidence <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Chain of Custody</th><th>Digital Evidence</th></tr>
+    <tr><td>Meaning</td><td>Record of evidence handling</td><td>Actual digital data collected</td></tr>
+    <tr><td>Purpose</td><td>Maintain authenticity &amp; admissibility</td><td>Prove the crime occurred</td></tr>
+    <tr><td>Legal Importance</td><td>Ensures court can trust the evidence</td><td>Used to convict or acquit</td></tr>
+    <tr><td>Example</td><td>Evidence log sheet with signatures</td><td>Hard disk image file</td></tr>
+  </table></div>
+</div>
+
+<!-- 4.6 -->
+<div class="topic-section" id="u4-s6">
+  <div class="topic-title"><span class="topic-num">4.6</span> Email Forensics</div>
+  <p>Email is one of the most common forms of digital evidence in cybercrime cases (phishing, scams, threats).</p>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📧</div><div class="card-title">Email Header</div><div class="card-body">Contains source IP, routing path, mail server details, timestamp. Used to trace origin. Usually hidden from normal view.</div></div>
+    <div class="card"><div class="card-icon">📝</div><div class="card-title">Email Body</div><div class="card-body">The actual message content. Analyzed for threats, keywords, or malicious content.</div></div>
+    <div class="card"><div class="card-icon">📎</div><div class="card-title">Attachments</div><div class="card-body">Can contain malware. Hash values compared against malware databases.</div></div>
+    <div class="card"><div class="card-icon">🔍</div><div class="card-title">Metadata</div><div class="card-body">Timestamps, sender/receiver details, read receipts — prove when and who.</div></div>
+  </div>
+  <div class="example-box"><div class="example-label">EXAMPLE</div><p>If phishing email received, forensics examines header to find: Was the "From" address spoofed? What is the real server IP? Which country did it originate from?</p></div>
+</div>
+
+<!-- 4.7 -->
+<div class="topic-section" id="u4-s7">
+  <div class="topic-title"><span class="topic-num">4.7</span> Network Forensics</div>
+  <div class="def-box"><p><strong>Network Forensics</strong> investigates network traffic and logs to detect intrusions, trace attacker IP addresses, and analyze attack patterns.</p></div>
+  <p>What is analyzed: Packet captures (PCAP files), Firewall logs, Server access logs, IDS/IPS alerts, DNS query logs.</p>
+
+  <div class="diff-label">📊 Network Forensics vs Computer Forensics <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Network Forensics</th><th>Computer Forensics</th></tr>
+    <tr><td>Focus</td><td>Network traffic &amp; logs</td><td>Computer system &amp; files</td></tr>
+    <tr><td>Data Source</td><td>Packet captures, firewall logs</td><td>Hard disk, RAM</td></tr>
+    <tr><td>Purpose</td><td>Trace attack path, detect intrusion</td><td>Recover files, identify suspect</td></tr>
+    <tr><td>Tools</td><td>Wireshark, tcpdump</td><td>Autopsy, EnCase, FTK</td></tr>
+    <tr><td>Example</td><td>Analyze DDoS attack traffic</td><td>Analyze infected PC hard drive</td></tr>
+  </table></div>
+</div>
+
+<!-- 4.8 -->
+<div class="topic-section" id="u4-s8">
+  <div class="topic-title"><span class="topic-num">4.8</span> Social Media Forensics &amp; Challenges</div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Social Media as Digital Evidence</div>
+    <p>Social media is a major source of evidence in cybercrime cases. What can be collected: Chat history, photos, location data, IP logs, friend connections, timestamps.</p>
+    <p>Used in: Cyberstalking cases, harassment cases, identity theft investigations, terrorist planning cases.</p>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Challenges in Computer Forensics</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🔐</div><div class="card-title">Encryption</div><div class="card-body">Encrypted data is unreadable without the key. Full disk encryption like BitLocker is a major challenge.</div></div>
+      <div class="card"><div class="card-icon">☁️</div><div class="card-title">Cloud Storage</div><div class="card-body">Data stored across multiple countries. Legal jurisdiction and international cooperation issues.</div></div>
+      <div class="card"><div class="card-icon">📊</div><div class="card-title">Large Data Volume</div><div class="card-body">Terabytes of logs. Time-consuming and resource-intensive analysis.</div></div>
+      <div class="card"><div class="card-icon">🕵️</div><div class="card-title">Anti-Forensics</div><div class="card-body">Attackers delete logs, use VPN, proxy chains, encrypt drives to hide evidence.</div></div>
+      <div class="card"><div class="card-icon">⚖️</div><div class="card-title">Legal Issues</div><div class="card-body">Privacy laws, cross-border investigation treaties, evidence admissibility challenges.</div></div>
+    </div>
+  </div>
+
+  <div class="diff-label">📊 Forensics vs Incident Response <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Computer Forensics</th><th>Incident Response</th></tr>
+    <tr><td>Goal</td><td>Collect evidence for court</td><td>Stop attack and minimize damage</td></tr>
+    <tr><td>Timing</td><td>After attack (investigation)</td><td>During attack (response)</td></tr>
+    <tr><td>Focus</td><td>Legal proof, accountability</td><td>Damage control, restoration</td></tr>
+    <tr><td>Example</td><td>Analyze attack logs for prosecution</td><td>Disconnect compromised server immediately</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Write Blocker vs Disk Imaging <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Write Blocker</th><th>Disk Imaging</th></tr>
+    <tr><td>Function</td><td>Prevents data from being modified during access</td><td>Creates exact bit-by-bit copy of drive</td></tr>
+    <tr><td>Usage Timing</td><td>During evidence access</td><td>During evidence collection</td></tr>
+    <tr><td>Purpose</td><td>Protect original evidence integrity</td><td>Preserve original, work on copy</td></tr>
+    <tr><td>Example</td><td>USB write blocker device</td><td>dd command or FTK Imager</td></tr>
+  </table></div>
+</div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     UNIT 5
+═══════════════════════════════════════════════════ -->
+<section class="unit-section" id="unit5" data-u="5">
+
+<div class="unit-hero" data-u="5">
+  <div class="unit-number">Unit 5 · BCC301/401</div>
+  <div class="unit-title">Security Policies &amp; Cyber Laws</div>
+  <div class="unit-subtitle">Information security policy, IT Act 2000, DPDP Act 2023, intellectual property rights — patents, copyright, trademarks in the cyber world.</div>
+  <span class="unit-badge">4 Lectures</span>
+  <span class="unit-badge">K2</span>
+</div>
+
+<!-- 5.1 -->
+<div class="topic-section" id="u5-s1">
+  <div class="topic-title"><span class="topic-num">5.1</span> Information Security Policy</div>
+  <div class="def-box"><p><strong>Information Security Policy (ISP)</strong> is a formal written document that defines what information needs protection, who is responsible, how protection should be implemented, and consequences of policy violations. It is the <em>security rulebook</em> of an organization.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Why Is It Needed?</div>
+    <p>Modern organizations store customer data, financial records, business secrets, and employee data. Without a policy:</p>
+    <ul class="notes-list">
+      <li>Employees may share passwords or write them on sticky notes</li>
+      <li>Data may be copied to personal devices without authorization</li>
+      <li>No standard security procedures lead to inconsistent protection</li>
+      <li>Data breaches cause legal penalties under DPDP Act 2023</li>
+    </ul>
+    <div class="example-box"><div class="example-label">EXAMPLE</div><p>No password policy → Employee uses "company123" → Easy to crack → Data breach → Heavy fine under DPDP Act 2023.</p></div>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Types of Security Policies</div>
+    <div class="card-grid">
+      <div class="card"><div class="card-icon">🏢</div><div class="card-title">Organizational Policy</div><div class="card-body">High-level rules for the entire organization. Broad security framework.</div></div>
+      <div class="card"><div class="card-icon">📋</div><div class="card-title">Issue-Specific Policy</div><div class="card-body">Focused on one specific issue. Examples: Email policy, Social media policy, BYOD policy.</div></div>
+      <div class="card"><div class="card-icon">⚙️</div><div class="card-title">System-Specific Policy</div><div class="card-body">Technical configuration rules. Examples: Firewall rules, server configuration, patch management.</div></div>
+    </div>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Key Policy Components</div>
+    <ul class="notes-list">
+      <li><strong>Password Policy</strong> — Complexity requirements, rotation schedule</li>
+      <li><strong>Data Classification Policy</strong> — Public / Internal / Confidential / Restricted</li>
+      <li><strong>Access Control Policy</strong> — Role-based access, least privilege principle</li>
+      <li><strong>Backup and Recovery Policy</strong> — Frequency, storage location, testing</li>
+      <li><strong>Incident Response Policy</strong> — Steps when breach occurs</li>
+      <li><strong>Remote Work Policy</strong> — VPN requirements, allowed devices</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5.2 -->
+<div class="topic-section" id="u5-s2">
+  <div class="topic-title"><span class="topic-num">5.2</span> Indian Cyber Law — IT Act 2000</div>
+  <div class="def-box"><p><strong>Information Technology Act 2000</strong> is India's primary law governing cybercrime and electronic commerce. It provides legal recognition to electronic records and digital signatures, and defines punishments for cyber offenses.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Why IT Act Was Needed</div>
+    <ul class="notes-list">
+      <li>Before 2000, no law covered online crimes in India</li>
+      <li>No legal status for digital signatures or e-contracts</li>
+      <li>Rapid growth of internet commerce needed legal framework</li>
+    </ul>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Important Sections of IT Act 2000</div>
+    <div class="diff-table-wrap"><table class="diff-table">
+      <tr><th>Section</th><th>Offense</th><th>Punishment</th></tr>
+      <tr><td>Section 43</td><td>Unauthorized access to computer</td><td>Compensation (civil)</td></tr>
+      <tr><td>Section 66</td><td>Hacking / computer-related offenses</td><td>Up to 3 years + fine</td></tr>
+      <tr><td>Section 66C</td><td>Identity theft</td><td>Up to 3 years + fine ₹1 lakh</td></tr>
+      <tr><td>Section 66D</td><td>Cheating by impersonation using computer</td><td>Up to 3 years + fine ₹1 lakh</td></tr>
+      <tr><td>Section 67</td><td>Publishing obscene content online</td><td>Up to 5 years + fine</td></tr>
+    </table></div>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">IT Amendment Act 2008</div>
+    <ul class="notes-list">
+      <li>Added cyber terrorism provisions</li>
+      <li>Data protection concepts introduced</li>
+      <li>Stronger penalties for serious offenses</li>
+      <li>CERT-In (Computer Emergency Response Team India) given legal status</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5.3 -->
+<div class="topic-section" id="u5-s3">
+  <div class="topic-title"><span class="topic-num">5.3</span> Digital Personal Data Protection Act 2023 (DPDP Act)</div>
+  <div class="def-box"><p><strong>DPDP Act 2023</strong> is India's comprehensive personal data protection law. It protects digital personal data, regulates how companies process data, gives rights to individuals, and imposes heavy penalties for data misuse.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Why Was This Act Needed?</div>
+    <ul class="notes-list">
+      <li>Massive data collection by social media, apps, fintech companies</li>
+      <li>Frequent large-scale data leaks in India</li>
+      <li>No dedicated personal data protection law existed before</li>
+      <li>India's Supreme Court declared privacy a fundamental right (2017)</li>
+    </ul>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Key Definitions</div>
+    <div class="card-grid">
+      <div class="card" style="border-color:var(--u5)"><div class="card-icon">👤</div><div class="card-title" style="color:var(--u5)">Data Principal</div><div class="card-body">The person whose data is being collected and processed. Example: You, the Instagram user.</div></div>
+      <div class="card" style="border-color:var(--u4)"><div class="card-icon">🏢</div><div class="card-title" style="color:var(--u4)">Data Fiduciary</div><div class="card-body">The organization that collects and processes data. Example: Instagram/Meta company.</div></div>
+    </div>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Rights of Data Principal (Individual)</div>
+    <ul class="notes-list">
+      <li>Right to know — How their data is used and for what purpose</li>
+      <li>Right to correction — Correct inaccurate personal data</li>
+      <li>Right to erasure — Delete personal data (Right to be forgotten)</li>
+      <li>Right to grievance redressal — Complain about data misuse</li>
+      <li>Right to nominate — Nominate someone to exercise rights after death</li>
+    </ul>
+  </div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">Obligations of Data Fiduciary (Company)</div>
+    <ul class="notes-list">
+      <li>Obtain free and informed consent before collecting data</li>
+      <li>Use data only for specified purpose</li>
+      <li>Protect data with appropriate security measures</li>
+      <li>Notify individuals and government if data breach occurs</li>
+      <li>Appoint Data Protection Officer (DPO) if required</li>
+      <li>Delete data when no longer needed (data minimization)</li>
+    </ul>
+  </div>
+
+  <div class="example-box"><div class="example-label">EXAMPLE</div><p>Fintech company leaks Aadhaar numbers + bank account details of 1 crore customers → DPDP Act 2023 → Heavy penalty potentially in crores of rupees.</p></div>
+
+  <div class="diff-label">📊 IT Act 2000 vs DPDP Act 2023 <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>IT Act 2000</th><th>DPDP Act 2023</th></tr>
+    <tr><td>Purpose</td><td>Regulate cybercrime &amp; e-commerce</td><td>Protect personal digital data</td></tr>
+    <tr><td>Focus</td><td>Cyber offenses &amp; hacking</td><td>Data privacy &amp; consent</td></tr>
+    <tr><td>Scope</td><td>All cyber activities</td><td>Personal data processing only</td></tr>
+    <tr><td>Key Concept</td><td>Hacking, identity theft penalties</td><td>Data principal &amp; fiduciary</td></tr>
+    <tr><td>Nature</td><td>Broad cyber law</td><td>Specific data protection law</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Data Principal vs Data Fiduciary <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Data Principal</th><th>Data Fiduciary</th></tr>
+    <tr><td>Meaning</td><td>Person whose data is collected</td><td>Organization collecting the data</td></tr>
+    <tr><td>Role</td><td>Data owner / subject</td><td>Data controller / processor</td></tr>
+    <tr><td>Rights</td><td>Access, correction, erasure</td><td>Must protect data, get consent</td></tr>
+    <tr><td>Example</td><td>Instagram user</td><td>Instagram / Meta company</td></tr>
+  </table></div>
+</div>
+
+<!-- 5.4 -->
+<div class="topic-section" id="u5-s4">
+  <div class="topic-title"><span class="topic-num">5.4</span> Intellectual Property (IP) Issues</div>
+  <div class="def-box"><p><strong>Intellectual Property (IP)</strong> refers to legal protection for creations of the human mind — inventions, artistic works, designs, and symbols. In the cyber world, IP theft is very common due to ease of digital copying.</p></div>
+
+  <div class="subtopic">
+    <div class="subtopic-title">IP Issues in Cybercrime</div>
+    <ul class="notes-list">
+      <li>Software piracy — using software without proper license</li>
+      <li>Torrent downloads — illegal distribution of movies, music, books</li>
+      <li>Logo misuse — creating fake websites with similar logos</li>
+      <li>Domain name spoofing — registering confusingly similar domain names</li>
+      <li>Code plagiarism — copying open-source code without attribution</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 5.5 -->
+<div class="topic-section" id="u5-s5">
+  <div class="topic-title"><span class="topic-num">5.5</span> Patent, Copyright &amp; Trademark</div>
+
+  <div class="card-grid">
+    <div class="card" style="border-color:#f59e0b"><div class="card-icon">🔬</div><div class="card-title" style="color:#f59e0b">Patent</div><div class="card-body">Protects inventions &amp; new technology. Duration: <strong>20 years</strong>. Governed by: Patents Act 1970. Registration: <strong>Mandatory</strong>. Example: New cybersecurity hardware chip.</div></div>
+    <div class="card" style="border-color:#ef4444"><div class="card-icon">©️</div><div class="card-title" style="color:#ef4444">Copyright</div><div class="card-body">Protects creative works. Duration: <strong>Life + 60 years</strong>. Governed by: Copyright Act 1957. Registration: <strong>Automatic</strong>. Example: Software source code, app, website content.</div></div>
+    <div class="card" style="border-color:#7c3aed"><div class="card-icon">™️</div><div class="card-title" style="color:#7c3aed">Trademark</div><div class="card-body">Protects brand identity. Duration: <strong>10 years (renewable)</strong>. Governed by: Trade Marks Act 1999. Registration: <strong>Mandatory</strong>. Example: Company logo, brand name, slogan.</div></div>
+  </div>
+
+  <div class="diff-label">📊 Patent vs Copyright vs Trademark <span class="badge">MOST IMPORTANT EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Patent</th><th>Copyright</th><th>Trademark</th></tr>
+    <tr><td>Protects</td><td>Inventions</td><td>Creative expressions</td><td>Brand identity</td></tr>
+    <tr><td>Duration</td><td>20 years</td><td>Life + 60 years</td><td>10 years (renewable)</td></tr>
+    <tr><td>Registration</td><td>Mandatory</td><td>Automatic on creation</td><td>Mandatory</td></tr>
+    <tr><td>Governing Law</td><td>Patents Act 1970</td><td>Copyright Act 1957</td><td>Trade Marks Act 1999</td></tr>
+    <tr><td>Cost</td><td>Expensive</td><td>Low / Free</td><td>Moderate</td></tr>
+    <tr><td>Example</td><td>New encryption chip</td><td>App source code</td><td>Company logo</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Security Policy vs Cyber Law <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Security Policy</th><th>Cyber Law</th></tr>
+    <tr><td>Definition</td><td>Internal rules of an organization</td><td>Government legal framework</td></tr>
+    <tr><td>Authority</td><td>Organization management</td><td>Parliament / Government</td></tr>
+    <tr><td>Scope</td><td>Limited to one organization</td><td>Applies to entire country</td></tr>
+    <tr><td>Enforcement</td><td>Internal disciplinary action</td><td>Legal punishment, fines, jail</td></tr>
+    <tr><td>Example</td><td>Password complexity policy</td><td>IT Act 2000</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Confidentiality vs Privacy <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Confidentiality</th><th>Privacy</th></tr>
+    <tr><td>Meaning</td><td>Protect data from unauthorized access</td><td>Right of individual to control their data</td></tr>
+    <tr><td>Focus</td><td>Security control by organization</td><td>Personal rights of individual</td></tr>
+    <tr><td>Example</td><td>Encrypting customer database</td><td>Giving consent before data collection</td></tr>
+    <tr><td>Law Related</td><td>Security policy, IT Act</td><td>DPDP Act 2023</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Digital Signature vs Electronic Signature <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Digital Signature</th><th>Electronic Signature</th></tr>
+    <tr><td>Technology</td><td>Cryptography (PKI) based</td><td>Any electronic method</td></tr>
+    <tr><td>Security</td><td>High — mathematically verifiable</td><td>Moderate</td></tr>
+    <tr><td>Legal Recognition</td><td>Under IT Act 2000</td><td>Also legally recognized</td></tr>
+    <tr><td>Example</td><td>DSC (Digital Signature Certificate) token</td><td>OTP-based consent, scanned signature</td></tr>
+  </table></div>
+
+  <div class="diff-label">📊 Personal Data vs Sensitive Personal Data <span class="badge">EXAM TABLE</span></div>
+  <div class="diff-table-wrap"><table class="diff-table">
+    <tr><th>Basis</th><th>Personal Data</th><th>Sensitive Personal Data</th></tr>
+    <tr><td>Meaning</td><td>Basic identifying information</td><td>Highly confidential personal info</td></tr>
+    <tr><td>Examples</td><td>Name, email, address, phone number</td><td>Biometric data, health records, financial data, Aadhaar</td></tr>
+    <tr><td>Risk Level</td><td>Moderate</td><td>High</td></tr>
+    <tr><td>Protection Level</td><td>Required</td><td>Very strict — extra safeguards needed</td></tr>
+  </table></div>
+</div>
+
+</section>
+
+</main>
+</div>
+
+<!-- SIDEBAR CONTENT (built by JS) -->
+<button class="mobile-toc-btn" onclick="document.getElementById('sidebar').style.display='block'">☰</button>
+
+<script>
+const sidebarData = {
+  1: [
+    ['u1-s1','What is Cybercrime?'],
+    ['u1-s2','Information Security & CIA Triad'],
+    ['u1-s3','Who are Cybercriminals?'],
+    ['u1-s4','Classification of Cybercrimes'],
+    ['u1-s5','Global Perspective & Survival Tips'],
+    ['u1-s6','How Criminals Plan Attacks'],
+    ['u1-s7','Social Engineering'],
+    ['u1-s8','Cyber Stalking, Cafes & Botnets'],
+    ['u1-s9','Attack Vector & Diff Tables'],
+  ],
+  2: [
+    ['u2-s1','Introduction to Mobile Devices'],
+    ['u2-s2','Proliferation & Attack Surface'],
+    ['u2-s3','Trends in Mobility'],
+    ['u2-s4','Credit Card Frauds'],
+    ['u2-s5','Security Challenges'],
+    ['u2-s6','Authentication Security'],
+    ['u2-s7','Attacks on Mobile Phones'],
+    ['u2-s8','Organizational Measures & Policies'],
+  ],
+  3: [
+    ['u3-s1','Proxy Servers & Anonymizers'],
+    ['u3-s2','Phishing & Identity Theft'],
+    ['u3-s3','Password Cracking'],
+    ['u3-s4','Keyloggers & Spyware'],
+    ['u3-s5','Virus, Worms, Trojans & Backdoors'],
+    ['u3-s6','Steganography'],
+    ['u3-s7','DoS & DDoS Attacks'],
+    ['u3-s8','SQL Injection'],
+    ['u3-s9','Buffer Overflow'],
+    ['u3-s10','Wireless Network Attacks'],
+  ],
+  4: [
+    ['u4-s1','Introduction to Computer Forensics'],
+    ['u4-s2','Digital Forensics Branches'],
+    ['u4-s3','Types of Digital Evidence'],
+    ['u4-s4','Forensics Lifecycle (6 Steps)'],
+    ['u4-s5','Chain of Custody'],
+    ['u4-s6','Email Forensics'],
+    ['u4-s7','Network Forensics'],
+    ['u4-s8','Social Media & Challenges'],
+  ],
+  5: [
+    ['u5-s1','Information Security Policy'],
+    ['u5-s2','IT Act 2000'],
+    ['u5-s3','DPDP Act 2023'],
+    ['u5-s4','Intellectual Property Issues'],
+    ['u5-s5','Patent, Copyright & Trademark'],
+  ]
+};
+
+const unitColors = {1:'var(--u1)',2:'var(--u2)',3:'var(--u3)',4:'var(--u4)',5:'var(--u5)'};
+const unitNames = {1:'Unit 1',2:'Unit 2',3:'Unit 3',4:'Unit 4',5:'Unit 5'};
+
+function buildSidebar() {
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = '';
+  for (let u = 1; u <= 5; u++) {
+    const unit = document.createElement('div');
+    unit.className = 'sidebar-unit';
+    const hdr = document.createElement('div');
+    hdr.className = 'sidebar-unit-header';
+    hdr.setAttribute('data-u', u);
+    hdr.textContent = unitNames[u];
+    hdr.onclick = () => showUnit(u);
+    unit.appendChild(hdr);
+    const items = document.createElement('div');
+    items.className = 'sidebar-items';
+    items.id = `sb-unit${u}`;
+    sidebarData[u].forEach(([id, label]) => {
+      const item = document.createElement('div');
+      item.className = 'sidebar-item';
+      item.textContent = label;
+      item.onclick = () => {
+        showUnit(u);
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 50);
+        document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+        item.classList.add('active');
+      };
+      items.appendChild(item);
+    });
+    unit.appendChild(items);
+    sb.appendChild(unit);
+  }
+}
+
+function showUnit(n) {
+  document.querySelectorAll('.unit-section').forEach(s => s.classList.remove('active'));
+  document.getElementById(`unit${n}`).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.nav-tab[data-u="${n}"]`).classList.add('active');
+  document.getElementById('content').scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function toggleAcc(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.accordion-chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chevron) chevron.classList.toggle('open', !isOpen);
+}
+
+// Reading progress
+const content = document.getElementById('content');
+const progressBar = document.getElementById('reading-progress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+  progressBar.style.transform = `scaleX(${progress})`;
+});
+
+buildSidebar();
+</script>
+</body>
+</html>

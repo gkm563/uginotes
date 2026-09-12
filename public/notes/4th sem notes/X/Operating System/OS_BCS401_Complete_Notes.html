@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Operating System – BCS401 | Complete Study Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0f1a;
+  --surface: #111827;
+  --surface2: #1a2236;
+  --border: #1f2d45;
+  --u1: #38bdf8; --u1d: #0ea5e9; --u1bg: rgba(56,189,248,0.08);
+  --u2: #34d399; --u2d: #10b981; --u2bg: rgba(52,211,153,0.08);
+  --u3: #f59e0b; --u3d: #d97706; --u3bg: rgba(245,158,11,0.08);
+  --u4: #a78bfa; --u4d: #7c3aed; --u4bg: rgba(167,139,250,0.08);
+  --u5: #fb7185; --u5d: #e11d48; --u5bg: rgba(251,113,133,0.08);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --code-bg: #0d1117;
+  --highlight: #fbbf24;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Source Sans 3',sans-serif;font-size:17px;line-height:1.75;}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;width:260px;height:100vh;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:24px 0;}
+#nav h2{font-family:'Playfair Display',serif;font-size:1rem;color:var(--muted);padding:0 20px 12px;letter-spacing:.12em;text-transform:uppercase;}
+#nav a{display:block;padding:9px 20px;color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:600;border-left:3px solid transparent;transition:all .2s;}
+#nav a:hover{color:var(--text);background:var(--surface2);}
+#nav a.u1{border-color:var(--u1);color:var(--u1);}
+#nav a.u2{border-color:var(--u2);color:var(--u2);}
+#nav a.u3{border-color:var(--u3);color:var(--u3);}
+#nav a.u4{border-color:var(--u4);color:var(--u4);}
+#nav a.u5{border-color:var(--u5);color:var(--u5);}
+#nav .nav-sub{font-size:.82rem;font-weight:400;padding:5px 20px 5px 32px;color:var(--muted);}
+#nav .nav-sub:hover{color:var(--text);}
+
+/* ── MAIN ── */
+main{margin-left:260px;padding:60px 56px;max-width:1100px;}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:80px 0 60px;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(56,189,248,.12) 0%,transparent 70%);pointer-events:none;}
+.hero .badge{display:inline-block;border:1px solid var(--border);padding:4px 14px;border-radius:20px;font-size:.8rem;color:var(--muted);letter-spacing:.1em;margin-bottom:20px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:900;line-height:1.1;background:linear-gradient(135deg,#e2e8f0 30%,var(--u1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--muted);font-size:1.1rem;margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto;}
+.unit-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
+.unit-pills a{padding:7px 18px;border-radius:24px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s;border:1.5px solid;}
+.unit-pills a.p1{border-color:var(--u1);color:var(--u1);}
+.unit-pills a.p2{border-color:var(--u2);color:var(--u2);}
+.unit-pills a.p3{border-color:var(--u3);color:var(--u3);}
+.unit-pills a.p4{border-color:var(--u4);color:var(--u4);}
+.unit-pills a.p5{border-color:var(--u5);color:var(--u5);}
+.unit-pills a:hover{color:#fff;background:currentColor;}
+
+/* ── UNIT SECTIONS ── */
+.unit{margin-top:80px;padding-top:20px;}
+.unit-header{display:flex;align-items:center;gap:16px;margin-bottom:40px;padding-bottom:20px;border-bottom:2px solid var(--border);}
+.unit-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;line-height:1;opacity:.18;}
+.unit-title h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;}
+.unit-title p{color:var(--muted);font-size:.95rem;margin-top:4px;}
+.u1 .unit-num{color:var(--u1);}
+.u2 .unit-num{color:var(--u2);}
+.u3 .unit-num{color:var(--u3);}
+.u4 .unit-num{color:var(--u4);}
+.u5 .unit-num{color:var(--u5);}
+
+/* ── TOPIC ── */
+.topic{margin-bottom:48px;}
+.topic h3{font-family:'Playfair Display',serif;font-size:1.45rem;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.topic h3::before{content:'';display:block;width:4px;height:22px;border-radius:2px;flex-shrink:0;}
+.u1-section .topic h3::before{background:var(--u1);}
+.u2-section .topic h3::before{background:var(--u2);}
+.u3-section .topic h3::before{background:var(--u3);}
+.u4-section .topic h3::before{background:var(--u4);}
+.u5-section .topic h3::before{background:var(--u5);}
+.topic h4{font-size:1.05rem;font-weight:700;color:var(--muted);margin:20px 0 8px;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem;}
+.topic p{margin-bottom:14px;color:#cbd5e1;}
+.topic ul,.topic ol{padding-left:24px;margin-bottom:14px;color:#cbd5e1;}
+.topic li{margin-bottom:6px;}
+.topic strong{color:var(--text);}
+
+/* ── INFO BOXES ── */
+.box{border-radius:10px;padding:18px 22px;margin:20px 0;border-left:4px solid;}
+.box-def{background:var(--surface2);border-color:var(--u1);}
+.box-def .box-label{color:var(--u1);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.box-eg{background:rgba(52,211,153,.06);border-color:var(--u2);}
+.box-eg .box-label{color:var(--u2);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.box-tip{background:rgba(245,158,11,.06);border-color:var(--u3);}
+.box-tip .box-label{color:var(--u3);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.box-warn{background:rgba(251,113,133,.06);border-color:var(--u5);}
+.box-warn .box-label{color:var(--u5);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+
+/* ── CODE ── */
+code{font-family:'JetBrains Mono',monospace;background:var(--code-bg);padding:2px 7px;border-radius:4px;font-size:.85em;color:#93c5fd;}
+pre{background:var(--code-bg);border:1px solid var(--border);border-radius:10px;padding:20px 24px;overflow-x:auto;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;color:#a5f3fc;line-height:1.6;}
+
+/* ── TABLE ── */
+.table-wrap{overflow-x:auto;margin:20px 0;border-radius:10px;border:1px solid var(--border);}
+table{width:100%;border-collapse:collapse;font-size:.9rem;}
+th{background:var(--surface2);padding:12px 16px;text-align:left;font-weight:700;color:var(--text);border-bottom:2px solid var(--border);}
+td{padding:11px 16px;border-bottom:1px solid var(--border);color:#cbd5e1;vertical-align:top;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+td:first-child{font-weight:600;}
+
+/* ── DIAGRAM ── */
+.diagram{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:28px;margin:24px 0;text-align:center;overflow-x:auto;}
+.diagram svg{max-width:100%;height:auto;}
+
+/* ── QUESTION BANK ── */
+.qbank{margin-top:56px;padding:28px 32px;border-radius:12px;border:1px solid var(--border);}
+.u1-section .qbank{background:var(--u1bg);}
+.u2-section .qbank{background:var(--u2bg);}
+.u3-section .qbank{background:var(--u3bg);}
+.u4-section .qbank{background:var(--u4bg);}
+.u5-section .qbank{background:var(--u5bg);}
+.qbank h3{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:20px;}
+.u1-section .qbank h3{color:var(--u1);}
+.u2-section .qbank h3{color:var(--u2);}
+.u3-section .qbank h3{color:var(--u3);}
+.u4-section .qbank h3{color:var(--u4);}
+.u5-section .qbank h3{color:var(--u5);}
+.q-item{margin-bottom:14px;padding:14px 18px;background:rgba(0,0,0,.25);border-radius:8px;}
+.q-item p{color:var(--text);font-size:.95rem;margin-bottom:4px;}
+.q-meta{font-size:.78rem;color:var(--muted);}
+.q-short{border-left:3px solid var(--muted);}
+.u1-section .q-long{border-left:3px solid var(--u1);}
+.u2-section .q-long{border-left:3px solid var(--u2);}
+.u3-section .q-long{border-left:3px solid var(--u3);}
+.u4-section .q-long{border-left:3px solid var(--u4);}
+.u5-section .q-long{border-left:3px solid var(--u5);}
+.ans-toggle{font-size:.82rem;font-weight:700;cursor:pointer;margin-top:8px;display:inline-block;opacity:.7;}
+.ans-toggle:hover{opacity:1;}
+.ans-block{display:none;margin-top:10px;padding:12px;background:rgba(255,255,255,.04);border-radius:6px;font-size:.92rem;color:#cbd5e1;line-height:1.6;}
+.ans-block.open{display:block;}
+
+/* ── FLOW / PROCESS BOXES ── */
+.flow{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:20px 0;}
+.flow-box{padding:10px 18px;border-radius:8px;font-size:.88rem;font-weight:700;border:2px solid;}
+.flow-arrow{color:var(--muted);font-size:1.4rem;padding:0 6px;}
+.comparison-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.cg-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.cg-card h4{font-size:.95rem;font-weight:700;margin-bottom:10px;}
+.cg-card ul{padding-left:18px;font-size:.9rem;color:#cbd5e1;}
+.cg-card li{margin-bottom:5px;}
+
+/* ── HIGHLIGHT ── */
+mark{background:rgba(251,191,36,.15);color:var(--highlight);padding:1px 4px;border-radius:3px;}
+
+/* ── CHIP ── */
+.chip{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.75rem;font-weight:700;margin:2px;vertical-align:middle;}
+.chip-blue{background:rgba(56,189,248,.15);color:var(--u1);}
+.chip-green{background:rgba(52,211,153,.15);color:var(--u2);}
+.chip-yellow{background:rgba(245,158,11,.15);color:var(--u3);}
+.chip-purple{background:rgba(167,139,250,.15);color:var(--u4);}
+.chip-red{background:rgba(251,113,133,.15);color:var(--u5);}
+
+/* ── SCROLL ── */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+@media(max-width:900px){
+  #nav{display:none;}
+  main{margin-left:0;padding:30px 20px;}
+  .hero h1{font-size:2.4rem;}
+  .comparison-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR NAV -->
+<nav id="nav">
+  <h2>BCS401 – OS</h2>
+  <a href="#hero">📖 Overview</a>
+  <a href="#unit1" class="u1">Unit 1: Introduction</a>
+  <a href="#u1-types" class="nav-sub">OS Types</a>
+  <a href="#u1-structure" class="nav-sub">OS Structure</a>
+  <a href="#u1-services" class="nav-sub">OS Services</a>
+  <a href="#u1-qbank" class="nav-sub">Question Bank</a>
+  <a href="#unit2" class="u2">Unit 2: Concurrency</a>
+  <a href="#u2-process" class="nav-sub">Process Concept</a>
+  <a href="#u2-mutex" class="nav-sub">Mutual Exclusion</a>
+  <a href="#u2-semaphore" class="nav-sub">Semaphores</a>
+  <a href="#u2-classical" class="nav-sub">Classical Problems</a>
+  <a href="#u2-ipc" class="nav-sub">IPC</a>
+  <a href="#u2-qbank" class="nav-sub">Question Bank</a>
+  <a href="#unit3" class="u3">Unit 3: CPU Scheduling</a>
+  <a href="#u3-pcb" class="nav-sub">PCB & Process States</a>
+  <a href="#u3-threads" class="nav-sub">Threads</a>
+  <a href="#u3-algos" class="nav-sub">Scheduling Algorithms</a>
+  <a href="#u3-deadlock" class="nav-sub">Deadlock</a>
+  <a href="#u3-qbank" class="nav-sub">Question Bank</a>
+  <a href="#unit4" class="u4">Unit 4: Memory Mgmt</a>
+  <a href="#u4-basic" class="nav-sub">Basic Concepts</a>
+  <a href="#u4-paging" class="nav-sub">Paging & Segmentation</a>
+  <a href="#u4-virtual" class="nav-sub">Virtual Memory</a>
+  <a href="#u4-replacement" class="nav-sub">Page Replacement</a>
+  <a href="#u4-qbank" class="nav-sub">Question Bank</a>
+  <a href="#unit5" class="u5">Unit 5: I/O & File Systems</a>
+  <a href="#u5-io" class="nav-sub">I/O Management</a>
+  <a href="#u5-disk" class="nav-sub">Disk Scheduling</a>
+  <a href="#u5-file" class="nav-sub">File Systems</a>
+  <a href="#u5-raid" class="nav-sub">RAID</a>
+  <a href="#u5-qbank" class="nav-sub">Question Bank</a>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="badge">B.Tech · 4th Semester · BCS401</div>
+  <h1>Operating<br>Systems</h1>
+  <p>Complete study notes with PYQs, real-world examples, diagrams, and exam preparation for all 5 units.</p>
+  <div class="unit-pills">
+    <a href="#unit1" class="p1">Unit 1: Intro</a>
+    <a href="#unit2" class="p2">Unit 2: Concurrency</a>
+    <a href="#unit3" class="p3">Unit 3: Scheduling</a>
+    <a href="#unit4" class="p4">Unit 4: Memory</a>
+    <a href="#unit5" class="p5">Unit 5: I/O & Files</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  UNIT 1                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="unit1" class="unit u1-section">
+  <div class="unit-header">
+    <div class="unit-num u1">01</div>
+    <div class="unit-title">
+      <h2>Introduction to Operating Systems</h2>
+      <p>Functions · Classification · Structure · Services · Kernels</p>
+    </div>
+  </div>
+
+  <div class="topic">
+    <h3>What is an Operating System?</h3>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      An <strong>Operating System (OS)</strong> is system software that acts as an <strong>intermediary</strong> between computer hardware and users. It manages hardware resources and provides a platform for application programs.
+    </div>
+    <p>Think of the OS as a <em>manager of a large office</em> — it assigns resources (desks = CPU, filing cabinets = memory), resolves conflicts, and ensures no single employee hogs everything.</p>
+
+    <h4>Primary Functions of an OS</h4>
+    <ul>
+      <li><strong>Process Management</strong> — Create, schedule, and terminate processes.</li>
+      <li><strong>Memory Management</strong> — Allocate and deallocate RAM to processes.</li>
+      <li><strong>File System Management</strong> — Organize data on storage devices.</li>
+      <li><strong>I/O Management</strong> — Control input/output devices.</li>
+      <li><strong>Security & Protection</strong> — Authenticate users, isolate processes.</li>
+      <li><strong>Networking</strong> — Handle network communication (TCP/IP stacks).</li>
+    </ul>
+
+    <div class="box box-eg">
+      <div class="box-label">Real-World Example</div>
+      When you open <strong>Chrome on Windows</strong>, the OS (Windows 11) allocates RAM to Chrome, schedules CPU time for it, connects it to your Wi-Fi adapter via the network stack, and controls which files Chrome can read — all transparently.
+    </div>
+  </div>
+
+  <div id="u1-types" class="topic">
+    <h3>Classification of Operating Systems</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type</th><th>Key Feature</th><th>Real-World Example</th><th>Exam Tip</th></tr>
+        <tr><td>Batch OS</td><td>Jobs collected, processed without user interaction</td><td>Early IBM mainframes, payroll processing</td><td>No user interaction during execution</td></tr>
+        <tr><td>Interactive OS</td><td>User interacts in real-time</td><td>Windows, macOS desktop</td><td>Immediate feedback to user commands</td></tr>
+        <tr><td>Time-Sharing OS</td><td>Multiple users share CPU via time slices (quantum)</td><td>Unix, Linux servers</td><td>Uses round-robin; low response time</td></tr>
+        <tr><td>Real-Time OS (RTOS)</td><td>Strict timing guarantees</td><td>Android camera firmware, ABS brakes, Mars Rover</td><td>Hard RTOS = no deadline miss; Soft = OK to miss occasionally</td></tr>
+        <tr><td>Multiprocessor OS</td><td>Manages 2+ CPUs</td><td>Supercomputers, multi-core laptops</td><td>Symmetric (SMP) vs Asymmetric (ASMP)</td></tr>
+        <tr><td>Multiuser OS</td><td>Multiple users simultaneously</td><td>Linux server, University systems</td><td>Needs strong isolation & security</td></tr>
+        <tr><td>Multithreaded OS</td><td>Single process runs multiple threads</td><td>Modern browsers (Chrome tabs), Android apps</td><td>Threads share same memory space</td></tr>
+        <tr><td>Distributed OS</td><td>Coordinates multiple independent computers</td><td>Google's internal cluster OS, cloud computing</td><td>Transparency: appears as single system</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-eg">
+      <div class="box-label">Deep Dive – Real-Time OS in Your Phone Camera</div>
+      When your <strong>Android phone takes a burst photo</strong>, the camera ISP (Image Signal Processor) runs a <strong>Hard RTOS</strong> — it must process each frame in microseconds. Miss the deadline = blurry/corrupted image. Android's main OS is <em>not</em> hard real-time, but the camera subsystem is.
+    </div>
+
+    <h4>Multiprocessor: Symmetric vs. Asymmetric <span class="chip chip-blue">PYQ 2014-15</span></h4>
+    <div class="comparison-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--u1)">Symmetric Multiprocessing (SMP)</h4>
+        <ul>
+          <li>All processors are equal</li>
+          <li>Each runs its own copy of the OS kernel</li>
+          <li>More robust — any CPU can do any job</li>
+          <li>Example: Modern Intel/AMD multi-core PCs</li>
+          <li>Better load balancing</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--u3)">Asymmetric Multiprocessing (ASMP)</h4>
+        <ul>
+          <li>Master CPU controls and assigns tasks</li>
+          <li>Slave CPUs execute assigned tasks only</li>
+          <li>Simpler to implement</li>
+          <li>Master can become bottleneck</li>
+          <li>Example: Early mainframe systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="u1-structure" class="topic">
+    <h3>Operating System Structure</h3>
+    <h4>1. Layered Architecture <span class="chip chip-blue">PYQ 2014-15, 2017-18, 2023-24</span></h4>
+    <p>The OS is divided into layers, each built on top of the previous. Layer N uses services of Layer N-1 and provides services to Layer N+1.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+        <defs>
+          <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity=".3"/>
+            <stop offset="100%" stop-color="#0ea5e9" stop-opacity=".1"/>
+          </linearGradient>
+        </defs>
+        <!-- Layers -->
+        <rect x="80" y="20" width="460" height="48" rx="8" fill="url(#lg1)" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="310" y="40" fill="#e2e8f0" text-anchor="middle" font-size="13" font-weight="700">Layer 5: User Programs / Applications</text>
+        <text x="310" y="58" fill="#94a3b8" text-anchor="middle" font-size="11">Chrome, Calc, Games ...</text>
+
+        <rect x="80" y="80" width="460" height="44" rx="8" fill="rgba(52,211,153,.15)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="310" y="100" fill="#e2e8f0" text-anchor="middle" font-size="13" font-weight="700">Layer 4: I/O Management</text>
+        <text x="310" y="116" fill="#94a3b8" text-anchor="middle" font-size="11">Device drivers, Buffering</text>
+
+        <rect x="80" y="136" width="460" height="44" rx="8" fill="rgba(245,158,11,.12)" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="310" y="156" fill="#e2e8f0" text-anchor="middle" font-size="13" font-weight="700">Layer 3: Memory Management</text>
+        <text x="310" y="172" fill="#94a3b8" text-anchor="middle" font-size="11">Paging, Segmentation, Virtual Memory</text>
+
+        <rect x="80" y="192" width="460" height="44" rx="8" fill="rgba(167,139,250,.12)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="310" y="212" fill="#e2e8f0" text-anchor="middle" font-size="13" font-weight="700">Layer 2: CPU Scheduling</text>
+        <text x="310" y="228" fill="#94a3b8" text-anchor="middle" font-size="11">Process management, Scheduling algorithms</text>
+
+        <rect x="80" y="248" width="460" height="44" rx="8" fill="rgba(251,113,133,.12)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="310" y="268" fill="#e2e8f0" text-anchor="middle" font-size="13" font-weight="700">Layer 1: Hardware Abstraction (Kernel)</text>
+        <text x="310" y="284" fill="#94a3b8" text-anchor="middle" font-size="11">CPU, RAM, Disk, Network hardware</text>
+
+        <!-- arrows -->
+        <path d="M 50 290 L 50 40" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+        <text x="30" y="168" fill="#94a3b8" font-size="11" text-anchor="middle" transform="rotate(-90,30,168)">Lower Layer</text>
+      </svg>
+    </div>
+    <p><strong>Advantages:</strong> Modularity, easy debugging (isolate errors to one layer), abstraction. <strong>Disadvantage:</strong> Performance overhead (each layer adds latency).</p>
+
+    <h4>2. Monolithic Kernel <span class="chip chip-blue">PYQ 2016-17, 2021-22</span></h4>
+    <p>Entire OS runs in a single large process in kernel space. All services (file system, device drivers, process management) are in one big block.</p>
+    <div class="box box-eg">
+      <div class="box-label">Example</div>
+      <strong>Linux kernel</strong> is monolithic. All kernel services run in the same address space. This makes it fast (no context switching between kernel components) but a bug in one component can crash the whole kernel.
+    </div>
+
+    <h4>3. Microkernel</h4>
+    <p>Only essential services (IPC, basic scheduling, memory management) run in the kernel. Everything else (file systems, device drivers) runs in user space as servers.</p>
+    <div class="comparison-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--u1)">Monolithic Kernel</h4>
+        <ul>
+          <li>All services in kernel space</li>
+          <li>Fast — direct function calls</li>
+          <li>Less secure — one bug affects all</li>
+          <li>Example: Linux, MS-DOS</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--u4)">Microkernel</h4>
+        <ul>
+          <li>Minimal kernel; rest in user space</li>
+          <li>Slower — message passing overhead</li>
+          <li>More secure and stable</li>
+          <li>Example: macOS (Mach), QNX, MINIX</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>4. Reentrant Kernel</h4>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      A kernel is <strong>reentrant</strong> if multiple processes can be executing kernel code simultaneously. This is essential for time-sharing systems. Linux kernel is reentrant.
+    </div>
+  </div>
+
+  <div id="u1-services" class="topic">
+    <h3>Operating System Services <span class="chip chip-blue">PYQ 2021-22</span></h3>
+    <ul>
+      <li><strong>Program Execution</strong> — Load programs into memory and run them.</li>
+      <li><strong>I/O Operations</strong> — Provide a uniform interface to all I/O devices.</li>
+      <li><strong>File-System Manipulation</strong> — Read, write, create, delete files and directories.</li>
+      <li><strong>Communications</strong> — Inter-process communication (pipes, sockets, shared memory).</li>
+      <li><strong>Error Detection</strong> — Handle hardware errors, divide-by-zero, memory violations.</li>
+      <li><strong>Resource Allocation</strong> — Fairly distribute CPU, memory, I/O among competing processes.</li>
+      <li><strong>Accounting</strong> — Track which users use how much resources (useful in cloud billing — AWS, Azure).</li>
+      <li><strong>Protection & Security</strong> — Control access (passwords, file permissions on Linux: <code>chmod 755</code>).</li>
+    </ul>
+
+    <h4>Multiprogramming vs. Multitasking</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Feature</th><th>Multiprogramming</th><th>Multitasking (Time-Sharing)</th></tr>
+        <tr><td>Goal</td><td>Keep CPU busy</td><td>Minimize response time</td></tr>
+        <tr><td>Switching</td><td>Only when I/O wait</td><td>Every time quantum (ms)</td></tr>
+        <tr><td>User Interaction</td><td>None</td><td>Interactive</td></tr>
+        <tr><td>Example</td><td>Batch payroll on mainframe</td><td>Linux terminal, Windows desktop</td></tr>
+      </table>
+    </div>
+
+    <h4>Spooling (Simultaneous Peripheral Operation On-Line) <span class="chip chip-blue">PYQ 2014-15</span></h4>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      Spooling is the process of putting jobs in a <strong>buffer (spool)</strong> — a special area of memory or disk — where they wait to be processed. The classic example is a <strong>print spooler</strong>: multiple documents queue up to be printed one at a time.
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Real Example</div>
+      When you print multiple documents from Windows, they all go into the <strong>Windows Print Spooler</strong> service. You can keep working while they print — the OS handles sequencing.
+    </div>
+  </div>
+
+  <!-- UNIT 1 QUESTION BANK -->
+  <div id="u1-qbank" class="qbank">
+    <h3>📝 Unit 1 – Question Bank (PYQs + Important Questions)</h3>
+    <p style="color:var(--muted);margin-bottom:20px;font-size:.9rem;">Click "Show Answer" to reveal hints/answers for exam preparation.</p>
+
+    <p style="font-weight:700;color:var(--u1);margin-bottom:10px;">Section A – Short Answer</p>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What is spooling? <span class="chip chip-blue">2014-15, 2015-16</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Spooling (Simultaneous Peripheral Operation On-Line) places jobs in a buffer (spool) on disk/memory before sending to slow devices like printers. Example: Windows print queue. It overlaps I/O of one job with execution of another, improving CPU utilization.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> Define multithreading. <span class="chip chip-blue">2015-16</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Multithreading is the ability of a CPU or single process to execute multiple threads concurrently. Each thread shares the process's code, data, and files but has its own stack and registers. Example: Chrome browser uses separate threads for rendering, networking, and JavaScript execution.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What is the primary function of an operating system? <span class="chip chip-blue">2023-24, 2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">The primary function is to act as an intermediary between users and hardware. Specifically: (1) Resource management — allocate CPU, memory, I/O to processes. (2) Abstraction — hide hardware complexity from users/programs. (3) Control — prevent errors and improper use.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> A system has 3 processors and 5 programs ready for execution. In how many ways can processors be assigned? <span class="chip chip-blue">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">We need to assign 3 processors to 5 programs. Each processor runs one program. This is a permutation: P(5,3) = 5!/(5-3)! = 5×4×3 = <strong>60 ways</strong>.</div>
+    </div>
+
+    <p style="font-weight:700;color:var(--u1);margin:20px 0 10px;">Section B – Long Answer</p>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Explain the layered architecture of OS with advantages and disadvantages. <span class="chip chip-blue">2014-15, 2017-18, 2023-24</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Answer:</strong> See the layered architecture diagram above (Layer 1 hardware → Layer 5 user programs). <br><strong>Advantages:</strong> Modularity, abstraction, easier debugging (isolate bugs to one layer), simplicity of construction. <br><strong>Disadvantages:</strong> Performance overhead (must pass through each layer), difficulty in defining clean layer boundaries, some functions span layers. <br><strong>Example:</strong> THE operating system by Dijkstra used 6 layers.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> What do you mean by kernel? Describe monolithic and microkernel structures. <span class="chip chip-blue">2018-19, 2016-17, 2021-22</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Kernel:</strong> Core part of OS that runs continuously in memory with highest privilege. Manages hardware directly. <br><strong>Monolithic:</strong> All services in one process in kernel mode. Fast but less secure. Examples: Linux, Unix. <br><strong>Microkernel:</strong> Only IPC, basic scheduling, memory mapping in kernel. File systems, drivers in user space as servers. More secure/stable but slower due to message passing. Examples: macOS Mach, MINIX, QNX.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Compare time-sharing and multiprogramming OS concepts. <span class="chip chip-blue">2023-24</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">See the comparison table in the notes above. Key difference: multiprogramming switches CPU only on I/O wait (maximizes CPU utilization), while time-sharing switches every time quantum ~10-100ms (minimizes user response time). Time-sharing is an extension of multiprogramming with user interaction.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> How does a multiuser OS differ from a multiprocessing system? <span class="chip chip-blue">2023-24</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Multiuser OS:</strong> Allows multiple users to use the system simultaneously (via terminals or network). Focus is on user isolation, security, and fair resource sharing. Example: Linux server hosting 100 users. <br><strong>Multiprocessing OS:</strong> Uses multiple CPUs/cores to increase throughput. Focus is on parallel execution of tasks. Multiple CPUs work on different tasks or share one task. Example: Modern AMD Ryzen 12-core PC. A system can be both (multi-core Linux server serving many users).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  UNIT 2                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="unit2" class="unit u2-section">
+  <div class="unit-header">
+    <div class="unit-num u2">02</div>
+    <div class="unit-title">
+      <h2>Concurrent Processes</h2>
+      <p>Process Concept · Mutual Exclusion · Semaphores · Classical Problems · IPC</p>
+    </div>
+  </div>
+
+  <div id="u2-process" class="topic">
+    <h3>Process Concept <span class="chip chip-green">PYQ 2015-16</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      A <strong>process</strong> is a program in execution. It is a dynamic entity — it has a state, resources allocated to it, and code that runs.
+    </div>
+    <div class="comparison-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--u2)">Program</h4>
+        <ul>
+          <li>Passive entity (just code on disk)</li>
+          <li>Stored in a file (.exe, .py)</li>
+          <li>No resources allocated</li>
+          <li>Does not change state</li>
+          <li>Example: Chrome.exe sitting on your SSD</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--u3)">Process</h4>
+        <ul>
+          <li>Active entity (running program)</li>
+          <li>Loaded into RAM</li>
+          <li>Has CPU registers, stack, heap</li>
+          <li>Changes state (running, waiting...)</li>
+          <li>Example: Chrome.exe after double-clicking</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Principle of Concurrency</h4>
+    <p>Concurrency means multiple processes are executing (or appearing to execute) at the same time. On a single CPU, this is achieved by <strong>interleaving</strong> — switching rapidly between processes. On multi-core systems, true <strong>parallelism</strong> occurs.</p>
+    <div class="box box-eg">
+      <div class="box-label">Real Example</div>
+      On your laptop, while Spotify streams music (<strong>process A</strong>), Chrome renders a webpage (<strong>process B</strong>), and Windows Defender scans files (<strong>process C</strong>) — these are concurrent. On a 4-core CPU, up to 4 processes truly run in parallel at any instant.
+    </div>
+
+    <h4>Process Generation: <code>fork()</code></h4>
+    <pre>int main() {
+    fork();  // Creates 1 child → 2 processes total
+    fork();  // Each of 2 creates 1 → 4 processes
+    fork();  // Each of 4 creates 1 → 8 processes
+    // Total processes = 2^n = 2^3 = 8
+}</pre>
+    <div class="box box-tip">
+      <div class="box-label">Exam Formula</div>
+      After n calls to <code>fork()</code>, total processes = <strong>2<sup>n</sup></strong>. The number of new child processes = 2<sup>n</sup> – 1.
+    </div>
+  </div>
+
+  <div id="u2-mutex" class="topic">
+    <h3>Mutual Exclusion & Critical Section</h3>
+    <div class="box box-def">
+      <div class="box-label">Critical Section</div>
+      A <strong>critical section</strong> is a segment of code where a process accesses <strong>shared resources</strong> (e.g., shared variables, files, hardware). Only one process must execute in its critical section at a time.
+    </div>
+    <h4>Requirements for a Valid CS Solution <span class="chip chip-green">PYQ 2016-17, 2017-18, 2024-25</span></h4>
+    <ul>
+      <li><strong>Mutual Exclusion</strong> — If process Pi is in CS, no other process can be in CS.</li>
+      <li><strong>Progress</strong> — If no process is in CS, one of the waiting processes must eventually enter.</li>
+      <li><strong>Bounded Waiting</strong> — There's a limit on how many times other processes can enter CS before a waiting process does (no starvation).</li>
+    </ul>
+
+    <h4>Dekker's Algorithm <span class="chip chip-green">PYQ 2016-17, 2014-15, 2023-24</span></h4>
+    <p>First software solution to the critical section problem for 2 processes. Uses two variables: <code>flag[]</code> (intention to enter) and <code>turn</code> (whose turn it is).</p>
+    <pre>// Process P0
+flag[0] = true;
+while (flag[1]) {
+    if (turn != 0) {
+        flag[0] = false;
+        while (turn != 0);  // busy wait
+        flag[0] = true;
+    }
+}
+// === Critical Section ===
+turn = 1;
+flag[0] = false;</pre>
+    <p><strong>Key insight:</strong> If both want to enter, <code>turn</code> decides — the non-favored process backs off (sets flag to false) and waits.</p>
+
+    <h4>Peterson's Algorithm <span class="chip chip-green">PYQ 2015-16, 2014-15</span></h4>
+    <p>Simpler, more elegant 2-process solution. Uses <code>flag[]</code> and <code>turn</code>.</p>
+    <pre>// Process Pi (other is Pj)
+flag[i] = true;
+turn = j;                    // Yield to j
+while (flag[j] && turn == j); // Wait if j wants and it's j's turn
+// === Critical Section ===
+flag[i] = false;</pre>
+    <p>Peterson's satisfies all 3 requirements. <strong>Remember:</strong> It uses <em>polite yielding</em> — "I want to enter, but you go first."</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Feature</th><th>Dekker's</th><th>Peterson's</th></tr>
+        <tr><td>Year</td><td>1965</td><td>1981</td></tr>
+        <tr><td>Simplicity</td><td>Complex</td><td>Simple</td></tr>
+        <tr><td>Busy Waiting</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Starvation</td><td>No (bounded waiting)</td><td>No</td></tr>
+        <tr><td>Approach</td><td>Contention resolution</td><td>Polite yielding</td></tr>
+      </table>
+    </div>
+
+    <h4>Test-and-Set Instruction <span class="chip chip-green">PYQ 2017-18</span></h4>
+    <pre>// Hardware atomic instruction
+boolean TestAndSet(boolean *target) {
+    boolean rv = *target;
+    *target = true;
+    return rv;
+}
+// Usage:
+while (TestAndSet(&lock));  // Spin until lock is false (available)
+// === Critical Section ===
+lock = false;</pre>
+    <p><strong>Advantage:</strong> Hardware ensures atomicity — no race condition possible. <strong>Disadvantage:</strong> Busy waiting (wastes CPU cycles). Used in spinlocks in Linux kernel.</p>
+  </div>
+
+  <div id="u2-semaphore" class="topic">
+    <h3>Semaphores <span class="chip chip-green">PYQ 2014-15, 2015-16, 2022-23</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      A <strong>semaphore</strong> is an integer variable (S) accessed only through two atomic operations: <code>wait(S)</code> and <code>signal(S)</code>, proposed by Dijkstra. It solves the busy-waiting problem of earlier solutions.
+    </div>
+    <pre>wait(S):
+    while S <= 0;  // busy wait (counting semaphore)
+    S--;
+
+signal(S):
+    S++;</pre>
+    <p><strong>Better implementation (no busy waiting):</strong></p>
+    <pre>wait(S):
+    S.value--;
+    if S.value < 0:
+        add process to S.list
+        block()         // suspend process (no CPU waste!)
+
+signal(S):
+    S.value++;
+    if S.value <= 0:
+        remove process P from S.list
+        wakeup(P)       // unblock it</pre>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Feature</th><th>Binary Semaphore (Mutex)</th><th>Counting Semaphore</th></tr>
+        <tr><td>Value range</td><td>0 or 1 only</td><td>Any non-negative integer</td></tr>
+        <tr><td>Purpose</td><td>Mutual exclusion</td><td>Control access to N resources</td></tr>
+        <tr><td>Example</td><td>Protecting a single printer</td><td>Managing a pool of 5 DB connections</td></tr>
+        <tr><td>Initial value</td><td>1 (unlocked)</td><td>N (number of resources)</td></tr>
+      </table>
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Real-World: Android Binder IPC</div>
+      Android's Binder driver uses semaphores to manage access to the binder thread pool. When all threads are busy, new requests wait (semaphore = 0). When a thread finishes, it signals (semaphore++), waking up the next waiting request.
+    </div>
+  </div>
+
+  <div id="u2-classical" class="topic">
+    <h3>Classical Concurrency Problems</h3>
+    <h4>1. Producer-Consumer (Bounded Buffer) <span class="chip chip-green">PYQ 2016-17, 2018-19, 2022-23</span></h4>
+    <p>Producer generates items into a buffer; Consumer removes items. Buffer has finite capacity N.</p>
+    <pre>Semaphore mutex = 1;     // mutual exclusion for buffer access
+Semaphore empty = N;     // number of empty slots
+Semaphore full = 0;      // number of filled slots
+
+Producer:
+  wait(empty);     // wait if buffer full
+  wait(mutex);
+  // add item to buffer
+  signal(mutex);
+  signal(full);    // notify consumer
+
+Consumer:
+  wait(full);      // wait if buffer empty
+  wait(mutex);
+  // remove item from buffer
+  signal(mutex);
+  signal(empty);   // notify producer</pre>
+    <div class="box box-eg">
+      <div class="box-label">Buffer Problem from PYQ 2024-25</div>
+      Buffer size = 4. Producer produces 6, Consumer consumes 3. Items in buffer = 6 – 3 = <strong>3</strong>. (Buffer can hold 4 max; producer blocks after filling 4; after consumer takes 3, producer can add 3 more → final = 3 items in buffer)
+    </div>
+
+    <h4>2. Dining Philosophers <span class="chip chip-green">PYQ 2017-18, 2021-22, 2022-23</span></h4>
+    <p>5 philosophers sit at a round table. Each needs 2 chopsticks (left and right) to eat. There are only 5 chopsticks (one between each pair).</p>
+    <div class="diagram">
+      <svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif">
+        <!-- Table -->
+        <circle cx="160" cy="150" r="70" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1.5"/>
+        <!-- Philosophers at positions -->
+        <circle cx="160" cy="65" r="18" fill="#1a2236" stroke="#34d399" stroke-width="2"/>
+        <text x="160" y="70" fill="#e2e8f0" text-anchor="middle" font-size="11" font-weight="700">P0</text>
+        <circle cx="237" cy="105" r="18" fill="#1a2236" stroke="#34d399" stroke-width="2"/>
+        <text x="237" y="110" fill="#e2e8f0" text-anchor="middle" font-size="11" font-weight="700">P1</text>
+        <circle cx="210" cy="195" r="18" fill="#1a2236" stroke="#34d399" stroke-width="2"/>
+        <text x="210" y="200" fill="#e2e8f0" text-anchor="middle" font-size="11" font-weight="700">P2</text>
+        <circle cx="110" cy="195" r="18" fill="#1a2236" stroke="#34d399" stroke-width="2"/>
+        <text x="110" y="200" fill="#e2e8f0" text-anchor="middle" font-size="11" font-weight="700">P3</text>
+        <circle cx="83" cy="105" r="18" fill="#1a2236" stroke="#34d399" stroke-width="2"/>
+        <text x="83" y="110" fill="#e2e8f0" text-anchor="middle" font-size="11" font-weight="700">P4</text>
+        <!-- Chopsticks -->
+        <line x1="197" y1="78" x2="225" y2="97" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="235" y1="145" x2="228" y2="175" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="180" y1="205" x2="145" y2="205" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="100" y1="175" x2="94" y2="145" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="95" y1="97" x2="126" y2="78" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+        <text x="160" y="155" fill="#94a3b8" text-anchor="middle" font-size="12">Table</text>
+        <text x="160" y="170" fill="#94a3b8" text-anchor="middle" font-size="10">🍴 = chopstick</text>
+      </svg>
+    </div>
+    <p><strong>Problem:</strong> If all 5 pick up the left chopstick simultaneously → <strong>deadlock</strong> (circular wait).</p>
+    <p><strong>Solution using monitors / Semaphores:</strong></p>
+    <pre>Semaphore chopstick[5] = {1,1,1,1,1};
+
+Philosopher i:
+  wait(chopstick[i]);              // pick left
+  wait(chopstick[(i+1) % 5]);     // pick right
+  // eat
+  signal(chopstick[i]);
+  signal(chopstick[(i+1) % 5]);
+
+// Deadlock prevention: Allow at most 4 philosophers to sit simultaneously</pre>
+
+    <h4>3. Sleeping Barber Problem</h4>
+    <p>A barbershop with N waiting chairs. If no customer → barber sleeps. If customer arrives and all chairs full → customer leaves. Otherwise customer sits and wakes barber.</p>
+    <pre>Semaphore customers = 0;  // # waiting customers
+Semaphore barbers = 0;    // # available barbers
+Semaphore mutex = 1;      // for waiting variable
+int waiting = 0;
+
+Barber:
+  wait(customers);    // sleep if no customers
+  wait(mutex);
+  waiting--;
+  signal(barbers);
+  signal(mutex);
+  cut_hair();
+
+Customer:
+  wait(mutex);
+  if waiting < N:
+    waiting++;
+    signal(customers);  // wake barber
+    signal(mutex);
+    wait(barbers);      // wait for barber
+    get_haircut();
+  else:
+    signal(mutex);      // leave (full)</pre>
+  </div>
+
+  <div id="u2-ipc" class="topic">
+    <h3>Inter-Process Communication (IPC) <span class="chip chip-green">PYQ 2015-16, 2021-22</span></h3>
+    <div class="comparison-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--u2)">Shared Memory</h4>
+        <ul>
+          <li>Processes share a common memory region</li>
+          <li>Fast — no kernel involvement after setup</li>
+          <li>Requires synchronization (semaphores)</li>
+          <li>Example: Producer-Consumer buffer</li>
+          <li>Linux: <code>shmget(), shmat()</code></li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--u3)">Message Passing</h4>
+        <ul>
+          <li>Processes send/receive messages via kernel</li>
+          <li>Slower — kernel mediates each message</li>
+          <li>No shared memory needed (distributed OK)</li>
+          <li>Example: Android Binder, Unix pipes</li>
+          <li>Easier to implement correctly</li>
+        </ul>
+      </div>
+    </div>
+    <h4>Other IPC Mechanisms</h4>
+    <ul>
+      <li><strong>Pipes</strong> — Unidirectional byte stream. <code>ls | grep txt</code> in Linux creates a pipe.</li>
+      <li><strong>Named Pipes (FIFOs)</strong> — Like pipes but have a name and can be used by unrelated processes.</li>
+      <li><strong>Sockets</strong> — Network communication. Chrome uses sockets to talk to web servers.</li>
+      <li><strong>Signals</strong> — Asynchronous notifications. <code>Ctrl+C</code> sends SIGINT signal in Linux.</li>
+      <li><strong>Message Queues</strong> — Messages queued in kernel. Processes post/retrieve independently.</li>
+    </ul>
+  </div>
+
+  <!-- UNIT 2 QUESTION BANK -->
+  <div id="u2-qbank" class="qbank">
+    <h3>📝 Unit 2 – Question Bank</h3>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What is Busy Waiting? How to overcome it using semaphores? <span class="chip chip-green">2017-18, 2015-16, 2022-23</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Busy Waiting:</strong> A process continuously checks a condition in a loop (spin-lock) wasting CPU cycles. Example: <code>while(flag) ;</code> <br><strong>Solution with semaphores:</strong> Instead of looping, process calls <code>block()</code> which suspends it and removes it from CPU. When the condition is met, <code>wakeup()</code> is called. This way, CPU time is freed for other processes.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> Two semaphores S1, S2 both = 1. P1: wait(S1); wait(S2). P2: wait(S2); wait(S1). Explain deadlock. <span class="chip chip-green">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Deadlock sequence: 1) P1 executes wait(S1) → S1=0. 2) Context switch. 3) P2 executes wait(S2) → S2=0. 4) P1 tries wait(S2) → S2=0, P1 blocks. 5) P2 tries wait(S1) → S1=0, P2 blocks. Both processes wait for each other forever → <strong>deadlock</strong>. This is a circular wait condition.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Compare Dekker's and Peterson's algorithms. <span class="chip chip-green">2023-24</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">See table in notes above. Key points: Both are software solutions for 2 processes. Both use busy waiting. Peterson's is simpler (published 1981, 16 years after Dekker 1965). Peterson uses "polite yielding" (turn = j), while Dekker uses contention resolution (back off and retry). Both satisfy mutual exclusion, progress, and bounded waiting.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> In Producer-Consumer with buffer size 4: Producer produces 6, Consumer consumes 3. Items in buffer? <span class="chip chip-green">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Step by step: Buffer capacity = 4. Producer adds 1,2,3,4 → buffer full (4 items). Producer tries to add 5th → blocked (empty semaphore = 0). Consumer removes 3 items → buffer = 1 item, signals producer. Producer can now add 2 more (items 5 and 6) → buffer = 3 items. <strong>Final answer: 3 items in buffer.</strong></div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> Process executes fork(); fork(); fork(); How many total processes? <span class="chip chip-green">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Formula: n fork() calls → 2^n total processes. With 3 forks: 2^3 = <strong>8 total processes</strong> (including original). New child processes created = 8 – 1 = 7.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  UNIT 3                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="unit3" class="unit u3-section">
+  <div class="unit-header">
+    <div class="unit-num u3">03</div>
+    <div class="unit-title">
+      <h2>CPU Scheduling & Deadlocks</h2>
+      <p>PCB · Process States · Scheduling Algorithms · Deadlock · Banker's Algorithm</p>
+    </div>
+  </div>
+
+  <div id="u3-pcb" class="topic">
+    <h3>Process States & PCB</h3>
+    <h4>Process State Diagram <span class="chip chip-yellow">PYQ 2014-15, 2016-17, 2024-25</span></h4>
+    <div class="diagram">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif" font-size="12">
+        <!-- States -->
+        <rect x="10" y="80" width="90" height="40" rx="8" fill="rgba(245,158,11,.15)" stroke="#f59e0b" stroke-width="1.5"/>
+        <text x="55" y="105" text-anchor="middle" fill="#e2e8f0" font-weight="700">New</text>
+
+        <rect x="150" y="80" width="90" height="40" rx="8" fill="rgba(56,189,248,.15)" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="195" y="105" text-anchor="middle" fill="#e2e8f0" font-weight="700">Ready</text>
+
+        <rect x="300" y="80" width="90" height="40" rx="8" fill="rgba(52,211,153,.2)" stroke="#34d399" stroke-width="2"/>
+        <text x="345" y="105" text-anchor="middle" fill="#e2e8f0" font-weight="700">Running</text>
+
+        <rect x="450" y="20" width="90" height="40" rx="8" fill="rgba(167,139,250,.15)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="495" y="45" text-anchor="middle" fill="#e2e8f0" font-weight="700">Waiting</text>
+
+        <rect x="570" y="80" width="90" height="40" rx="8" fill="rgba(251,113,133,.15)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="615" y="105" text-anchor="middle" fill="#e2e8f0" font-weight="700">Terminated</text>
+
+        <!-- Arrows -->
+        <line x1="100" y1="100" x2="148" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a)"/>
+        <text x="124" y="93" fill="#94a3b8" text-anchor="middle" font-size="10">admitted</text>
+
+        <line x1="240" y1="100" x2="298" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a)"/>
+        <text x="269" y="93" fill="#94a3b8" text-anchor="middle" font-size="10">dispatch</text>
+
+        <path d="M 250 108 Q 260 130 295 108" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+        <text x="270" y="140" fill="#94a3b8" text-anchor="middle" font-size="10">timeout</text>
+
+        <path d="M 345 80 Q 420 20 448 40" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+        <text x="400" y="40" fill="#94a3b8" font-size="10">I/O wait</text>
+
+        <path d="M 448 55 Q 350 65 298 90" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+        <text x="380" y="82" fill="#94a3b8" font-size="10">I/O done</text>
+
+        <line x1="390" y1="100" x2="568" y2="100" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a)"/>
+        <text x="480" y="93" fill="#94a3b8" text-anchor="middle" font-size="10">exit</text>
+
+        <defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M 0 0 L 6 3 L 0 6 z" fill="#94a3b8"/></marker></defs>
+      </svg>
+    </div>
+
+    <h4>Process Control Block (PCB) <span class="chip chip-yellow">PYQ 2016-17, 2018-19, 2021-22</span></h4>
+    <p>The PCB is a data structure maintained by the OS for every process. It's the process's "identity card."</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>PCB Field</th><th>What it stores</th><th>Example value</th></tr>
+        <tr><td>Process ID (PID)</td><td>Unique numeric identifier</td><td>1234</td></tr>
+        <tr><td>Process State</td><td>Current state</td><td>Running</td></tr>
+        <tr><td>Program Counter</td><td>Address of next instruction</td><td>0x004A21F0</td></tr>
+        <tr><td>CPU Registers</td><td>All register values (for context switch)</td><td>AX=5, BX=10...</td></tr>
+        <tr><td>Memory Limits</td><td>Base & limit registers</td><td>Base=0x1000, Limit=4096</td></tr>
+        <tr><td>Open Files List</td><td>File descriptors</td><td>fd[0]=stdin, fd[1]=stdout</td></tr>
+        <tr><td>Scheduling Info</td><td>Priority, quantum used</td><td>Priority=5</td></tr>
+        <tr><td>Parent PID</td><td>PID of creating process</td><td>1000</td></tr>
+      </table>
+    </div>
+
+    <h4>Schedulers <span class="chip chip-yellow">PYQ 2016-17</span></h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Scheduler</th><th>Frequency</th><th>Function</th></tr>
+        <tr><td>Long-term (Job)</td><td>Rare (minutes)</td><td>Selects jobs from job queue → ready queue. Controls degree of multiprogramming.</td></tr>
+        <tr><td>Short-term (CPU)</td><td>Very frequent (ms)</td><td>Selects process from ready queue → CPU. The main scheduling decision.</td></tr>
+        <tr><td>Medium-term</td><td>Moderate</td><td>Swaps processes in/out of memory (swapping). Reduces multiprogramming temporarily.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="u3-threads" class="topic">
+    <h3>Threads & Thread Models <span class="chip chip-yellow">PYQ 2014-15, 2018-19, 2021-22</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Thread</div>
+      A <strong>thread</strong> is the basic unit of CPU utilization. A process can have multiple threads sharing its code, data, and open files, but each thread has its own stack, registers, and program counter.
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Android Example</div>
+      When you use <strong>WhatsApp</strong>: Thread 1 = UI rendering, Thread 2 = receiving messages (network), Thread 3 = playing voice note. All share the same app's memory but execute independently.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Thread Model</th><th>Description</th><th>Pros</th><th>Cons</th></tr>
+        <tr><td>Many-to-One</td><td>Many user threads → 1 kernel thread</td><td>Fast thread management</td><td>One block = all block; no true parallelism</td></tr>
+        <tr><td>One-to-One</td><td>Each user thread → 1 kernel thread</td><td>True parallelism; one block doesn't affect others</td><td>Overhead of many kernel threads; Windows, Linux use this</td></tr>
+        <tr><td>Many-to-Many</td><td>M user threads → N kernel threads (N ≤ M)</td><td>Balance of both; flexible</td><td>Complex to implement; Solaris LWP</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="u3-algos" class="topic">
+    <h3>CPU Scheduling Algorithms <span class="chip chip-yellow">PYQ 2017-18, 2018-19, 2024-25</span></h3>
+    <h4>Performance Criteria</h4>
+    <ul>
+      <li><strong>CPU Utilization</strong> — Keep CPU as busy as possible (target: 90%+).</li>
+      <li><strong>Throughput</strong> — # processes completed per unit time.</li>
+      <li><strong>Turnaround Time (TAT)</strong> = Completion time – Arrival time.</li>
+      <li><strong>Waiting Time (WT)</strong> = TAT – Burst time.</li>
+      <li><strong>Response Time</strong> = Time from submission to first response.</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Algorithm</th><th>Type</th><th>Description</th><th>Starvation?</th><th>Overhead</th></tr>
+        <tr><td>FCFS</td><td>Non-preemptive</td><td>Jobs served in arrival order (queue). Simple. Convoy effect issue.</td><td>No</td><td>Low</td></tr>
+        <tr><td>SJF</td><td>Non-preemptive</td><td>Shortest burst time runs next. Optimal for avg WT but needs future knowledge.</td><td>Yes (long jobs)</td><td>Low</td></tr>
+        <tr><td>SRTF</td><td>Preemptive</td><td>Preemptive SJF. New arrival preempts if shorter remaining time.</td><td>Yes</td><td>High</td></tr>
+        <tr><td>Round Robin</td><td>Preemptive</td><td>Each process gets time quantum Q. After Q expires, preempted → back of queue.</td><td>No</td><td>Medium</td></tr>
+        <tr><td>Priority</td><td>Both</td><td>Highest priority runs first. Can be preemptive or non-preemptive.</td><td>Yes (aging fixes)</td><td>Medium</td></tr>
+        <tr><td>Multilevel Queue</td><td>Preemptive</td><td>Multiple queues with different priorities. Processes don't move between queues.</td><td>Yes</td><td>High</td></tr>
+        <tr><td>Multilevel Feedback Queue</td><td>Preemptive</td><td>Like multilevel but processes can move between queues based on behavior. Most flexible.</td><td>No (with aging)</td><td>Very High</td></tr>
+      </table>
+    </div>
+
+    <h4>Worked Example – FCFS, SJF, RR <span class="chip chip-yellow">PYQ 2024-25</span></h4>
+    <p>Processes: P1(0, 11, pri=2), P2(5, 28, pri=0), P3(12, 2, pri=3), P4(2, 10, pri=1), P5(9, 16, pri=4)</p>
+    <div class="box box-tip">
+      <div class="box-label">Preemptive Priority (lower # = higher priority from PYQ 2024-25)</div>
+      Order by priority (0=highest): P2(0) > P4(1) > P1(2) > P3(3) > P5(4)<br>
+      Timeline: 0-2: P1 starts → P4 arrives at 2 (priority 1 > P1's 2) → P4 preempts → 2-5: P4 runs → P2 arrives at 5 (priority 0) → P2 preempts → 5-33: P2 finishes → P4 resumes → P4 finishes at 41 → P1 at 50 → P3 at 52 → P5 at 68<br>
+      WT(P2)=0, WT(P4)=(2-2)+(33-5)=28... (see full Gantt chart calculation)
+    </div>
+  </div>
+
+  <div id="u3-deadlock" class="topic">
+    <h3>Deadlock <span class="chip chip-yellow">PYQ 2017-18, 2021-22, 2022-23, 2024-25</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Definition</div>
+      A <strong>deadlock</strong> is a situation where a set of processes are permanently blocked — each waiting for a resource held by another process in the set. None can proceed.
+    </div>
+
+    <h4>Four Necessary Conditions (Coffman Conditions)</h4>
+    <ul>
+      <li><strong>Mutual Exclusion</strong> — At least one resource must be non-shareable (e.g., printer).</li>
+      <li><strong>Hold and Wait</strong> — A process holds ≥1 resource and waits for more.</li>
+      <li><strong>No Preemption</strong> — Resources cannot be forcibly taken from a process.</li>
+      <li><strong>Circular Wait</strong> — P1 waits for P2, P2 waits for P3, ..., Pn waits for P1.</li>
+    </ul>
+    <div class="box box-warn">
+      <div class="box-label">Remember</div>
+      <strong>All four conditions must hold simultaneously</strong> for deadlock to occur. Breaking any one prevents deadlock.
+    </div>
+
+    <h4>Deadlock Handling Strategies</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Strategy</th><th>Approach</th><th>Cost</th><th>Example</th></tr>
+        <tr><td>Prevention</td><td>Ensure ≥1 Coffman condition never holds by design</td><td>Low efficiency</td><td>Require all resources upfront (No Hold-and-Wait)</td></tr>
+        <tr><td>Avoidance</td><td>Dynamically check if allocation is "safe"</td><td>Medium</td><td>Banker's Algorithm</td></tr>
+        <tr><td>Detection + Recovery</td><td>Allow deadlock, detect it, then recover</td><td>Recovery cost</td><td>Kill a process, preempt resources</td></tr>
+        <tr><td>Ignore (Ostrich)</td><td>Pretend deadlocks don't happen</td><td>Risk of freeze</td><td>Windows, old Linux (rare deadlock)</td></tr>
+      </table>
+    </div>
+
+    <h4>Banker's Algorithm (Deadlock Avoidance) <span class="chip chip-yellow">PYQ 2017-18, 2015-16, 2022-23</span></h4>
+    <div class="box box-def">
+      <div class="box-label">Concept</div>
+      Like a bank that never allocates money such that it can't satisfy all customers. The OS only allocates resources if the resulting state is <strong>safe</strong> (∃ a sequence where all processes can finish).
+    </div>
+    <p><strong>Key matrices:</strong></p>
+    <ul>
+      <li><code>Allocation[i][j]</code> — How much of resource j process i currently holds.</li>
+      <li><code>Max[i][j]</code> — Maximum demand of resource j by process i.</li>
+      <li><code>Need[i][j]</code> = <code>Max[i][j] – Allocation[i][j]</code></li>
+      <li><code>Available[j]</code> — Currently free units of resource j.</li>
+    </ul>
+
+    <h4>Safety Algorithm Steps:</h4>
+    <ol>
+      <li>Find process whose <code>Need ≤ Available</code>.</li>
+      <li>If found: "pretend" it runs, release its allocation → <code>Available += Allocation</code>.</li>
+      <li>Repeat until all processes finish (safe) or none can proceed (unsafe).</li>
+    </ol>
+
+    <div class="box box-eg">
+      <div class="box-label">PYQ 2022-23 – Banker's Example (3 resources A,B,C)</div>
+      <strong>Available = [2,1,0]</strong><br>
+      Need matrix: P0=[3,2,2], P1=[1,0,2], P2=[5,-1,-2]→invalid… (see full table in PYQ notes)<br>
+      Safe sequence: Start with process whose Need ≤ Available. P1 need=[1,0,2] > [2,1,0]? P1 needs 2 of C but only 0 available → skip. P0 need=[3,2,2] > available → skip. P3 need=[7,4,3]... Try each systematically.
+    </div>
+  </div>
+
+  <!-- UNIT 3 QUESTION BANK -->
+  <div id="u3-qbank" class="qbank">
+    <h3>📝 Unit 3 – Question Bank</h3>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> List three components stored in a PCB. <span class="chip chip-yellow">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">1. <strong>Process ID (PID)</strong> — unique identifier. 2. <strong>Program Counter</strong> — address of next instruction to execute. 3. <strong>CPU Register values</strong> — saved state of all registers (for context switching). Other valid answers: process state, memory limits, scheduling priority, open file list.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What do you mean by safe state and unsafe state? <span class="chip chip-yellow">2021-22</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Safe state:</strong> A state is safe if there exists a safe sequence — an ordering of all processes such that each can obtain its maximum resources and complete. <strong>Unsafe state:</strong> No such sequence exists; deadlock may (not necessarily will) occur. The OS avoids unsafe states using Banker's Algorithm.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> A system has 9 tape drives. Current: P1=3, P2=1, P3=3. Max: P1=7, P2=6, P3=5. Is system safe? <span class="chip chip-yellow">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">
+        Total allocated = 3+1+3 = 7. Available = 9-7 = 2.<br>
+        Need: P1=7-3=4, P2=6-1=5, P3=5-3=2.<br>
+        Safety check: P3 needs 2 ≤ available(2) → P3 runs, releases 3 → Available=5. P1 needs 4 ≤ 5 → P1 runs, releases 3 → Available=8. P2 needs 5 ≤ 8 → P2 runs. Safe sequence: <strong>P3→P1→P2. System is SAFE, NOT deadlocked.</strong> Answer: Option 2.
+      </div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Compare FCFS, SJF, and Round Robin scheduling algorithms. <span class="chip chip-yellow">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">See the scheduling table in notes. Key points: FCFS = simple, non-preemptive, convoy effect, no starvation. SJF = optimal average WT, non-preemptive, needs burst time knowledge, starvation possible. RR = preemptive, fair, best for time-sharing, performance depends heavily on time quantum Q (too small = too many context switches; too large = behaves like FCFS).</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  UNIT 4                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="unit4" class="unit u4-section">
+  <div class="unit-header">
+    <div class="unit-num u4">04</div>
+    <div class="unit-title">
+      <h2>Memory Management</h2>
+      <p>Partitioning · Paging · Segmentation · Virtual Memory · Page Replacement</p>
+    </div>
+  </div>
+
+  <div id="u4-basic" class="topic">
+    <h3>Memory Management Concepts</h3>
+    <h4>Evolution of Memory Management</h4>
+    <div class="flow">
+      <div class="flow-box" style="border-color:var(--muted);color:var(--muted)">Bare Machine</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color:var(--u4);color:var(--u4)">Resident Monitor</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color:var(--u4);color:var(--u4)">Fixed Partitions</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color:var(--u4);color:var(--u4)">Variable Partitions</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color:var(--u4);color:var(--u4)">Paging/VM</div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Scheme</th><th>Description</th><th>Problem</th></tr>
+        <tr><td>Bare Machine</td><td>No OS; programmer controls everything</td><td>No protection, no sharing</td></tr>
+        <tr><td>Resident Monitor</td><td>Simple OS remains in memory; runs one job at a time</td><td>CPU idle during I/O; no multiprogramming</td></tr>
+        <tr><td>Fixed Partitions (MFT)</td><td>Memory divided into fixed-size partitions at startup</td><td>Internal fragmentation (wasted space within partition)</td></tr>
+        <tr><td>Variable Partitions (MVT)</td><td>Partitions sized to fit each job exactly</td><td>External fragmentation (holes between partitions)</td></tr>
+        <tr><td>Paging</td><td>Fixed-size pages; eliminates external fragmentation</td><td>Internal fragmentation (last page may not be full)</td></tr>
+        <tr><td>Segmentation</td><td>Variable-size segments by logical structure</td><td>External fragmentation</td></tr>
+        <tr><td>Virtual Memory</td><td>Run programs larger than physical RAM</td><td>Thrashing if too many pages swapped</td></tr>
+      </table>
+    </div>
+
+    <h4>Fragmentation <span class="chip chip-purple">PYQ 2016-17, 2022-23</span></h4>
+    <div class="comparison-grid">
+      <div class="cg-card">
+        <h4 style="color:var(--u4)">Internal Fragmentation</h4>
+        <ul>
+          <li>Wasted space <em>inside</em> an allocated partition</li>
+          <li>Happens in fixed partitioning and paging</li>
+          <li>Example: 100 KB partition, 90 KB process → 10 KB wasted inside</li>
+          <li>Cannot be reused by other processes</li>
+        </ul>
+      </div>
+      <div class="cg-card">
+        <h4 style="color:var(--u5)">External Fragmentation</h4>
+        <ul>
+          <li>Wasted space <em>outside</em> allocations (free holes)</li>
+          <li>Happens in variable partitioning</li>
+          <li>Total free = enough, but not contiguous</li>
+          <li>Solution: Compaction (move processes together)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="u4-paging" class="topic">
+    <h3>Paging & Segmentation <span class="chip chip-purple">PYQ 2018-19, 2022-23, 2023-24</span></h3>
+    <h4>Paging</h4>
+    <p>Physical memory divided into equal-size <strong>frames</strong>. Logical memory divided into equal-size <strong>pages</strong>. A page table maps pages to frames.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" font-family="'Source Sans 3',sans-serif" font-size="12">
+        <!-- Logical -->
+        <text x="80" y="20" text-anchor="middle" fill="#a78bfa" font-weight="700">Logical Address</text>
+        <rect x="10" y="30" width="60" height="32" rx="4" fill="rgba(167,139,250,.15)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="40" y="51" text-anchor="middle" fill="#e2e8f0">Page #</text>
+        <rect x="75" y="30" width="60" height="32" rx="4" fill="rgba(167,139,250,.08)" stroke="#a78bfa" stroke-width="1"/>
+        <text x="105" y="51" text-anchor="middle" fill="#e2e8f0">Offset</text>
+
+        <!-- Arrow -->
+        <line x1="145" y1="46" x2="185" y2="46" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a2)"/>
+
+        <!-- Page Table -->
+        <text x="240" y="20" text-anchor="middle" fill="#94a3b8" font-weight="700">Page Table</text>
+        <rect x="185" y="28" width="120" height="110" rx="6" fill="var(--surface2)" stroke="var(--border)" stroke-width="1.5"/>
+        <line x1="185" y1="50" x2="305" y2="50" stroke="var(--border)" stroke-width="1"/>
+        <line x1="185" y1="72" x2="305" y2="72" stroke="var(--border)" stroke-width="1"/>
+        <line x1="185" y1="94" x2="305" y2="94" stroke="var(--border)" stroke-width="1"/>
+        <text x="240" y="44" text-anchor="middle" fill="#94a3b8" font-size="11">Page 0 → Frame 3</text>
+        <text x="240" y="66" text-anchor="middle" fill="#94a3b8" font-size="11">Page 1 → Frame 7</text>
+        <text x="240" y="88" text-anchor="middle" fill="#94a3b8" font-size="11">Page 2 → Frame 1</text>
+        <text x="240" y="110" text-anchor="middle" fill="#94a3b8" font-size="11">Page 3 → Frame 5</text>
+
+        <!-- Arrow -->
+        <line x1="305" y1="46" x2="345" y2="46" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#a2)"/>
+
+        <!-- Physical Address -->
+        <text x="430" y="20" text-anchor="middle" fill="#34d399" font-weight="700">Physical Address</text>
+        <rect x="345" y="30" width="70" height="32" rx="4" fill="rgba(52,211,153,.15)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="380" y="51" text-anchor="middle" fill="#e2e8f0">Frame #</text>
+        <rect x="420" y="30" width="60" height="32" rx="4" fill="rgba(52,211,153,.08)" stroke="#34d399" stroke-width="1"/>
+        <text x="450" y="51" text-anchor="middle" fill="#e2e8f0">Offset</text>
+
+        <text x="300" y="165" text-anchor="middle" fill="#94a3b8" font-size="11">Physical Addr = Frame# × FrameSize + Offset</text>
+
+        <defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M 0 0 L 6 3 L 0 6 z" fill="#94a3b8"/></marker></defs>
+      </svg>
+    </div>
+
+    <h4>TLB (Translation Lookaside Buffer)</h4>
+    <p>A high-speed cache for the page table. Most lookups hit the TLB and skip the slow main memory page table access.</p>
+    <p><strong>Effective Access Time (EAT) formula:</strong></p>
+    <pre>EAT = α × (TLB_time + memory_time) + (1-α) × (TLB_time + 2 × memory_time)
+Where α = hit ratio</pre>
+    <div class="box box-eg">
+      <div class="box-label">PYQ Calculation 2022-23</div>
+      TLB access = 100ns, Memory access = 80ns more (total 180ns for memory). Hit ratio = α.<br>
+      EAT = 125ns → α(100+80) + (1-α)(100+80+80) = 125 → 180α + 260(1-α) = 125 → 180α + 260 - 260α = 125 → -80α = -135 → <strong>α = 135/80 ≈ 0.9375 (93.75% hit ratio)</strong>
+    </div>
+
+    <h4>Segmentation vs. Paging</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Feature</th><th>Paging</th><th>Segmentation</th></tr>
+        <tr><td>Division</td><td>Fixed-size pages</td><td>Variable-size logical segments</td></tr>
+        <tr><td>Programmer visibility</td><td>Invisible (hardware does it)</td><td>Visible (programmer defines segments)</td></tr>
+        <tr><td>Fragmentation</td><td>Internal only</td><td>External only</td></tr>
+        <tr><td>Address format</td><td>Page# + Offset</td><td>Segment# + Offset</td></tr>
+        <tr><td>Example</td><td>x86 protected mode</td><td>Intel IA-32 real mode</td></tr>
+        <tr><td>Sharing</td><td>Share at page granularity</td><td>Share at segment granularity (better)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="u4-virtual" class="topic">
+    <h3>Virtual Memory & Demand Paging <span class="chip chip-purple">PYQ 2016-17, 2022-23</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Virtual Memory</div>
+      A technique that allows execution of processes that are not completely in memory. The logical address space can be larger than physical memory. Pages are loaded on demand.
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Real Example</div>
+      Your laptop has 8GB RAM. You run Photoshop (2GB), Chrome (3GB), and try to open a 6GB video — total 11GB > 8GB physical. The OS uses <strong>virtual memory</strong> (swap space on SSD) to keep only active pages in RAM. Rarely used parts are swapped to disk.
+    </div>
+
+    <h4>Demand Paging</h4>
+    <p>Pages are loaded into memory <strong>only when accessed</strong> (not all at start). A <strong>page fault</strong> occurs when a referenced page is not in memory.</p>
+    <p><strong>Page Fault Handling:</strong></p>
+    <ol>
+      <li>Process accesses a page → check valid bit in page table.</li>
+      <li>Valid bit = 0 → page fault trap → kernel.</li>
+      <li>Kernel finds page on disk.</li>
+      <li>Load page into free frame.</li>
+      <li>Update page table, set valid bit = 1.</li>
+      <li>Restart the faulting instruction.</li>
+    </ol>
+
+    <h4>Thrashing <span class="chip chip-purple">PYQ 2017-18, 2016-17, 2022-23</span></h4>
+    <div class="box box-def">
+      <div class="box-label">Thrashing</div>
+      Thrashing occurs when a process spends more time paging than executing — it constantly causes page faults. The OS is so busy swapping pages that useful work stops.
+    </div>
+    <p><strong>Cause:</strong> Too many processes in memory → each has too few frames → high page fault rate → CPU utilization drops → OS admits more processes → even worse.</p>
+    <p><strong>Solution:</strong> Working Set Model — keep only the "working set" (recently used pages) of each process in memory. Suspend processes if total working sets exceed available frames.</p>
+
+    <h4>Locality of Reference</h4>
+    <p>Programs tend to access the same set of addresses repeatedly (temporal locality) and nearby addresses together (spatial locality). This is why LRU and demand paging work well in practice.</p>
+  </div>
+
+  <div id="u4-replacement" class="topic">
+    <h3>Page Replacement Algorithms <span class="chip chip-purple">PYQ 2018-19, 2015-16, 2017-18, 2021-22</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Purpose</div>
+      When a page fault occurs and no free frames are available, we must <strong>replace</strong> a page. The goal is to minimize future page faults.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Algorithm</th><th>Policy</th><th>Belady's Anomaly?</th><th>Optimal?</th></tr>
+        <tr><td>FIFO</td><td>Replace oldest page in memory</td><td>Yes ✗</td><td>No</td></tr>
+        <tr><td>Optimal (OPT)</td><td>Replace page not used for longest time in future</td><td>No ✓</td><td>Yes (theoretical)</td></tr>
+        <tr><td>LRU</td><td>Replace page least recently used</td><td>No ✓</td><td>Near-optimal</td></tr>
+        <tr><td>LFU</td><td>Replace page used least frequently</td><td>No</td><td>No</td></tr>
+        <tr><td>Clock (Second Chance)</td><td>FIFO but gives pages a second chance (reference bit)</td><td>No</td><td>Approximates LRU</td></tr>
+      </table>
+    </div>
+
+    <h4>Worked Example – PYQ 2018-19 (FIFO, OPT with 3 frames)</h4>
+    <p>Reference string: <code>7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1</code></p>
+    <pre>FIFO with 3 frames:
+Ref:  7  0  1  2  0  3  0  4  2  3  0  3  2  1  2  0  1  7  0  1
+F1:   7  7  7  2  2  2  2  4  4  4  0  0  0  0  0  0  0  7  7  7
+F2:   -  0  0  0  0  3  3  3  2  2  2  2  2  1  1  1  1  1  0  0
+F3:   -  -  1  1  1  1  0  0  0  3  3  3  3  3  2  2  2  2  2  1
+PF:   *  *  *  *     *     *        *           *     *        *
+Total Page Faults = 15</pre>
+
+    <div class="box box-warn">
+      <div class="box-label">Belady's Anomaly</div>
+      In FIFO, adding more frames can sometimes <em>increase</em> page faults! This is Belady's Anomaly. LRU and OPT are <strong>stack algorithms</strong> and do NOT suffer from this anomaly.
+    </div>
+
+    <h4>PYQ 2024-25 – Page Table Size Calculation</h4>
+    <pre>32-bit logical address, 20-bit physical, page size = 2048 bytes = 2^11 bytes
+Offset bits = log2(2048) = 11 bits
+Page number bits = 32 - 11 = 21 bits
+Max entries in page table = 2^21 = 2,097,152 entries</pre>
+  </div>
+
+  <!-- UNIT 4 QUESTION BANK -->
+  <div id="u4-qbank" class="qbank">
+    <h3>📝 Unit 4 – Question Bank</h3>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What is the purpose of a page replacement algorithm? <span class="chip chip-purple">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">When a page fault occurs and memory is full, a page replacement algorithm decides which page to evict (remove) from memory to make space for the new page. The goal is to minimize the total number of future page faults, improving system performance and reducing disk I/O.</div>
+    </div>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> What do you mean by Belady's anomaly? Which algorithm suffers from it? <span class="chip chip-purple">2017-18</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">Belady's Anomaly: The counterintuitive phenomenon where increasing the number of memory frames leads to more page faults (not fewer). Only <strong>FIFO</strong> suffers from this. LRU and Optimal do not (they are stack algorithms). To fix: Don't use FIFO; use LRU or clock algorithm instead.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Reference string: 1,2,3,4,2,1,5,6,2,1,2,3,7,6,3,2,1,2,3,6. FIFO, LRU, OPT with 3 frames. <span class="chip chip-purple">2015-16, 2017-18</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">
+        <strong>FIFO (3 frames):</strong> Page faults = 16<br>
+        <strong>LRU (3 frames):</strong> Page faults = 14<br>
+        <strong>OPT (3 frames):</strong> Page faults = 11 (minimum possible)<br>
+        For 4 frames: FIFO=14, LRU=11, OPT=8. Note: OPT always gives minimum, LRU ≤ FIFO typically, and OPT ≤ LRU always.
+      </div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> What causes thrashing? How to eliminate it? <span class="chip chip-purple">2017-18, 2016-17</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Cause:</strong> Too many processes competing for too few frames → each process lacks enough pages → high page fault rate → OS spends all time paging → CPU utilization drops → degree of multiprogramming increases → worsens problem.<br><strong>Solutions:</strong> (1) Working Set Model — allocate frames = working set size. (2) Page Fault Frequency control — if fault rate too high, allocate more frames; if too low, remove frames. (3) Reduce degree of multiprogramming by swapping out some processes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  UNIT 5                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="unit5" class="unit u5-section">
+  <div class="unit-header">
+    <div class="unit-num u5">05</div>
+    <div class="unit-title">
+      <h2>I/O Management & File Systems</h2>
+      <p>I/O Devices · Buffering · Disk Scheduling · File Systems · RAID</p>
+    </div>
+  </div>
+
+  <div id="u5-io" class="topic">
+    <h3>I/O Management</h3>
+    <h4>I/O Buffering <span class="chip chip-red">PYQ 2021-22, 2017-18</span></h4>
+    <div class="box box-def">
+      <div class="box-label">Buffering</div>
+      A <strong>buffer</strong> is a memory area that holds data while it's transferred between devices (or between device and CPU). It smooths out speed differences.
+    </div>
+    <ul>
+      <li><strong>Single Buffering:</strong> One buffer — CPU and device share it. CPU waits while device fills buffer.</li>
+      <li><strong>Double Buffering:</strong> Two buffers — device fills buffer 1 while CPU processes buffer 2. Then swap. Better overlap.</li>
+      <li><strong>Circular Buffering:</strong> Ring of N buffers for high-speed streams (video streaming, audio capture).</li>
+    </ul>
+    <div class="box box-eg">
+      <div class="box-label">Real Example</div>
+      When you stream YouTube on Chrome, the browser pre-buffers several seconds of video ahead. This is circular buffering — new video chunks are fetched into buffers while older ones are displayed.
+    </div>
+
+    <h4>DMA (Direct Memory Access)</h4>
+    <p>DMA allows I/O devices to transfer data directly to/from memory without CPU involvement. The CPU only initiates the transfer and gets an interrupt when done.</p>
+    <div class="box box-eg">
+      <div class="box-label">Example</div>
+      When you copy a large file from USB drive on Linux, the USB controller uses DMA to move data directly to RAM. The CPU just starts the transfer and handles the completion interrupt — it's free to run other code during the transfer.
+    </div>
+
+    <h4>Spooling, Caching, Polling</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Technique</th><th>What it does</th><th>Real Example</th></tr>
+        <tr><td>Spooling</td><td>Queue jobs for slow devices (printer)</td><td>Windows Print Spooler queue</td></tr>
+        <tr><td>Caching</td><td>Store frequently accessed data in fast memory</td><td>L1/L2/L3 CPU cache, browser cache</td></tr>
+        <tr><td>Polling</td><td>CPU periodically checks if device needs service</td><td>Simple microcontroller I/O loops</td></tr>
+        <tr><td>Interrupt-driven I/O</td><td>Device interrupts CPU when ready</td><td>Keyboard presses, network packets arriving</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="u5-disk" class="topic">
+    <h3>Disk Scheduling <span class="chip chip-red">PYQ 2014-15, 2016-17, 2022-23</span></h3>
+    <div class="box box-def">
+      <div class="box-label">Key Terms</div>
+      <strong>Seek time:</strong> Time to move disk arm to desired track. <strong>Rotational latency:</strong> Time for disk to rotate so desired sector is under head. <strong>Transfer time:</strong> Time to read/write data. Total I/O time = Seek + Rotational + Transfer.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Algorithm</th><th>Policy</th><th>Advantage</th><th>Disadvantage</th></tr>
+        <tr><td>FCFS</td><td>Serve in arrival order</td><td>Fair, no starvation</td><td>High seek time, poor throughput</td></tr>
+        <tr><td>SSTF</td><td>Serve closest request to current head</td><td>Lower average seek time</td><td>Starvation of far requests</td></tr>
+        <tr><td>SCAN (Elevator)</td><td>Move in one direction, serve all, reverse</td><td>No starvation, good throughput</td><td>Uneven wait (middle tracks favored)</td></tr>
+        <tr><td>C-SCAN</td><td>Like SCAN but return to start without serving</td><td>More uniform wait time</td><td>Wasted time on return trip</td></tr>
+        <tr><td>LOOK</td><td>Like SCAN but only go as far as last request</td><td>Better than SCAN</td><td>Slightly complex</td></tr>
+        <tr><td>C-LOOK</td><td>Like C-SCAN but jump back after last request</td><td>Best uniform wait</td><td>Complex</td></tr>
+      </table>
+    </div>
+
+    <h4>Worked Example – PYQ 2022-23</h4>
+    <p>Disk queue: 45,20,90,10,50,60,80,25,70. Head starts at 49. SSTF:</p>
+    <pre>From 49: closest is 50(1) → 45(5) → 25(20) → 20(5) → 10(10) → 60(50) → 70(10) → 80(10) → 90(10)
+Total SSTF = 1+5+20+5+10+50+10+10+10 = 121 cylinders</pre>
+
+    <h4>C-LOOK Example from PYQ 2024-25</h4>
+    <pre>Queue: 47,38,121,191,87,11,92,10. Head at 63, moving toward larger.
+Sort requests: 10,11,38,47,87,92,121,191
+From 63, going up: 87→92→121→191 then jump to 10→11→38→47
+Movement: (87-63)+(92-87)+(121-92)+(191-121)+(191-10)+(11-10)+(38-11)+(47-38)
+= 24+5+29+70+181+1+27+9 = 346... 
+Actual C-LOOK: 63→87→92→121→191→10→11→38→47
+= 24+5+29+70+(191-10)+1+27+9 = 366 cylinders</pre>
+  </div>
+
+  <div id="u5-file" class="topic">
+    <h3>File Systems <span class="chip chip-red">PYQ 2018-19, 2021-22</span></h3>
+    <h4>File Concept & Operations</h4>
+    <p>A <strong>file</strong> is a named collection of related information recorded on secondary storage. The OS provides a uniform interface regardless of the underlying storage device.</p>
+    <p><strong>File attributes:</strong> Name, identifier (inode number), type, location, size, protection, timestamps.</p>
+    <p><strong>File operations:</strong> Create, Read, Write, Reposition (seek), Delete, Truncate, Open, Close.</p>
+
+    <h4>File Access Methods</h4>
+    <ul>
+      <li><strong>Sequential Access</strong> — Read bytes in order (magnetic tape, log files). <code>read()</code> advances file pointer automatically.</li>
+      <li><strong>Direct (Random) Access</strong> — Jump to any position. <code>seek(n); read();</code> Database files use this.</li>
+      <li><strong>Indexed Access</strong> — Use an index to find records quickly. Database index files.</li>
+    </ul>
+
+    <h4>File Allocation Methods <span class="chip chip-red">PYQ 2017-18, 2023-24</span></h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Method</th><th>How it works</th><th>Pros</th><th>Cons</th></tr>
+        <tr><td>Contiguous</td><td>File occupies consecutive disk blocks</td><td>Fast sequential & random access; simple directory entry (start, length)</td><td>External fragmentation; file size must be known at creation</td></tr>
+        <tr><td>Linked</td><td>Each block contains pointer to next block</td><td>No external fragmentation; file can grow dynamically</td><td>No random access (must follow chain); pointer overhead; reliability (lost pointer = lost data)</td></tr>
+        <tr><td>Indexed</td><td>Index block stores all pointers to file's blocks</td><td>Supports random access; no external fragmentation</td><td>Index block overhead; small files waste index block</td></tr>
+      </table>
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Real Example</div>
+      <strong>Linux ext4</strong> uses a variant of indexed allocation (inodes with direct, single-indirect, double-indirect, triple-indirect block pointers). <strong>FAT (Windows)</strong> uses linked allocation via a File Allocation Table.
+    </div>
+
+    <h4>Directory Structures <span class="chip chip-red">PYQ 2014-15, 2015-16</span></h4>
+    <ul>
+      <li><strong>Single-level:</strong> All files in one directory. Simple but name conflicts for multiple users.</li>
+      <li><strong>Two-level:</strong> One directory per user (Master File Directory → User File Directory). Solves name conflict.</li>
+      <li><strong>Tree-structured:</strong> Hierarchical. <code>/home/student/notes/os.pdf</code> in Linux. Most common today.</li>
+      <li><strong>Acyclic Graph:</strong> Allows sharing (symbolic links, hard links in Linux). Multiple paths to same file.</li>
+    </ul>
+
+    <h4>Free Space Management</h4>
+    <ul>
+      <li><strong>Bit Vector (Bitmap):</strong> 1 bit per disk block; 1=free, 0=allocated. Easy to find contiguous blocks. Linux ext4 uses this.</li>
+      <li><strong>Linked List:</strong> Chain of free blocks. No wasted space but hard to find contiguous blocks.</li>
+      <li><strong>Grouping:</strong> Store addresses of n free blocks in first free block. More efficient traversal.</li>
+      <li><strong>Counting:</strong> Store (first free block, count) pairs. Efficient for contiguous allocations.</li>
+    </ul>
+
+    <h4>File System Protection & Security <span class="chip chip-red">PYQ 2021-22</span></h4>
+    <ul>
+      <li><strong>Access Control List (ACL):</strong> Specify exactly who (user/group) can do what (read/write/execute) on each file.</li>
+      <li><strong>Access Matrix:</strong> 2D table — rows=subjects (users/processes), columns=objects (files). Linux <code>chmod</code> implements simplified 3×3 version (owner/group/others × r/w/x).</li>
+      <li><strong>Capability Lists:</strong> Per-user list of permitted operations on objects.</li>
+    </ul>
+    <div class="box box-eg">
+      <div class="box-label">Linux Example</div>
+      <code>chmod 755 file.sh</code> → Owner: read+write+execute (7=111), Group: read+execute (5=101), Others: read+execute. This is the access matrix in action.
+    </div>
+  </div>
+
+  <div id="u5-raid" class="topic">
+    <h3>RAID (Redundant Array of Independent Disks) <span class="chip chip-red">PYQ 2022-23, 2024-25</span></h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>RAID Level</th><th>Technique</th><th>Min Disks</th><th>Pros</th><th>Cons</th></tr>
+        <tr><td>RAID 0 (Striping)</td><td>Data split across disks; no redundancy</td><td>2</td><td>Maximum performance & capacity; fast reads/writes</td><td>No fault tolerance; one disk fails = all data lost</td></tr>
+        <tr><td>RAID 1 (Mirroring)</td><td>Exact copy on 2+ disks</td><td>2</td><td>Excellent fault tolerance; fast reads</td><td>50% storage efficiency; costly</td></tr>
+        <tr><td>RAID 5 (Striping+Parity)</td><td>Data + distributed parity across 3+ disks</td><td>3</td><td>Good balance: performance + fault tolerance + efficiency</td><td>Write penalty (recalculate parity); slow writes</td></tr>
+        <tr><td>RAID 6</td><td>Like RAID 5 but 2 parity blocks</td><td>4</td><td>Can survive 2 simultaneous disk failures</td><td>More write overhead</td></tr>
+        <tr><td>RAID 10 (1+0)</td><td>Stripe of mirrors</td><td>4</td><td>High performance + redundancy</td><td>50% efficiency; expensive</td></tr>
+      </table>
+    </div>
+    <div class="box box-eg">
+      <div class="box-label">Real-World Usage</div>
+      <strong>RAID 0:</strong> Video editing workstations (speed). <strong>RAID 1:</strong> Critical database servers (reliability). <strong>RAID 5:</strong> Enterprise NAS systems (balance). <strong>RAID 10:</strong> High-traffic web servers. Cloud providers like AWS use erasure coding (advanced RAID) for S3 storage.
+    </div>
+  </div>
+
+  <!-- UNIT 5 QUESTION BANK -->
+  <div id="u5-qbank" class="qbank">
+    <h3>📝 Unit 5 – Question Bank</h3>
+
+    <div class="q-item q-short">
+      <p><strong>Q.</strong> Define seek time and rotational latency. <span class="chip chip-red">2018-19, 2021-22</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block"><strong>Seek time:</strong> Time required to move the read/write head to the desired track (cylinder). This is typically the dominant component of disk access time (3-15ms for HDDs). <strong>Rotational latency:</strong> Time waiting for the desired sector to rotate under the read/write head. Average = half revolution time. At 7200 RPM: avg latency = 60s/7200/2 = 4.17ms.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Hard disk: 2000 cylinders (0-1999). Head at 143, previous at 125. Queue: 86,1470,913,1774,948,1509,1022,1750,130. Find total movement for SSTF and FCFS. <span class="chip chip-red">2018-19, 2021-22</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">
+        <strong>FCFS</strong> (serve in order): 143→86→1470→913→1774→948→1509→1022→1750→130<br>
+        = 57+1384+557+861+826+561+487+728+1620 = <strong>7081 cylinders</strong><br><br>
+        <strong>SSTF</strong> (closest first from 143): Sort by proximity: 130,86,913,948,1022,1470,1509,1750,1774<br>
+        143→130→86→913→948→1022→1470→1509→1750→1774<br>
+        = 13+44+827+35+74+448+39+241+24 = <strong>1745 cylinders</strong>
+      </div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Explain RAID 0, RAID 1, and RAID 5 in detail. <span class="chip chip-red">2024-25</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">See the RAID table above. Key exam points: RAID 0 = pure striping, no redundancy, max performance. RAID 1 = mirroring, 100% redundancy, 50% efficiency. RAID 5 = best balance — striping with distributed parity (1 disk overhead), can survive 1 disk failure, reads are fast, writes are slower due to parity recalculation. Most enterprise storage uses RAID 5 or 6.</div>
+    </div>
+
+    <div class="q-item q-long">
+      <p><strong>Q.</strong> Disk: 100 tracks. Queue: 45,20,90,10,50,60,80,25,70. Head at 49. Calculate movement for SSTF, SCAN, C-SCAN, LOOK. <span class="chip chip-red">2022-23</span></p>
+      <span class="ans-toggle" onclick="tog(this)">▶ Show Answer</span>
+      <div class="ans-block">
+        <strong>SSTF:</strong> 49→50→45→25→20→10→60→70→80→90 = 1+5+20+5+10+50+10+10+10 = <strong>121</strong><br>
+        <strong>SCAN</strong> (move up first): 49→50→60→70→80→90→99→25→20→10 = 51+74 = <strong>125</strong><br>
+        <strong>C-SCAN</strong> (up then jump to 0, serve going up): 49→50→60→70→80→90→99→0→10→20→25 = 50+99+25 = <strong>174</strong><br>
+        <strong>LOOK</strong> (up to 90, reverse to 10): 49→50→60→70→80→90→45→25→20→10 = 41+80 = <strong>121</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div style="text-align:center;padding:60px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--border);margin-top:80px;">
+  <p style="font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);margin-bottom:8px;">BCS401 – Operating Systems</p>
+  <p>4th Semester · B.Tech CSE/AIML/DS · Even Semester 2025-26</p>
+  <p style="margin-top:8px;">Reference: Silberschatz & Galvin, Halder & Aravind, William Stallings</p>
+</div>
+
+</main>
+
+<script>
+function tog(el){
+  const block = el.nextElementSibling;
+  const open = block.classList.toggle('open');
+  el.textContent = open ? '▼ Hide Answer' : '▶ Show Answer';
+}
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('#nav a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.fontWeight = a.getAttribute('href') === '#'+cur ? '700' : '';
+    a.style.color = '';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Electronics — Complete Notes | B.Tech Sem IV</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #252a35;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --u1: #00d4ff;   /* Unit 1 - cyan */
+    --u1b: #003d4d;
+    --u2: #00ff9d;   /* Unit 2 - green */
+    --u2b: #003d25;
+    --u3: #ff6b35;   /* Unit 3 - orange */
+    --u3b: #3d1a0a;
+    --u4: #bf5af2;   /* Unit 4 - purple */
+    --u4b: #2a0d3d;
+    --u5: #ffd60a;   /* Unit 5 - yellow */
+    --u5b: #3d3000;
+    --pyq: #ff4466;  /* PYQ - red */
+    --pyqb: #3d0015;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,12,16,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--u1);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  nav { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+  nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    transition: all 0.2s;
+  }
+  nav a:nth-child(1) { color: var(--u1); border: 1px solid var(--u1b); }
+  nav a:nth-child(2) { color: var(--u2); border: 1px solid var(--u2b); }
+  nav a:nth-child(3) { color: var(--u3); border: 1px solid var(--u3b); }
+  nav a:nth-child(4) { color: var(--u4); border: 1px solid var(--u4b); }
+  nav a:nth-child(5) { color: var(--u5); border: 1px solid var(--u5b); }
+  nav a:hover { background: var(--surface2); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,255,0.08), transparent);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--u1);
+    border: 1px solid var(--u1b);
+    background: rgba(0,212,255,0.05);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #fff 0%, var(--u1) 50%, var(--u2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-size: 1rem;
+  }
+
+  .unit-pills {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .unit-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ── UNIT SECTIONS ── */
+  .unit {
+    margin: 3rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .unit-header {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .unit-header::after {
+    content: '';
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.07;
+  }
+
+  .unit-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    opacity: 0.4;
+  }
+
+  .unit-title-block h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .unit-title-block p {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-top: 4px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  .unit-body { padding: 2rem; background: var(--surface); }
+
+  /* Unit color themes */
+  .u1 .unit-header { background: linear-gradient(135deg, var(--u1b), rgba(0,61,77,0.3)); }
+  .u1 .unit-header::after { background: var(--u1); }
+  .u1 .unit-num, .u1 .unit-title-block h2 { color: var(--u1); }
+  .u1 .unit-pill { background: rgba(0,212,255,0.1); color: var(--u1); border: 1px solid var(--u1b); }
+
+  .u2 .unit-header { background: linear-gradient(135deg, var(--u2b), rgba(0,61,37,0.3)); }
+  .u2 .unit-header::after { background: var(--u2); }
+  .u2 .unit-num, .u2 .unit-title-block h2 { color: var(--u2); }
+  .u2 .unit-pill { background: rgba(0,255,157,0.1); color: var(--u2); border: 1px solid var(--u2b); }
+
+  .u3 .unit-header { background: linear-gradient(135deg, var(--u3b), rgba(61,26,10,0.3)); }
+  .u3 .unit-header::after { background: var(--u3); }
+  .u3 .unit-num, .u3 .unit-title-block h2 { color: var(--u3); }
+  .u3 .unit-pill { background: rgba(255,107,53,0.1); color: var(--u3); border: 1px solid var(--u3b); }
+
+  .u4 .unit-header { background: linear-gradient(135deg, var(--u4b), rgba(42,13,61,0.3)); }
+  .u4 .unit-header::after { background: var(--u4); }
+  .u4 .unit-num, .u4 .unit-title-block h2 { color: var(--u4); }
+  .u4 .unit-pill { background: rgba(191,90,242,0.1); color: var(--u4); border: 1px solid var(--u4b); }
+
+  .u5 .unit-header { background: linear-gradient(135deg, var(--u5b), rgba(61,48,0,0.3)); }
+  .u5 .unit-header::after { background: var(--u5); }
+  .u5 .unit-num, .u5 .unit-title-block h2 { color: var(--u5); }
+  .u5 .unit-pill { background: rgba(255,214,10,0.1); color: var(--u5); border: 1px solid var(--u5b); }
+
+  /* ── TOPIC CARDS ── */
+  .topic {
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    overflow: hidden;
+  }
+
+  .topic-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .topic-body { padding: 1.25rem; }
+
+  .topic-body p { margin-bottom: 0.85rem; color: var(--text); }
+  .topic-body p:last-child { margin-bottom: 0; }
+
+  h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 1.2rem 0 0.5rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── TABLES ── */
+  .tbl-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-family: 'Space Mono', monospace; font-size: 0.8rem; }
+  th {
+    background: var(--surface);
+    padding: 8px 14px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 7px 14px; text-align: center; border-bottom: 1px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── FORMULA / CODE BLOCKS ── */
+  .formula {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .u1 .formula { border-left-color: var(--u1); }
+  .u2 .formula { border-left-color: var(--u2); }
+  .u3 .formula { border-left-color: var(--u3); }
+  .u4 .formula { border-left-color: var(--u4); }
+  .u5 .formula { border-left-color: var(--u5); }
+
+  /* ── PYQ SECTION ── */
+  .pyq-section {
+    margin-top: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--pyqb);
+    background: rgba(255,68,102,0.04);
+    overflow: hidden;
+  }
+
+  .pyq-header {
+    background: linear-gradient(90deg, var(--pyqb), transparent);
+    padding: 0.85rem 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pyq);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pyq-body { padding: 1.25rem; }
+
+  .pyq-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,68,102,0.1);
+  }
+
+  .pyq-item:last-child { border-bottom: none; }
+
+  .pyq-badge {
+    flex-shrink: 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(255,68,102,0.15);
+    color: var(--pyq);
+    border: 1px solid var(--pyqb);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+
+  .pyq-text { font-size: 0.9rem; line-height: 1.5; }
+
+  .marks-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-left: 0.5rem;
+  }
+
+  /* ── HIGHLIGHT / CALLOUT ── */
+  .callout {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+  .callout.tip { background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2); }
+  .callout.warn { background: rgba(255,107,53,0.07); border: 1px solid rgba(255,107,53,0.2); }
+  .callout.key { background: rgba(0,255,157,0.07); border: 1px solid rgba(0,255,157,0.2); }
+
+  /* ── SVG DIAGRAMS ── */
+  .diagram-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+
+  .diagram-caption {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── STEP LIST ── */
+  .steps { counter-reset: step; list-style: none; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+  }
+  .steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* ── BULLET LIST ── */
+  ul.dots { list-style: none; }
+  ul.dots li { padding: 4px 0; display: flex; gap: 0.6rem; align-items: flex-start; }
+  ul.dots li::before { content: '◆'; font-size: 0.5rem; margin-top: 6px; flex-shrink: 0; opacity: 0.5; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:700px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-header { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 4rem 0 2rem;
+  }
+  .section-divider::before, .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-divider span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .unit { animation: fadeInUp 0.5s ease both; }
+  .unit:nth-child(1) { animation-delay: 0.1s; }
+  .unit:nth-child(2) { animation-delay: 0.2s; }
+  .unit:nth-child(3) { animation-delay: 0.3s; }
+  .unit:nth-child(4) { animation-delay: 0.4s; }
+  .unit:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ── KMAP TABLE ── */
+  .kmap td { width: 50px; height: 40px; font-family: 'Space Mono', monospace; font-size: 0.85rem; }
+  .kmap .k-head { background: var(--surface); font-weight: 700; font-size: 0.7rem; color: var(--muted); }
+  .kmap .k1 { background: rgba(0,255,157,0.15); color: var(--u2); font-weight: 700; }
+  .kmap .k0 { color: var(--muted); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--u1); font-style: italic; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .tag.imp { background: rgba(255,68,102,0.15); color: var(--pyq); border: 1px solid var(--pyqb); }
+  .tag.co { background: rgba(191,90,242,0.12); color: var(--u4); border: 1px solid rgba(191,90,242,0.2); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">⚡ BEE401 / BOE410 — Digital Electronics</div>
+  <nav>
+    <a href="#unit1">U1 Binary</a>
+    <a href="#unit2">U2 Combo</a>
+    <a href="#unit3">U3 Seq</a>
+    <a href="#unit4">U4 Sync/Async</a>
+    <a href="#unit5">U5 Memory</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">B.Tech Sem IV · 2024-25</div>
+  <h1>Digital Electronics<br>Complete Notes</h1>
+  <p>Syllabus-aligned notes with PYQs, logic diagrams, truth tables & exam-ready explanations.</p>
+  <div class="unit-pills">
+    <span class="unit-pill" style="background:rgba(0,212,255,.1);color:var(--u1);border:1px solid var(--u1b)">Unit I — Binary Systems</span>
+    <span class="unit-pill" style="background:rgba(0,255,157,.1);color:var(--u2);border:1px solid var(--u2b)">Unit II — Combinational Logic</span>
+    <span class="unit-pill" style="background:rgba(255,107,53,.1);color:var(--u3);border:1px solid var(--u3b)">Unit III — Sequential Logic</span>
+    <span class="unit-pill" style="background:rgba(191,90,242,.1);color:var(--u4);border:1px solid var(--u4b)">Unit IV — Sync & Async</span>
+    <span class="unit-pill" style="background:rgba(255,214,10,.1);color:var(--u5);border:1px solid var(--u5b)">Unit V — Memory & PLDs</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     UNIT I
+════════════════════════════════════════════════════ -->
+<div class="container">
+<div class="unit u1" id="unit1">
+  <div class="unit-header">
+    <div class="unit-num">01</div>
+    <div class="unit-title-block">
+      <h2>Digital Binary Systems & Logic Simplification</h2>
+      <p>CO1 · K3 · Number Systems · Boolean Algebra · K-Map · QM Method</p>
+    </div>
+  </div>
+  <div class="unit-body">
+
+    <!-- 1.1 Number Systems -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.1 Number Systems & Conversions</div>
+      <div class="topic-body">
+        <p>Digital circuits work exclusively with <strong>binary (base-2)</strong> numbers. Understanding number systems and conversions is fundamental.</p>
+
+        <h4>Common Number Systems</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>System</th><th>Base</th><th>Digits</th><th>Example</th></tr>
+          <tr><td>Binary</td><td>2</td><td>0, 1</td><td>(1011)₂</td></tr>
+          <tr><td>Octal</td><td>8</td><td>0–7</td><td>(13)₈</td></tr>
+          <tr><td>Decimal</td><td>10</td><td>0–9</td><td>(11)₁₀</td></tr>
+          <tr><td>Hexadecimal</td><td>16</td><td>0–9, A–F</td><td>(B)₁₆</td></tr>
+        </table></div>
+
+        <h4>Binary ↔ Grey Code Conversion <span class="tag imp">PYQ ★</span></h4>
+        <p><strong>Binary to Grey Code:</strong> MSB stays same. Each subsequent grey bit = XOR of that binary bit and the previous binary bit.</p>
+        <div class="formula">Binary:   B₃  B₂  B₁  B₀
+Grey:     G₃  G₂  G₁  G₀
+
+Rule: G₃ = B₃
+      G₂ = B₃ ⊕ B₂
+      G₁ = B₂ ⊕ B₁
+      G₀ = B₁ ⊕ B₀
+
+Example: Binary (110111)₂ → Grey Code
+B:  1  1  0  1  1  1
+G:  1  0  1  1  0  1  →  (101101)_Grey
+
+Example: Binary (100110)₂ → Grey Code
+B:  1  0  0  1  1  0
+G:  1  1  0  1  0  1  →  (110101)_Grey</div>
+
+        <h4>2's Complement & Subtraction <span class="tag imp">PYQ ★</span></h4>
+        <p>2's complement of a number = 1's complement + 1. Used for binary subtraction: A − B = A + (2's complement of B)</p>
+        <div class="formula">Example: (1100)₂ − (11101)₂
+
+Step 1: Make equal length → (01100)₂ − (11101)₂
+Step 2: 2's complement of 11101:
+        1's complement = 00010
+        Add 1          = 00011
+Step 3: Add:  01100
+            + 00011
+            ───────
+              01111  → No carry → Result is NEGATIVE
+Step 4: 2's complement of result = 10001 = −17 in decimal
+        So answer = −(10001)₂ = −17</div>
+
+        <h4>Hexadecimal to Binary <span class="tag imp">PYQ ★</span></h4>
+        <div class="formula">Convert 3F to Binary:
+3 = 0011,  F = 1111
+∴ (3F)₁₆ = (0011 1111)₂</div>
+
+        <h4>Signed Binary Numbers</h4>
+        <ul class="dots">
+          <li>Sign-Magnitude: MSB = 0 (positive), MSB = 1 (negative)</li>
+          <li>1's Complement: Invert all bits for negative</li>
+          <li>2's Complement: Most used; no dual zero problem</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.2 Binary Codes -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.2 Binary Codes</div>
+      <div class="topic-body">
+        <div class="tbl-wrap"><table>
+          <tr><th>Decimal</th><th>BCD (8421)</th><th>Excess-3</th><th>Grey Code</th></tr>
+          <tr><td>0</td><td>0000</td><td>0011</td><td>0000</td></tr>
+          <tr><td>1</td><td>0001</td><td>0100</td><td>0001</td></tr>
+          <tr><td>2</td><td>0010</td><td>0101</td><td>0011</td></tr>
+          <tr><td>3</td><td>0011</td><td>0110</td><td>0010</td></tr>
+          <tr><td>4</td><td>0100</td><td>0111</td><td>0110</td></tr>
+          <tr><td>5</td><td>0101</td><td>1000</td><td>0111</td></tr>
+          <tr><td>6</td><td>0110</td><td>1001</td><td>0101</td></tr>
+          <tr><td>7</td><td>0111</td><td>1010</td><td>0100</td></tr>
+          <tr><td>8</td><td>1000</td><td>1011</td><td>1100</td></tr>
+          <tr><td>9</td><td>1001</td><td>1100</td><td>1000</td></tr>
+        </table></div>
+        <div class="callout key"><span class="callout-icon">💡</span><div>Grey code has the property that <strong>only one bit changes</strong> between consecutive values. This makes it useful in shaft encoders and analog-to-digital converters to prevent errors during transitions.</div></div>
+      </div>
+    </div>
+
+    <!-- 1.3 Boolean Algebra -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.3 Boolean Algebra & De Morgan's Theorem</div>
+      <div class="topic-body">
+        <h4>Basic Laws</h4>
+        <div class="formula">Identity:      A + 0 = A,   A · 1 = A
+Null:          A + 1 = 1,   A · 0 = 0
+Idempotent:    A + A = A,   A · A = A
+Complement:    A + A' = 1,  A · A' = 0
+Involution:    (A')' = A
+Commutative:   A + B = B + A,   A · B = B · A
+Associative:   A + (B + C) = (A + B) + C
+Distributive:  A(B + C) = AB + AC</div>
+
+        <h4>De Morgan's Theorems</h4>
+        <div class="formula">Theorem 1: (A · B)' = A' + B'
+            "Break the bar, change the sign (· ↔ +)"
+
+Theorem 2: (A + B)' = A' · B'
+
+Example: Y = ((A + B)C)'D
+Using De Morgan: Y = (A' · B' + C') · D</div>
+
+        <h4>SOP & POS Forms</h4>
+        <ul class="dots">
+          <li><strong>SOP (Sum of Products):</strong> OR of AND terms. Each AND term called a minterm.</li>
+          <li><strong>POS (Product of Sums):</strong> AND of OR terms. Each OR term called a maxterm.</li>
+          <li>F = Σm(minterms) = ΠM(maxterms)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.4 K-Map -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.4 Karnaugh Map (K-Map) Simplification <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <p>K-Map is a visual method to simplify Boolean expressions. Groups of 1s (or 0s for POS) that are powers of 2 (1,2,4,8...) can be combined to simplify.</p>
+
+        <h4>4-Variable K-Map Layout</h4>
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%">
+            <style>.km{fill:#111318;stroke:#252a35;stroke-width:1} .kmh{fill:#181c24} .kmt{font-family:'Space Mono',monospace;font-size:11px;fill:#7a8099;text-anchor:middle} .kmv{font-family:'Space Mono',monospace;font-size:10px;fill:#e8eaf0;text-anchor:middle;dominant-baseline:middle} .km1{fill:rgba(0,255,157,0.15)} .km0{fill:#0a0c10}</style>
+            <!-- Header row -->
+            <text x="90" y="20" class="kmt">AB\CD</text>
+            <text x="150" y="20" class="kmt">00</text>
+            <text x="210" y="20" class="kmt">01</text>
+            <text x="270" y="20" class="kmt">11</text>
+            <text x="330" y="20" class="kmt">10</text>
+            <!-- Row labels -->
+            <text x="55" y="55" class="kmt">00</text>
+            <text x="55" y="105" class="kmt">01</text>
+            <text x="55" y="155" class="kmt">11</text>
+            <text x="55" y="205" class="kmt">10</text>
+            <!-- Cells -->
+            <g>
+              <rect x="120" y="30" width="60" height="40" class="km0 km"/><text x="150" y="55" class="kmv" fill="#7a8099">0</text>
+              <rect x="180" y="30" width="60" height="40" class="km0 km"/><text x="210" y="55" class="kmv" fill="#7a8099">0</text>
+              <rect x="240" y="30" width="60" height="40" class="km0 km"/><text x="270" y="55" class="kmv" fill="#7a8099">0</text>
+              <rect x="300" y="30" width="60" height="40" class="km0 km"/><text x="330" y="55" class="kmv" fill="#7a8099">0</text>
+
+              <rect x="120" y="70" width="60" height="40" class="km0 km"/><text x="150" y="95" class="kmv" fill="#7a8099">0</text>
+              <rect x="180" y="70" width="60" height="40" class="km1 km"/><text x="210" y="95" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="240" y="70" width="60" height="40" class="km1 km"/><text x="270" y="95" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="300" y="70" width="60" height="40" class="km0 km"/><text x="330" y="95" class="kmv" fill="#7a8099">0</text>
+
+              <rect x="120" y="110" width="60" height="40" class="km1 km"/><text x="150" y="135" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="180" y="110" width="60" height="40" class="km1 km"/><text x="210" y="135" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="240" y="110" width="60" height="40" class="km1 km"/><text x="270" y="135" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="300" y="110" width="60" height="40" class="km1 km"/><text x="330" y="135" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+
+              <rect x="120" y="150" width="60" height="40" class="km0 km"/><text x="150" y="175" class="kmv" fill="#7a8099">0</text>
+              <rect x="180" y="150" width="60" height="40" class="km1 km"/><text x="210" y="175" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="240" y="150" width="60" height="40" class="km1 km"/><text x="270" y="175" class="kmv" style="fill:#00ff9d;font-weight:700">1</text>
+              <rect x="300" y="150" width="60" height="40" class="km0 km"/><text x="330" y="175" class="kmv" fill="#7a8099">0</text>
+            </g>
+            <!-- AB CD labels -->
+            <text x="70" y="10" class="kmt" font-size="9">AB↓  CD→</text>
+          </svg>
+          <div class="diagram-caption">Sample 4-variable K-map with groupings highlighted in green</div>
+        </div>
+
+        <h4>K-Map Rules</h4>
+        <ol class="steps">
+          <li>Group 1s in largest possible power-of-2 groups (1, 2, 4, 8, 16)</li>
+          <li>Groups can overlap and wrap around edges</li>
+          <li>Don't-care (X) cells can be included if it increases group size</li>
+          <li>Each cell must be covered by at least one group</li>
+          <li>Variables that change within a group are eliminated from that term</li>
+        </ol>
+
+        <h4>Solved PYQ: F(A,B,C,D) = ΠM(4,5,6,7,8,12), d(0,1,2,3,9,11,14) <span class="tag imp">PYQ</span></h4>
+        <div class="formula">POS form: Maxterms at positions 4,5,6,7,8,12
+Don't cares at: 0,1,2,3,9,11,14
+Zeros at maxterm positions:
+Position 4  = 0100 (A=0,B=1,C=0,D=0)
+Position 5  = 0101
+Position 6  = 0110
+Position 7  = 0111
+Position 8  = 1000
+Position 12 = 1100
+
+Using K-map with don't cares:
+Group 1: 4,5,6,7 (quad) → B=1, A=0 → (A+B')
+Group 2: 8,12 + dc(0) → A=1,B=X,C=0,D=0 OR group with dc → (B+C+D)
+Simplified F = (A+B')(B+C+D) — or simplify using grouping</div>
+      </div>
+    </div>
+
+    <!-- 1.5 NAND/NOR Implementation -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.5 NAND & NOR Gate Implementation <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <p>NAND and NOR are called <strong>universal gates</strong> because any Boolean function can be implemented using only NAND or only NOR gates.</p>
+
+        <h4>NAND as Universal Gate</h4>
+        <div class="formula">NOT using NAND:   A' = (A·A)' = NAND(A,A)
+AND using NAND:   A·B = ((A·B)')' = NAND(NAND(A,B), NAND(A,B))
+OR using NAND:    A+B = NAND(NAND(A,A), NAND(B,B)) = NAND(A', B')</div>
+
+        <h4>NOR as Universal Gate</h4>
+        <div class="formula">NOT using NOR:   A' = (A+A)' = NOR(A,A)
+OR using NOR:    A+B = NOR(NOR(A,B), NOR(A,B))
+AND using NOR:   A·B = NOR(NOR(A,A), NOR(B,B))</div>
+
+        <h4>SOP → NAND-NAND</h4>
+        <p>Any SOP expression can be directly converted to 2-level NAND-NAND form:</p>
+        <div class="formula">F = AB + CD  →  F = ((AB)' · (CD)')' = NAND(NAND(A,B), NAND(C,D))</div>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;width:100%">
+            <style>.gt{fill:#181c24;stroke:#252a35;stroke-width:1.5}.lbl{font-family:'Space Mono',monospace;font-size:10px;fill:#e8eaf0}.lne{stroke:#00d4ff;stroke-width:1.5;fill:none}.bub{fill:#0a0c10;stroke:#00d4ff;stroke-width:1.5}</style>
+            <!-- NAND gate 1 (top) -->
+            <rect x="60" y="15" width="60" height="35" rx="5" class="gt"/>
+            <text x="90" y="37" class="lbl" text-anchor="middle" style="font-size:9px">NAND</text>
+            <circle cx="122" cy="32" r="5" class="bub"/>
+            <!-- NAND gate 2 (bottom) -->
+            <rect x="60" y="70" width="60" height="35" rx="5" class="gt"/>
+            <text x="90" y="92" class="lbl" text-anchor="middle" style="font-size:9px">NAND</text>
+            <circle cx="122" cy="87" r="5" class="bub"/>
+            <!-- Output NAND -->
+            <rect x="220" y="40" width="60" height="40" rx="5" class="gt"/>
+            <text x="250" y="64" class="lbl" text-anchor="middle" style="font-size:9px">NAND</text>
+            <circle cx="282" cy="60" r="5" class="bub"/>
+            <!-- Input lines -->
+            <line x1="10" y1="25" x2="60" y2="25" class="lne"/>
+            <line x1="10" y1="40" x2="60" y2="40" class="lne"/>
+            <line x1="10" y1="80" x2="60" y2="80" class="lne"/>
+            <line x1="10" y1="95" x2="60" y2="95" class="lne"/>
+            <!-- Connect to output gate -->
+            <line x1="127" y1="32" x2="220" y2="52" class="lne"/>
+            <line x1="127" y1="87" x2="220" y2="68" class="lne"/>
+            <!-- Output line -->
+            <line x1="287" y1="60" x2="350" y2="60" class="lne"/>
+            <!-- Labels -->
+            <text x="5" y="22" class="lbl" style="font-size:9px;fill:#7a8099">A</text>
+            <text x="5" y="37" class="lbl" style="font-size:9px;fill:#7a8099">B</text>
+            <text x="5" y="77" class="lbl" style="font-size:9px;fill:#7a8099">C</text>
+            <text x="5" y="92" class="lbl" style="font-size:9px;fill:#7a8099">D</text>
+            <text x="355" y="63" class="lbl" style="font-size:9px;fill:#00d4ff">F</text>
+          </svg>
+          <div class="diagram-caption">NAND-NAND implementation of F = AB + CD</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1.6 Quine-McCluskey -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u1)">1.6 Quine-McCluskey (Tabular) Method <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <p>QM method is the algebraic form of K-map, useful for 5+ variables or when automation is needed.</p>
+        <ol class="steps">
+          <li>List all minterms in binary, group by number of 1s</li>
+          <li>Compare minterms differing in exactly 1 bit; combine them (use dash for eliminated variable)</li>
+          <li>Repeat until no more combinations possible</li>
+          <li>Prime implicants = terms that couldn't be combined further</li>
+          <li>Use a Prime Implicant Chart to select essential prime implicants</li>
+        </ol>
+
+        <h4>Solved PYQ: f(A,B,C,D) = Σm(0,1,2,3,4,6,8,9,10,11) <span class="tag imp">PYQ</span></h4>
+        <div class="formula">Step 1 — Group minterms by number of 1s:
+Group 0: 0  (0000)
+Group 1: 1  (0001), 2  (0010), 4  (0100), 8  (1000)
+Group 2: 3  (0011), 6  (0110), 9  (1001), 10 (1010)
+Group 3: 11 (1011)
+
+Step 2 — Combine pairs (differ by 1 bit):
+0,1   → 000-    0,2  → 00-0    0,4  → 0-00    0,8  → -000
+1,3   → 00-1    2,3  → 001-    2,10 → -010    4,6  → 01-0
+1,9   → -001    8,9  → 100-    8,10 → 10-0    9,11 → 10-1
+3,11  → -011    10,11→ 101-
+
+Step 3 — Combine groups of 4:
+0,1,8,9   → -00-    0,2,8,10  → -0-0    0,4,2,6   → 0--0
+1,3,9,11  → -0-1    8,9,10,11 → 10--
+
+Step 4 — Prime Implicants:
+PI1: -00-  → covers 0,1,8,9    → BD' 
+PI2: -0-0  → covers 0,2,8,10   → B'D'
+PI3: 0--0  → covers 0,2,4,6    → A'D'
+PI4: -0-1  → covers 1,3,9,11   → B'D
+PI5: 10--  → covers 8,9,10,11  → AB'
+
+Final simplified expression:
+F = B'D' + B'D + AB' = B' + AB' = B'(1+A) + ... 
+→ F = A'D' + B'    (after proper PI chart analysis)</div>
+      </div>
+    </div>
+
+    <!-- Unit 1 PYQs -->
+    <div class="pyq-section">
+      <div class="pyq-header">🎯 Previous Year Questions — Unit I</div>
+      <div class="pyq-body">
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Convert binary (110111)₂ and (100110)₂ to Grey code. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Perform subtraction (1100)₂ − (11101)₂ using 2's complement method. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Simplify F(A,B,C,D) = ΠM(4,5,6,7,8,12), d(0,1,2,3,9,11,14) using K-map. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Simplify f(A,B,C,D) = Σm(0,1,2,3,4,6,8,9,10,11) using Quine-McCluskey method. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Implement Y = ((A+B)C)' · D using only NAND gates. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">What is Gray Code? Convert (1010)₂ to Gray Code and explain its significance. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Convert hexadecimal 3F to binary. Explain 1's complement vs 2's complement. <span class="marks-badge">[2M+2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Simplify F(A,B,C,D) = Σm(3,5,6,7,9,12,13,15) using K-map and implement using only NOR gates. <span class="marks-badge">[7M]</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /unit1 -->
+
+<!-- ════════════════════════════════════════════════════
+     UNIT II
+════════════════════════════════════════════════════ -->
+<div class="unit u2" id="unit2">
+  <div class="unit-header">
+    <div class="unit-num">02</div>
+    <div class="unit-title-block">
+      <h2>Combinational Logic Circuits</h2>
+      <p>CO2 · K4 · MUX · Decoder · Adder · Comparator · ROM</p>
+    </div>
+  </div>
+  <div class="unit-body">
+
+    <!-- 2.1 Multiplexers -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u2)">2.1 Multiplexers (MUX) <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <p>A multiplexer (data selector) selects one of N inputs and routes it to a single output, controlled by select lines. An <strong>N:1 MUX needs log₂N select lines.</strong></p>
+
+        <h4>4:1 MUX using 2:1 MUX <span class="tag imp">PYQ</span></h4>
+        <div class="callout key"><span class="callout-icon">⚙️</span><div>A 4:1 MUX can be built from three 2:1 MUXes. Two MUXes select between pairs of inputs (using S₀), and one final MUX selects between the two outputs (using S₁).</div></div>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;width:100%">
+            <style>.mux{fill:#181c24;stroke:#00ff9d;stroke-width:1.5}.muxlbl{font-family:'Space Mono',monospace;font-size:9px;fill:#00ff9d;text-anchor:middle}.wir{stroke:#00ff9d;stroke-width:1.2;fill:none}.ilbl{font-family:'Space Mono',monospace;font-size:9px;fill:#7a8099}</style>
+            <!-- MUX 1 (top left) -->
+            <polygon points="60,20 60,80 100,65 100,35" class="mux"/>
+            <text x="72" y="55" class="muxlbl">2:1</text>
+            <text x="72" y="65" class="muxlbl">MUX</text>
+            <!-- MUX 2 (bottom left) -->
+            <polygon points="60,120 60,180 100,165 100,135" class="mux"/>
+            <text x="72" y="155" class="muxlbl">2:1</text>
+            <text x="72" y="165" class="muxlbl">MUX</text>
+            <!-- MUX 3 (right) -->
+            <polygon points="220,60 220,160 270,140 270,80" class="mux"/>
+            <text x="240" y="108" class="muxlbl">2:1</text>
+            <text x="240" y="120" class="muxlbl">MUX</text>
+            <!-- Inputs -->
+            <line x1="10" y1="35" x2="60" y2="35" class="wir"/><text x="5" y="32" class="ilbl">I₀</text>
+            <line x1="10" y1="65" x2="60" y2="65" class="wir"/><text x="5" y="62" class="ilbl">I₁</text>
+            <line x1="10" y1="135" x2="60" y2="135" class="wir"/><text x="5" y="132" class="ilbl">I₂</text>
+            <line x1="10" y1="165" x2="60" y2="165" class="wir"/><text x="5" y="162" class="ilbl">I₃</text>
+            <!-- MUX outputs to final MUX -->
+            <line x1="100" y1="50" x2="220" y2="90" class="wir"/>
+            <line x1="100" y1="150" x2="220" y2="130" class="wir"/>
+            <!-- Select lines -->
+            <line x1="80" y1="80" x2="80" y2="95" class="wir" stroke-dasharray="3,2"/>
+            <line x1="80" y1="120" x2="80" y2="95" class="wir" stroke-dasharray="3,2"/>
+            <line x1="80" y1="95" x2="30" y2="95" class="wir" stroke-dasharray="3,2"/>
+            <text x="20" y="92" class="ilbl">S₀</text>
+            <line x1="245" y1="160" x2="245" y2="175" class="wir" stroke-dasharray="3,2"/>
+            <text x="230" y="188" class="ilbl">S₁</text>
+            <!-- Output -->
+            <line x1="270" y1="110" x2="350" y2="110" class="wir"/>
+            <text x="355" y="113" class="ilbl" style="fill:#00ff9d">Y</text>
+          </svg>
+          <div class="diagram-caption">4:1 MUX constructed from three 2:1 MUX units</div>
+        </div>
+
+        <h4>Function Implementation using MUX <span class="tag imp">PYQ</span></h4>
+        <p>An 8:1 MUX with 3 select lines (A,B,C) can implement any 3-variable function directly by connecting minterms to inputs. For 4-variable using 8:1 MUX — fix one variable (e.g., D) on input lines.</p>
+        <div class="formula">Implementing F(A,B,C,D) = Σm(0,1,3,4,7,8,9,11,14,15) using 8:1 MUX:
+Select lines: A,B,C (3 MSBs)
+Data inputs are functions of D:
+
+ABC=000: m₀(D=0)=1, m₁(D=1)=1  → Input I₀ = 1
+ABC=001: m₂(D=0)=0, m₃(D=1)=1  → Input I₁ = D
+ABC=010: m₄(D=0)=1, m₅(D=1)=0  → Input I₂ = D'
+ABC=011: m₆(D=0)=0, m₇(D=1)=1  → Input I₃ = D
+ABC=100: m₈(D=0)=1, m₉(D=1)=1  → Input I₄ = 1
+ABC=101: m₁₀(D=0)=0,m₁₁(D=1)=1 → Input I₅ = D
+ABC=110: m₁₂(D=0)=0,m₁₃(D=1)=0 → Input I₆ = 0
+ABC=111: m₁₄(D=0)=1,m₁₅(D=1)=1 → Input I₇ = 1</div>
+
+      </div>
+    </div>
+
+    <!-- 2.2 Decoders -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u2)">2.2 Decoders & Encoders</div>
+      <div class="topic-body">
+        <p>A <strong>decoder</strong> converts n-bit binary input to 2ⁿ output lines — only one output is HIGH at a time. Used to select memory chips, data routing.</p>
+
+        <h4>2:4 Decoder Truth Table</h4>
+        <div class="tbl-wrap"><table>
+          <tr><th>A₁</th><th>A₀</th><th>D₀</th><th>D₁</th><th>D₂</th><th>D₃</th></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+        </table></div>
+        <div class="formula">D₀ = A₁'A₀',  D₁ = A₁'A₀,  D₂ = A₁A₀',  D₃ = A₁A₀</div>
+
+        <p>An <strong>encoder</strong> does the reverse: 2ⁿ inputs to n outputs. A <strong>priority encoder</strong> gives priority to the highest-order input when multiple inputs are HIGH simultaneously.</p>
+      </div>
+    </div>
+
+    <!-- 2.3 Adders -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u2)">2.3 Half Adder, Full Adder & Lookahead Carry <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <h4>Half Adder</h4>
+        <div class="grid2">
+          <div>
+            <div class="tbl-wrap"><table>
+              <tr><th>A</th><th>B</th><th>Sum</th><th>Carry</th></tr>
+              <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+            </table></div>
+          </div>
+          <div>
+            <div class="formula" style="margin-top:0">Sum   = A ⊕ B
+Carry = A · B
+
+Half adder adds 2 bits
+No carry-in input</div>
+          </div>
+        </div>
+
+        <h4>Full Adder (using 2 Half Adders + OR) <span class="tag imp">PYQ</span></h4>
+        <div class="formula">Sum   = A ⊕ B ⊕ Cin
+Carry = AB + (A⊕B)·Cin
+
+Implementation:
+HA1: S1 = A⊕B,  C1 = A·B
+HA2: Sum = S1⊕Cin, C2 = S1·Cin
+Cout = C1 + C2</div>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 380 130" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;width:100%">
+            <style>.ha{fill:#181c24;stroke:#00ff9d;stroke-width:1.5;rx:6}.halbl{font-family:'Space Mono',monospace;font-size:9px;fill:#00ff9d;text-anchor:middle}.w{stroke:#00ff9d;stroke-width:1.2;fill:none}.il{font-family:'Space Mono',monospace;font-size:9px;fill:#7a8099}.or{fill:#181c24;stroke:#00ff9d;stroke-width:1.5}</style>
+            <!-- HA1 -->
+            <rect x="60" y="25" width="70" height="45" rx="5" class="ha"/>
+            <text x="95" y="47" class="halbl">Half</text>
+            <text x="95" y="59" class="halbl">Adder</text>
+            <!-- HA2 -->
+            <rect x="180" y="25" width="70" height="45" rx="5" class="ha"/>
+            <text x="215" y="47" class="halbl">Half</text>
+            <text x="215" y="59" class="halbl">Adder</text>
+            <!-- OR gate -->
+            <rect x="290" y="50" width="50" height="30" rx="5" class="or"/>
+            <text x="315" y="70" class="halbl">OR</text>
+            <!-- Inputs -->
+            <line x1="10" y1="35" x2="60" y2="35" class="w"/><text x="3" y="32" class="il">A</text>
+            <line x1="10" y1="60" x2="60" y2="60" class="w"/><text x="3" y="57" class="il">B</text>
+            <!-- HA1 → HA2 (sum) -->
+            <line x1="130" y1="40" x2="180" y2="40" class="w"/>
+            <text x="145" y="36" class="il">S1</text>
+            <!-- Cin to HA2 -->
+            <line x1="10" y1="100" x2="215" y2="100" class="w"/>
+            <line x1="215" y1="100" x2="215" y2="70" class="w"/>
+            <text x="3" y="97" class="il">Cin</text>
+            <!-- HA1 carry to OR -->
+            <line x1="130" y1="60" x2="260" y2="60" class="w"/>
+            <line x1="260" y1="60" x2="260" y2="57" class="w"/>
+            <line x1="260" y1="57" x2="290" y2="57" class="w"/>
+            <!-- HA2 carry to OR -->
+            <line x1="250" y1="60" x2="250" y2="73" class="w"/>
+            <line x1="250" y1="73" x2="290" y2="73" class="w"/>
+            <!-- Sum output -->
+            <line x1="250" y1="40" x2="370" y2="40" class="w"/>
+            <text x="372" y="43" class="il" style="fill:#00ff9d">Sum</text>
+            <!-- Carry output -->
+            <line x1="340" y1="65" x2="370" y2="65" class="w"/>
+            <text x="372" y="68" class="il" style="fill:#00ff9d">Cout</text>
+          </svg>
+          <div class="diagram-caption">Full Adder using 2 Half Adders + OR gate</div>
+        </div>
+
+        <h4>Look-Ahead Carry Generator <span class="tag imp">PYQ</span></h4>
+        <p>Ripple carry adders are slow because each bit must wait for the previous carry. A <strong>Carry Look-Ahead (CLA)</strong> generates all carries simultaneously.</p>
+        <div class="formula">Propagate: Pᵢ = Aᵢ ⊕ Bᵢ
+Generate:  Gᵢ = Aᵢ · Bᵢ
+
+Carry equations:
+C₁ = G₀ + P₀·C₀
+C₂ = G₁ + P₁·G₀ + P₁·P₀·C₀
+C₃ = G₂ + P₂·G₁ + P₂·P₁·G₀ + P₂·P₁·P₀·C₀
+C₄ = G₃ + P₃·G₂ + P₃·P₂·G₁ + P₃·P₂·P₁·G₀ + P₃·P₂·P₁·P₀·C₀
+
+All carries computed in parallel → maximum delay = 2 gate levels</div>
+      </div>
+    </div>
+
+    <!-- 2.4 ROM-based design -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u2)">2.4 ROM-Based Combinational Circuit Design <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <p>A ROM can implement any combinational function by storing the truth table. A ROM with n address lines and m data lines implements m Boolean functions of n variables.</p>
+        <h4>Full Adder using ROM <span class="tag imp">PYQ</span></h4>
+        <div class="formula">3 inputs (A, B, Cin) → 8 addresses (2³)
+2 outputs (Sum, Cout)
+
+ROM content:
+Address | A B Cin | Sum Cout
+  000   | 0 0  0  |  0    0
+  001   | 0 0  1  |  1    0
+  010   | 0 1  0  |  1    0
+  011   | 0 1  1  |  0    1
+  100   | 1 0  0  |  1    0
+  101   | 1 0  1  |  0    1
+  110   | 1 1  0  |  0    1
+  111   | 1 1  1  |  1    1
+
+ROM size needed: 8 × 2 = 16 bits</div>
+      </div>
+    </div>
+
+    <!-- 2.5 Comparator -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u2)">2.5 Magnitude Comparator <span class="tag imp">PYQ</span></div>
+      <div class="topic-body">
+        <p>Compares two binary numbers and gives outputs: A>B, A=B, A&lt;B.</p>
+        <h4>1-bit Comparator</h4>
+        <div class="formula">A = B:  (A⊙B) = XNOR = A'B' + AB
+A > B:  A · B'
+A < B:  A' · B</div>
+        <h4>2-bit Comparator (A₁A₀ vs B₁B₀)</h4>
+        <div class="formula">A = B:  (A₁⊙B₁)(A₀⊙B₀)
+A > B:  A₁B₁' + (A₁⊙B₁)·A₀B₀'
+A < B:  A₁'B₁ + (A₁⊙B₁)·A₀'B₀</div>
+      </div>
+    </div>
+
+    <!-- Unit 2 PYQs -->
+    <div class="pyq-section">
+      <div class="pyq-header">🎯 Previous Year Questions — Unit II</div>
+      <div class="pyq-body">
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Implement a 4:1 multiplexer using 2:1 multiplexers. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Design a full adder using a ROM. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Explain the look-ahead carry generator with neat diagram. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Implement F(A,B,C,D) = Σm(0,1,3,4,7,8,9,11,14,15) using 8:1 MUX and 4:1 MUX. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Design a 4:1 multiplexer using basic logic gates. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Explain the design and working of a 2-bit magnitude comparator. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Design a full adder using two half adders and an OR gate. <span class="marks-badge">[7M]</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /unit2 -->
+
+<!-- ════════════════════════════════════════════════════
+     UNIT III
+════════════════════════════════════════════════════ -->
+<div class="unit u3" id="unit3">
+  <div class="unit-header">
+    <div class="unit-num">03</div>
+    <div class="unit-title-block">
+      <h2>Sequential Logic & Applications</h2>
+      <p>CO3 · K4 · Flip-Flops · Registers · Counters</p>
+    </div>
+  </div>
+  <div class="unit-body">
+
+    <!-- 3.1 Latches and Flip-Flops -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u3)">3.1 Latches & Flip-Flops <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <p>Sequential circuits have <strong>memory</strong> — output depends on both current input AND past history. The basic storage element is the <strong>flip-flop</strong>.</p>
+
+        <h4>SR (Set-Reset) Flip-Flop <span class="tag imp">PYQ</span></h4>
+        <div class="grid2">
+          <div class="tbl-wrap"><table>
+            <tr><th>S</th><th>R</th><th>Q(t+1)</th><th>State</th></tr>
+            <tr><td>0</td><td>0</td><td>Q(t)</td><td>No Change</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>Reset</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>Set</td></tr>
+            <tr><td>1</td><td>1</td><td>?</td><td>⚠️ Invalid</td></tr>
+          </table></div>
+          <div>
+            <div class="formula" style="margin-top:0">Characteristic Eq:
+Q(t+1) = S + R'Q
+Constraint: SR = 0
+(S=1, R=1 is forbidden)</div>
+          </div>
+        </div>
+
+        <h4>JK Flip-Flop <span class="tag imp">PYQ</span></h4>
+        <p>JK FF eliminates the invalid state of SR FF. When J=K=1, output <em>toggles</em>.</p>
+        <div class="grid2">
+          <div class="tbl-wrap"><table>
+            <tr><th>J</th><th>K</th><th>Q(t+1)</th><th>State</th></tr>
+            <tr><td>0</td><td>0</td><td>Q</td><td>No Change</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>Reset</td></tr>
+            <tr><td>1</td><td>0</td><td>1</td><td>Set</td></tr>
+            <tr><td>1</td><td>1</td><td>Q'</td><td>Toggle</td></tr>
+          </table></div>
+          <div>
+            <div class="formula" style="margin-top:0">Characteristic Eq:
+Q(t+1) = JQ' + K'Q
+
+Race-Around Condition:
+When J=K=1 and clock
+pulse is high for too
+long, Q oscillates.
+Solved by Master-Slave
+JK or Edge-triggering.</div>
+          </div>
+        </div>
+
+        <h4>Race Around Condition <span class="tag imp">PYQ</span></h4>
+        <div class="callout warn"><span class="callout-icon">⚠️</span><div>In a level-triggered JK FF with J=K=1, if the clock pulse remains HIGH for a time period greater than the propagation delay of the FF, the output oscillates (toggles multiple times) during one clock cycle. This unpredictable behavior is called the <strong>race-around condition</strong>. It is solved by using <strong>edge-triggered</strong> flip-flops or <strong>master-slave</strong> configuration.</div></div>
+
+        <h4>D Flip-Flop</h4>
+        <div class="grid2">
+          <div class="tbl-wrap"><table>
+            <tr><th>D</th><th>Q(t+1)</th></tr>
+            <tr><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>1</td></tr>
+          </table></div>
+          <div><div class="formula" style="margin-top:0">Q(t+1) = D
+Output follows input D
+on clock edge.
+Simplest FF for
+data storage.</div></div>
+        </div>
+
+        <h4>T Flip-Flop</h4>
+        <div class="formula">Q(t+1) = T⊕Q
+T=0 → No change,  T=1 → Toggle
+Made from JK by connecting J=K=T</div>
+      </div>
+    </div>
+
+    <!-- 3.2 Shift Registers -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u3)">3.2 Shift Registers <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <p>A shift register is a chain of flip-flops where data shifts from one FF to the next on each clock pulse.</p>
+
+        <h4>Types of Shift Registers</h4>
+        <ul class="dots">
+          <li><strong>SISO</strong> (Serial In, Serial Out) — simple shift, data enters and exits 1 bit at a time</li>
+          <li><strong>SIPO</strong> (Serial In, Parallel Out) — data enters serially, all bits available simultaneously</li>
+          <li><strong>PISO</strong> (Parallel In, Serial Out) — parallel load, serial shift-out</li>
+          <li><strong>PIPO</strong> (Parallel In, Parallel Out) — all bits loaded and read simultaneously</li>
+        </ul>
+
+        <h4>Bi-Directional Shift Register <span class="tag imp">PYQ</span></h4>
+        <p>Data can shift left OR right, controlled by a direction control bit. Implemented using D flip-flops with 2:1 MUX at each stage's input.</p>
+        <div class="formula">For each stage i, the D input:
+D_i = (Mode · Q_{i+1}) + (Mode' · Q_{i-1})
+
+Mode = 0 → Shift Right:  Dᵢ = Q_{i-1}
+Mode = 1 → Shift Left:   Dᵢ = Q_{i+1}</div>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;width:100%">
+            <style>.ff{fill:#181c24;stroke:#ff6b35;stroke-width:1.5}.fflbl{font-family:'Space Mono',monospace;font-size:9px;fill:#ff6b35;text-anchor:middle}.wr{stroke:#ff6b35;stroke-width:1.2;fill:none}.mx{fill:#181c24;stroke:#7a8099;stroke-width:1;font-family:'Space Mono',monospace;font-size:8px}</style>
+            <!-- 3 D FFs -->
+            <rect x="30" y="30" width="60" height="50" rx="5" class="ff"/>
+            <text x="60" y="52" class="fflbl">D  Q</text>
+            <text x="60" y="64" class="fflbl">FF-0</text>
+
+            <rect x="160" y="30" width="60" height="50" rx="5" class="ff"/>
+            <text x="190" y="52" class="fflbl">D  Q</text>
+            <text x="190" y="64" class="fflbl">FF-1</text>
+
+            <rect x="290" y="30" width="60" height="50" rx="5" class="ff"/>
+            <text x="320" y="52" class="fflbl">D  Q</text>
+            <text x="320" y="64" class="fflbl">FF-2</text>
+
+            <!-- Connections -->
+            <line x1="90" y1="50" x2="160" y2="50" class="wr"/>
+            <line x1="220" y1="50" x2="290" y2="50" class="wr"/>
+            <!-- Input -->
+            <line x1="5" y1="50" x2="30" y2="50" class="wr"/>
+            <text x="0" y="47" style="font-family:'Space Mono',monospace;font-size:8px;fill:#7a8099">SI</text>
+            <!-- Output -->
+            <line x1="350" y1="50" x2="395" y2="50" class="wr"/>
+            <text x="362" y="47" style="font-family:'Space Mono',monospace;font-size:8px;fill:#ff6b35">SO</text>
+            <!-- Clock -->
+            <line x1="60" y1="80" x2="60" y2="100" class="wr" stroke-dasharray="3,2"/>
+            <line x1="190" y1="80" x2="190" y2="100" class="wr" stroke-dasharray="3,2"/>
+            <line x1="320" y1="80" x2="320" y2="100" class="wr" stroke-dasharray="3,2"/>
+            <line x1="30" y1="100" x2="370" y2="100" class="wr" stroke-dasharray="3,2"/>
+            <text x="175" y="115" style="font-family:'Space Mono',monospace;font-size:8px;fill:#7a8099;text-anchor:middle">CLK</text>
+            <!-- Mode arrows -->
+            <text x="120" y="25" style="font-family:'Space Mono',monospace;font-size:8px;fill:#7a8099">→ Shift Right</text>
+          </svg>
+          <div class="diagram-caption">3-bit Shift Register using D flip-flops (shift right direction)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3.3 Counters -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u3)">3.3 Counters <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <h4>Ripple (Asynchronous) Counter</h4>
+        <p>In a ripple counter, each FF triggers the next. Output of Q is the clock for the next stage. Simple but slow due to ripple delay.</p>
+
+        <h4>Synchronous Counter</h4>
+        <p>All FFs share the same clock. Faster and no ripple delay, but requires combinational logic for each FF's input.</p>
+
+        <h4>MOD-6 Synchronous Counter Design <span class="tag imp">PYQ</span></h4>
+        <div class="formula">MOD-6 counter: counts 000 → 001 → 010 → 011 → 100 → 101 → (back to 000)
+Needs 3 JK flip-flops: Q₂Q₁Q₀
+
+State Table:
+Present State | Next State | J₂K₂ | J₁K₁ | J₀K₀
+   Q₂Q₁Q₀   |  Q₂Q₁Q₀  |      |      |
+    000      |   001    |  0X  |  0X  |  1X
+    001      |   010    |  0X  |  1X  |  X1
+    010      |   011    |  0X  |  X0  |  1X
+    011      |   100    |  1X  |  X1  |  X1
+    100      |   101    |  X0  |  0X  |  1X
+    101      |   000    |  X1  |  0X  |  X1
+
+K-map simplification:
+J₂ = Q₁Q₀,  K₂ = 1
+J₁ = Q₀Q₂', K₁ = Q₀
+J₀ = 1,     K₀ = 1</div>
+
+        <h4>Ring Counter & Johnson Counter</h4>
+        <div class="formula">Ring Counter:  Single 1 circulates → MOD-n with n FFs
+              States: 1000, 0100, 0010, 0001 (for 4-bit)
+
+Johnson Counter: Inverted output fed back to input
+              States: 4-bit → 8 states
+              0000→1000→1100→1110→1111→0111→0011→0001→0000</div>
+      </div>
+    </div>
+
+    <!-- Unit 3 PYQs -->
+    <div class="pyq-section">
+      <div class="pyq-header">🎯 Previous Year Questions — Unit III</div>
+      <div class="pyq-body">
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Elucidate the race around condition in sequential circuits. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Discuss the R-S flip flop in detail. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Define bi-directional shift register. Draw and explain 3-bit bi-directional shift register using D flip-flop. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Design a synchronous binary MOD-6 counter. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Define the characteristic equation of a flip-flop. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Explain the JK flip-flop using logic diagram and characteristic table. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Draw and explain the working of a bidirectional shift register. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Draw the block diagram of a synchronous decade counter and explain its working. <span class="marks-badge">[7M]</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /unit3 -->
+
+<!-- ════════════════════════════════════════════════════
+     UNIT IV
+════════════════════════════════════════════════════ -->
+<div class="unit u4" id="unit4">
+  <div class="unit-header">
+    <div class="unit-num">04</div>
+    <div class="unit-title-block">
+      <h2>Synchronous & Asynchronous Sequential Circuits</h2>
+      <p>CO4 · K3 · State Machines · State Reduction · Hazards</p>
+    </div>
+  </div>
+  <div class="unit-body">
+
+    <!-- 4.1 Mealy & Moore -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u4)">4.1 Mealy & Moore State Machines <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <div class="grid2">
+          <div>
+            <h4 style="color:var(--u4)">Moore Machine</h4>
+            <ul class="dots">
+              <li>Output depends ONLY on present state</li>
+              <li>Output changes only on clock edge</li>
+              <li>More states needed, but more stable</li>
+              <li>Output: λ(Q)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color:var(--u4)">Mealy Machine</h4>
+            <ul class="dots">
+              <li>Output depends on present state AND current input</li>
+              <li>Faster response, fewer states needed</li>
+              <li>Output may glitch with input changes</li>
+              <li>Output: λ(Q, X)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tbl-wrap"><table>
+          <tr><th class="compare-header">Feature</th><th class="compare-header">Moore</th><th class="compare-header">Mealy</th></tr>
+          <tr><td>Output depends on</td><td>State only</td><td>State + Input</td></tr>
+          <tr><td>Number of states</td><td>More</td><td>Less</td></tr>
+          <tr><td>Output stability</td><td>More stable</td><td>May glitch</td></tr>
+          <tr><td>Output change</td><td>On clock edge</td><td>Immediately with input</td></tr>
+          <tr><td>Application</td><td>FSM with stable outputs</td><td>Fast response needed</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <!-- 4.2 State Reduction -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u4)">4.2 State Reduction & Assignment</div>
+      <div class="topic-body">
+        <p>State reduction minimizes the number of states in a sequential circuit, saving flip-flop hardware.</p>
+        <h4>Implication Table Method (Row Reduction)</h4>
+        <ol class="steps">
+          <li>List all pairs of states</li>
+          <li>Mark pairs as distinguishable if they produce different outputs for same input</li>
+          <li>For indistinguishable pairs, check if their next states are also indistinguishable</li>
+          <li>Merge equivalent states (identical output and same next state behavior)</li>
+        </ol>
+        <div class="callout key"><span class="callout-icon">💡</span><div>Two states S₁ and S₂ are <strong>equivalent</strong> if for every possible input sequence, the same output sequence is produced, regardless of which state we start in.</div></div>
+      </div>
+    </div>
+
+    <!-- 4.3 Asynchronous Circuits -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u4)">4.3 Asynchronous Sequential Circuits & Hazards <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <p>Asynchronous circuits respond immediately to input changes without waiting for a clock. They use <strong>fundamental mode</strong> (only one input changes at a time) or <strong>pulse mode</strong>.</p>
+
+        <h4>Flow Table</h4>
+        <p>A flow table (like a state table) shows the next state and output for each input combination. Unstable states are in circles, stable states in squares.</p>
+
+        <h4>Race Conditions <span class="tag imp">PYQ</span></h4>
+        <ul class="dots">
+          <li><strong>Race:</strong> When multiple state variables must change simultaneously, they may not change at exactly the same time due to unequal delays.</li>
+          <li><strong>Non-critical race:</strong> Both transition paths lead to the same stable state — harmless.</li>
+          <li><strong>Critical race:</strong> Different paths lead to different stable states — circuit ends up in wrong state!</li>
+        </ul>
+
+        <h4>Race-Free State Assignment</h4>
+        <ol class="steps">
+          <li>Assign binary codes to states such that transitions between states differ by only one bit (like Grey code)</li>
+          <li>Add extra intermediate states if needed</li>
+          <li>Use shared rows technique in flow table</li>
+        </ol>
+
+        <h4>Hazards in Combinational Circuits</h4>
+        <div class="formula">Static-1 Hazard: Output momentarily goes 0 when it should stay 1
+Static-0 Hazard: Output momentarily goes 1 when it should stay 0
+Dynamic Hazard:  Output changes 3+ times when it should change once
+
+Solutions:
+- Add redundant gates to cover K-map grouping transitions
+- Use consensus terms to eliminate hazard
+- Add delay elements (not preferred)</div>
+      </div>
+    </div>
+
+    <!-- Unit 4 PYQs -->
+    <div class="pyq-section">
+      <div class="pyq-header">🎯 Previous Year Questions — Unit IV</div>
+      <div class="pyq-body">
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Explain Mealy machine and Moore machine. Also state the differences between them. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">What is the role of state reduction in sequential circuit design? <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Discuss hazards in asynchronous circuits. How can race conditions be avoided? <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Explain the role of flow table in designing asynchronous sequential circuits. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">What are the steps in designing an asynchronous sequential circuit? <span class="marks-badge">[7M]</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /unit4 -->
+
+<!-- ════════════════════════════════════════════════════
+     UNIT V
+════════════════════════════════════════════════════ -->
+<div class="unit u5" id="unit5">
+  <div class="unit-header">
+    <div class="unit-num">05</div>
+    <div class="unit-title-block">
+      <h2>Memory, PLDs & Digital Logic Families</h2>
+      <p>CO5 · K3 · ROM · RAM · PAL · PLA · FPGA · TTL · CMOS · ECL · ADC · DAC</p>
+    </div>
+  </div>
+  <div class="unit-body">
+
+    <!-- 5.1 Logic Families -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u5)">5.1 Digital Logic Families Comparison <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <p>Logic families define how logic gates are implemented using transistors. Key parameters: <strong>Fan-in, Fan-out, Propagation Delay, Power Dissipation, Noise Margin, VIL, VIH.</strong></p>
+
+        <h4>Key Definitions</h4>
+        <div class="formula">Fan-in:  Number of inputs a gate can accept
+Fan-out: Number of gate inputs a single output can drive
+         (without logic level degradation)
+
+Noise Margin: Ability to tolerate electrical noise
+  High NM (NMH) = VOH(min) - VIH(min)
+  Low NM (NML)  = VIL(max) - VOL(max)</div>
+
+        <div class="tbl-wrap"><table>
+          <tr><th class="compare-header">Parameter</th><th>DTL</th><th>TTL</th><th>ECL</th><th>CMOS</th></tr>
+          <tr><td>Supply Voltage</td><td>5V</td><td>5V</td><td>-5.2V</td><td>3-18V</td></tr>
+          <tr><td>Speed</td><td>Slow</td><td>Medium</td><td>Fastest</td><td>Medium</td></tr>
+          <tr><td>Power Dissipation</td><td>High</td><td>High</td><td>Very High</td><td>Very Low</td></tr>
+          <tr><td>Noise Margin</td><td>Good</td><td>Good</td><td>Poor</td><td>Excellent</td></tr>
+          <tr><td>Fan-out</td><td>~5</td><td>10</td><td>25</td><td>50+</td></tr>
+          <tr><td>Propagation Delay</td><td>30ns</td><td>10ns</td><td>1-2ns</td><td>10-50ns</td></tr>
+          <tr><td>Technology</td><td>Diode-Transistor</td><td>Bipolar BJT</td><td>Bipolar Diff</td><td>MOS FET</td></tr>
+        </table></div>
+
+        <h4>ECL (Emitter-Coupled Logic) <span class="tag imp">PYQ</span></h4>
+        <p>Fastest logic family — uses differential amplifier pair. Transistors never saturate, so no storage delay. Used in very high-speed applications like fiber optic transceivers.</p>
+        <div class="formula">ECL features:
+✓ Fastest (sub-nanosecond)
+✓ Both OR and NOR outputs simultaneously
+✗ Highest power consumption
+✗ Poor noise margin
+✗ Negative supply voltage (-5.2V)</div>
+
+        <h4>CMOS Advantages over TTL <span class="tag imp">PYQ</span></h4>
+        <ul class="dots">
+          <li>Extremely low static power dissipation (near zero when not switching)</li>
+          <li>Wide supply voltage range (3V–18V)</li>
+          <li>Very high fan-out (>50)</li>
+          <li>Excellent noise margin (~40% of VDD)</li>
+          <li>High packing density — millions of gates on a chip</li>
+          <li>Used in all modern digital chips (phones, CPUs, memory)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5.2 Memory -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u5)">5.2 ROM, RAM & EEPROM <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <h4>ROM (Read-Only Memory)</h4>
+        <p>Non-volatile, programmed during manufacture. Stores truth tables for combinational functions. Types: Mask ROM, PROM, EPROM, EEPROM, Flash.</p>
+        <div class="formula">ROM Organization:
+n address lines → 2ⁿ locations
+m data lines → m bits per location
+Total capacity = 2ⁿ × m bits
+
+Example: 3-variable Boolean function using ROM
+3 inputs → 2³ = 8 addresses
+Each address stores one output value</div>
+
+        <h4>EEPROM Advantages <span class="tag imp">PYQ</span></h4>
+        <ul class="dots">
+          <li>Electrically erasable — no UV light needed (unlike EPROM)</li>
+          <li>Byte-level erase and write (selective update)</li>
+          <li>In-circuit reprogramming (no removal from board)</li>
+          <li>Non-volatile — retains data without power</li>
+          <li>Unlimited read cycles; typically 100,000+ write cycles</li>
+          <li>Used in BIOS chips, smart cards, microcontroller data storage</li>
+        </ul>
+
+        <h4>RAM (Random Access Memory)</h4>
+        <ul class="dots">
+          <li><strong>SRAM</strong> (Static): Uses cross-coupled inverters (6T cell), fast, used for cache</li>
+          <li><strong>DRAM</strong> (Dynamic): Uses capacitor + transistor (1T cell), needs refresh, dense, used for main memory</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5.3 PLDs -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u5)">5.3 PLA, PAL & FPGA <span class="tag imp">PYQ ★</span></div>
+      <div class="topic-body">
+        <div class="tbl-wrap"><table>
+          <tr><th class="compare-header">Feature</th><th>PLA</th><th>PAL</th><th>FPGA</th></tr>
+          <tr><td>AND array</td><td>Programmable</td><td>Programmable</td><td>LUT-based</td></tr>
+          <tr><td>OR array</td><td>Programmable</td><td>Fixed</td><td>Programmable</td></tr>
+          <tr><td>Flexibility</td><td>High</td><td>Medium</td><td>Very High</td></tr>
+          <tr><td>Speed</td><td>Slower</td><td>Faster</td><td>Very Fast</td></tr>
+          <tr><td>Cost</td><td>Medium</td><td>Low</td><td>High</td></tr>
+          <tr><td>Reprogrammable</td><td>Sometimes</td><td>Once</td><td>Yes (many times)</td></tr>
+        </table></div>
+
+        <h4>PLA (Programmable Logic Array)</h4>
+        <p>Both AND and OR planes are programmable. Can implement any SOP expression. More flexible than PAL. Used for custom logic functions.</p>
+
+        <h4>PAL (Programmable Array Logic) <span class="tag imp">PYQ</span></h4>
+        <p>Only AND plane is programmable; OR plane is fixed. Simpler, faster, cheaper. Each output is OR of a fixed number of AND terms.</p>
+
+        <h4>FPGA (Field-Programmable Gate Array)</h4>
+        <p>Contains thousands of Look-Up Tables (LUTs), flip-flops, and programmable interconnects. Reprogrammable in the field. Used for prototyping, DSP, video processing.</p>
+
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" style="max-width:380px;width:100%">
+            <style>.plb{fill:#181c24;stroke:#ffd60a;stroke-width:1.5}.plt{font-family:'Space Mono',monospace;font-size:9px;fill:#ffd60a;text-anchor:middle}.plw{stroke:#ffd60a;stroke-width:1;fill:none}.plm{font-family:'Space Mono',monospace;font-size:8px;fill:#7a8099;text-anchor:middle}</style>
+            <!-- AND array -->
+            <rect x="20" y="20" width="140" height="120" rx="6" class="plb"/>
+            <text x="90" y="75" class="plt">AND</text>
+            <text x="90" y="88" class="plt">ARRAY</text>
+            <text x="90" y="105" class="plm">(Programmable)</text>
+            <!-- OR array -->
+            <rect x="200" y="20" width="140" height="120" rx="6" class="plb" stroke="#ffd60a"/>
+            <text x="270" y="75" class="plt">OR</text>
+            <text x="270" y="88" class="plt">ARRAY</text>
+            <text x="270" y="105" class="plm">(Fixed in PAL /</text>
+            <text x="270" y="116" class="plm">Prog. in PLA)</text>
+            <!-- Connections -->
+            <line x1="160" y1="60" x2="200" y2="60" class="plw"/>
+            <line x1="160" y1="80" x2="200" y2="80" class="plw"/>
+            <line x1="160" y1="100" x2="200" y2="100" class="plw"/>
+            <!-- Inputs -->
+            <line x1="0" y1="50" x2="20" y2="50" class="plw"/><text x="-5" y="47" class="plm" style="fill:#e8eaf0">I₀</text>
+            <line x1="0" y1="70" x2="20" y2="70" class="plw"/><text x="-5" y="67" class="plm" style="fill:#e8eaf0">I₁</text>
+            <line x1="0" y1="90" x2="20" y2="90" class="plw"/><text x="-5" y="87" class="plm" style="fill:#e8eaf0">I₂</text>
+            <!-- Outputs -->
+            <line x1="340" y1="60" x2="370" y2="60" class="plw"/><text x="372" y="57" class="plm" style="fill:#ffd60a">F₀</text>
+            <line x1="340" y1="80" x2="370" y2="80" class="plw"/><text x="372" y="77" class="plm" style="fill:#ffd60a">F₁</text>
+            <!-- Labels -->
+            <text x="90" y="15" class="plm" style="fill:#ffd60a;font-size:9px">PLA / PAL STRUCTURE</text>
+          </svg>
+          <div class="diagram-caption">PLA/PAL Structure: AND array followed by OR array</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5.4 ADC and DAC -->
+    <div class="topic">
+      <div class="topic-title" style="color:var(--u5)">5.4 ADC & DAC <span class="tag imp">PYQ ★★</span></div>
+      <div class="topic-body">
+        <h4>Flash Type ADC <span class="tag imp">PYQ</span></h4>
+        <p>Fastest ADC. Uses 2ⁿ−1 comparators in parallel. All comparisons happen simultaneously — very high speed but very hardware-intensive.</p>
+        <div class="formula">For n-bit Flash ADC:
+- Number of comparators needed: 2ⁿ - 1
+- Reference voltages: VREF/2ⁿ, 2VREF/2ⁿ, ..., (2ⁿ-1)VREF/2ⁿ
+- Priority encoder converts thermometer code to binary
+- Used in: oscilloscopes, radar, high-speed data acquisition
+- 8-bit ADC needs 255 comparators!</div>
+
+        <h4>Dual Slope ADC <span class="tag imp">PYQ</span></h4>
+        <p>High accuracy, slow speed. Used in digital multimeters. Noise-immune because it integrates over time.</p>
+        <div class="formula">Phase 1: Integrate Vin for fixed time T₁
+Phase 2: Integrate -VREF until output = 0
+Count clock pulses during Phase 2 → Digital output
+
+Digital Count N = (Vin/VREF) × N_max
+Advantage: Excellent noise rejection, self-calibrating</div>
+
+        <h4>Successive Approximation ADC <span class="tag imp">PYQ</span></h4>
+        <p>Most popular ADC for medium speed. Uses binary search algorithm — n comparisons for n-bit output.</p>
+        <div class="formula">Algorithm (for 4-bit, VREF=10V, Vin=7.3V):
+Start: 0000
+Bit 3: Try 1000 → DAC=5V, 7.3>5 → Keep → 1000
+Bit 2: Try 1100 → DAC=7.5V, 7.3<7.5 → Drop → 1000
+Bit 1: Try 1010 → DAC=6.25V, 7.3>6.25 → Keep → 1010
+Bit 0: Try 1011 → DAC=6.875V, 7.3>6.875 → Keep → 1011
+Result: 1011 (= 6.875V, closest to 7.3V)</div>
+
+        <h4>R-2R Ladder DAC <span class="tag imp">PYQ</span></h4>
+        <p>Most practical DAC — uses only two resistor values (R and 2R). Easy to manufacture with high precision.</p>
+        <div class="formula">Output voltage:
+Vout = -VREF × (b₃/2 + b₂/4 + b₁/8 + b₀/16)
+
+For 4-bit R-2R:
+MSB (b₃) contributes VREF/2
+Next  (b₂) contributes VREF/4
+Next  (b₁) contributes VREF/8
+LSB  (b₀) contributes VREF/16
+
+Key advantages:
+✓ Only R and 2R values needed
+✓ Easy to fabricate precisely on IC
+✓ Good accuracy and speed</div>
+      </div>
+    </div>
+
+    <!-- Unit 5 PYQs -->
+    <div class="pyq-section">
+      <div class="pyq-header">🎯 Previous Year Questions — Unit V</div>
+      <div class="pyq-body">
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Enlist the advantages of EEPROM. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Explain the flash type ADC. <span class="marks-badge">[2M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Elaborate a comparison of CMOS, TTL and RTL logic families. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Explain the working of dual slope ADC with neat diagram. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Draw the circuit of an ECL gate and explain its operation. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Elaborate the term PAL, PLA and FPGA with neat diagram. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">What do you mean by R-2R ladder DAC? Explain its working operation. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">2024-25</span>
+          <div class="pyq-text">Enlist different types of ADC and explain successive approximation ADC. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">State two differences between PLA and PAL. Define Fan-in and Fan-out. <span class="marks-badge">[2M each]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Explain ROM internal structure and implementation for a 3-variable Boolean function. <span class="marks-badge">[7M]</span></div>
+        </div>
+        <div class="pyq-item">
+          <span class="pyq-badge">BOE410</span>
+          <div class="pyq-text">Compare TTL and CMOS logic families in terms of power consumption and speed. Write a short note on CMOS advantages over TTL. <span class="marks-badge">[7M]</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /unit5 -->
+
+<!-- QUICK REVISION SECTION -->
+<div class="section-divider"><span>★ Quick Revision Cheatsheet</span></div>
+
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:3rem;">
+  <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;margin-bottom:1.5rem;color:var(--text)">Must-Remember Formulas & Key Facts</h3>
+  <div class="grid2">
+    <div>
+      <h4 style="color:var(--u1)">Unit I — Binary</h4>
+      <div class="formula" style="border-left-color:var(--u1)">Grey: Gₙ = Bₙ⊕B_{n-1}
+2's comp subtraction: A+2'sComp(B)
+K-map: Groups must be powers of 2
+QM: Groups by number of 1s first</div>
+
+      <h4 style="color:var(--u2)">Unit II — Combinational</h4>
+      <div class="formula" style="border-left-color:var(--u2)">4:1 MUX = 3× (2:1 MUX)
+Full Adder = 2 HA + 1 OR
+ROM size = 2ⁿ × m bits
+CLA: All carries computed in parallel</div>
+    </div>
+    <div>
+      <h4 style="color:var(--u3)">Unit III — Sequential</h4>
+      <div class="formula" style="border-left-color:var(--u3)">JK: Q+ = JQ'+K'Q  (no invalid state)
+D:  Q+ = D          (simplest FF)
+T:  Q+ = T⊕Q        (toggle)
+Race-around: solved by edge triggering</div>
+
+      <h4 style="color:var(--u5)">Unit V — Memory</h4>
+      <div class="formula" style="border-left-color:var(--u5)">Flash ADC: 2ⁿ-1 comparators, fastest
+Dual Slope: Highest accuracy
+Succ. Approx: n steps for n bits
+R-2R: Uses only R and 2R resistors
+CMOS: Lowest power, highest fan-out</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Digital Electronics Notes · BEE401 / BOE410 · B.Tech Sem IV 2024-25<br>
+  Based on Syllabus + PYQs from Jul 2025 Examinations
+</footer>
+
+</body>
+</html>
