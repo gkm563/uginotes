@@ -1,0 +1,15 @@
+[NOTES OF ALL UNIT](https://chatgpt.com/share/68fec2b9-8370-8009-b3f0-f1b1660a255b)
+
+https://chatgpt.com/share/68fec2b9-8370-8009-b3f0-f1b1660a255b
+
+
+
+
+
+
+
+
+
+
+https://chatgpt.com/share/68fec2b9-8370-8009-b3f0-f1b1660a255b
+
