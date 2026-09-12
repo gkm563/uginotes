@@ -192,7 +192,10 @@ export function NotesListing({
             const sLower = search.toLowerCase();
             matches = matches && (n.title.toLowerCase().includes(sLower) || n.subject.toLowerCase().includes(sLower) || n.description.toLowerCase().includes(sLower));
           }
-          if (year !== "All") matches = matches && n.year === year;
+          if (year !== "All") {
+            const normYear = year.replace(/(st|nd|rd|th)/gi, "");
+            matches = matches && (n.year === year || n.year?.toString().replace(/(st|nd|rd|th)/gi, "") === normYear);
+          }
           if (sem !== "All") matches = matches && n.semester === parseInt(sem);
           if (type !== "All") matches = matches && n.type === type;
           return matches;

@@ -70,7 +70,8 @@ export default async function NotesPage({
         matches = matches && (n.title.toLowerCase().includes(qLower) || n.subject.toLowerCase().includes(qLower) || n.description.toLowerCase().includes(qLower));
       }
       if (year !== "All") {
-        matches = matches && n.year === year;
+        const normYear = year.replace(/(st|nd|rd|th)/gi, "");
+        matches = matches && (n.year === year || n.year?.toString().replace(/(st|nd|rd|th)/gi, "") === normYear);
       }
       if (semester !== "All") {
         matches = matches && n.semester === parseInt(semester);
